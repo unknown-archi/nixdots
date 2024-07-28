@@ -116,17 +116,16 @@
   environment.systemPackages = with pkgs; [
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    rofi
     unzip
     curl
     vscode  
     kitty
     bluez
     bluez-tools
-    pavucontrol
-    blueman
+    pavucontrol # Sound Manager
+    blueman # Bluetooth Manager
     swaynotificationcenter
-    webcord
+    webcord # Discord
     nwg-look
     bat
     btop
@@ -153,9 +152,12 @@
     hypridle
     hyprpicker
     hyprcursor
-    swaybg
+    swaybg # Wallpaper
     waybar
     fira
+    arandr # Screens GUI
+    rofi
+    tofi
   ];
 
   # Enable zsh
