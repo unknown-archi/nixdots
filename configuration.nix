@@ -158,6 +158,7 @@
     arandr # Screens GUI
     rofi
     tofi
+    wlsunset
   ];
 
   # Enable zsh
