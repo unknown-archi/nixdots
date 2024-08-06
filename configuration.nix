@@ -173,8 +173,8 @@
   fonts.packages = with pkgs; [
   
     nerdfonts
-    fira-code
     fira-code-symbols
+    montserrat
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
