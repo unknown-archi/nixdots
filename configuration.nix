@@ -162,13 +162,20 @@
     alacritty
     zsh-powerlevel10k
     blackbox-terminal
-    nerdfonts
   ];
 
   # Enable zsh
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
+
+  # Fonts
+  fonts.packages = with pkgs; [
+  
+    nerdfonts
+    fira-code
+    fira-code-symbols
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
