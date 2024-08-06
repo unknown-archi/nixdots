@@ -159,6 +159,8 @@
     rofi
     tofi
     wlsunset
+    alacritty
+    zsh-powerlevel10k
   ];
 
   # Enable zsh
