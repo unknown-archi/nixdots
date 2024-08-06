@@ -162,6 +162,7 @@
     alacritty
     zsh-powerlevel10k
     blackbox-terminal
+    nerdfonts
   ];
 
   # Enable zsh
