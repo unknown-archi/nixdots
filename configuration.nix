@@ -161,6 +161,7 @@
     wlsunset
     alacritty
     zsh-powerlevel10k
+    blackbox-terminal
   ];
 
   # Enable zsh
