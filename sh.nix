@@ -8,6 +8,19 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+
+    initExtra = ''
+      eval "$(zoxide init zsh)"
+      source ~/.dotfiles/p10k.zsh
+    '';
+    plugins = [   
+      {                                                                                   
+        name = "powerlevel10k";                                                           
+        src = pkgs.zsh-powerlevel10k;                                                     
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";                         
+      }
+    ];
+
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "thefuck" "tldr" ];
@@ -38,9 +51,5 @@
       homeupdate = "home-manager switch --flake ~/.dotfiles#mathieu";
       # john="~/tools/john/run/john";
     };
-    # Add the zoxide initialization command
-    initExtra = ''
-      eval "$(zoxide init zsh)"
-    '';
   };
 }
