@@ -158,10 +158,12 @@
     arandr # Screens GUI
     rofi
     tofi
-    wlsunset
+    wlsunset # Gamma 
     alacritty
     zsh-powerlevel10k
     blackbox-terminal
+    thefuck
+    tldr    
   ];
 
   # Enable zsh
@@ -176,6 +178,8 @@
     fira-code-symbols
     montserrat
   ];
+
+  programs.thefuck.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

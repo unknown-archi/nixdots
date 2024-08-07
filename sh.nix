@@ -23,7 +23,7 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "thefuck" "tldr" ];
+      plugins = [ "git" "thefuck" ];
       theme = "robbyrussell";
     };
     shellAliases = {
@@ -42,6 +42,7 @@
       trash="command rm -rf /tmp/trash ; echo 'Emptied the trash !'";
       codeC="code *.c";
       save="git add .; git commit -m 'Save'; git push";
+      msave="git add .; git commit -m '$1'; git push";
       # done="mv $(pwd) "$(pwd)_DONE"';
       ubuntu_docker="sudo docker run -it ubuntu bash";
       chmox="chmod +x";
