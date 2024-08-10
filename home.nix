@@ -134,7 +134,14 @@
   
   # HyprIdle
   home.file.".config/hypr/hypridle.conf".source = ./hypridle.conf;
-
+  
+  # Wezterm
+  programs.wezterm = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
+    extraConfig = builtins.readFile ./wezterm.lua;
+  };
 }
 
 

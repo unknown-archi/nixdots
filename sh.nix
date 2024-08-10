@@ -42,14 +42,14 @@
       trash="command rm -rf /tmp/trash ; echo 'Emptied the trash !'";
       codeC="code *.c";
       save="git add .; git commit -m 'Save'; git push";
-      msave="git add .; git commit -m '$1'; git push";
+      msave= "git add .; git commit -m '$1'; git push";
       # done="mv $(pwd) "$(pwd)_DONE"';
       ubuntu_docker="sudo docker run -it ubuntu bash";
       chmox="chmod +x";
       cat="bat -p";
       lsa= "ls -a";
-      nixupdate = "sudo nixos-rebuild switch --flake ~/.dotfiles#mathieu";
-      homeupdate = "home-manager switch --flake ~/.dotfiles#mathieu";
+      nixupdate = "save; sudo nixos-rebuild switch --flake ~/.dotfiles#mathieu";
+      homeupdate = "save; home-manager switch --flake ~/.dotfiles#mathieu";
       # john="~/tools/john/run/john";
     };
   };
