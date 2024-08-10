@@ -163,8 +163,7 @@
     zsh-powerlevel10k
     blackbox-terminal
     thefuck
-    tldr
-    wezterm    
+    tldr    
   ];
 
   # Enable zsh
