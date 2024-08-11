@@ -131,7 +131,9 @@
 		fi
 
 		# Remove the package from the list
-		sed -i "/environment.systemPackages = with pkgs;/,/];/ { /^[[:space:]]*$package_name[[:space:]]*,$/d; /^[[:space:]]*$package_name[[:space:]]*$/d; /^[[:space:]]*$/d }" "$config_file"
+		sed -i "/environment.systemPackages = with pkgs;/,/];/s/^[[:space:]]*$package_name//g" "$config_file"
+		sed -i "/environment.systemPackages = with pkgs;/,/];/s/,$//g" "$config_file"
+
 
 		echo "Package '$package_name' has been removed from your configuration.nix."
 		nixupdate
