@@ -83,6 +83,25 @@
 		echo "\nServing on : http://$IP:8000\n\n"
 		python3 -m http.server
 	}
+
+      install() {
+	local package_name=$1
+	local config_file="~/.dotfiles/configuration.nix"
+	local indentation="    "
+
+	# Check if the package is already in the list
+	if grep -q "$package_name" "$config_file"; then
+		echo "Package '$package_name' is already in the list."
+		return
+	fi
+
+	# Use sed to insert the package at the end of the list
+	sed -i "/environment.systemPackages = with pkgs;/,/];/ s/];/${indentation}${package_name}\n&/" $config_file
+
+	echo "Package '$package_name' has been added to your configuration.nix."
+}
+
+
       # Zoxide
       eval "$(zoxide init zsh)"
       # Powerlevel 10k
