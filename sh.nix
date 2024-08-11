@@ -120,13 +120,29 @@
 		echo "Package '$package_name' has been added to your configuration.nix."
 		nixupdate
 }
+	nixrm() {
+		local package_name=$1
+		local config_file="/home/mathieu/.dotfiles/configuration.nix"
+
+		# Check if the package is in the list
+		if ! grep -q "$package_name" "$config_file"; then
+			echo "Package '$package_name' is not in the list."
+			return
+		fi
+
+		# Remove the package from the list
+		sed -i "/environment.systemPackages = with pkgs;/,/];/s/^[[:space:]]*$package_name//g" "$config_file"
+		sed -i "/environment.systemPackages = with pkgs;/,/];/s/,$//g" "$config_file"
+
+		echo "Package '$package_name' has been removed from your configuration.nix."
+		nixupdate
+	}
 
 
-
-      # Zoxide
-      eval "$(zoxide init zsh)"
-      # Powerlevel 10k
-      source ~/.dotfiles/p10k.zsh
+	# Zoxide
+	eval "$(zoxide init zsh)"
+	# Powerlevel 10k
+	source ~/.dotfiles/p10k.zsh
     '';
 
   };
