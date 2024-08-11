@@ -85,6 +85,7 @@
 	}
 
     nixstall() {
+	local package_name=$1
 	local config_file="/home/mathieu/.dotfiles/configuration.nix"
 
 	# Check if the package is already in the list
