@@ -119,7 +119,7 @@
 		sed -i "/environment.systemPackages = with pkgs;/,/];/ s/];/    $1\n&/" "$config_file"
 
 		echo "Package '$package_name' has been added to your configuration.nix."
-		nixupdate
+		nixupdate "Installed $package_name"
 }
 	nixrm() {
 		local package_name=$1
@@ -137,7 +137,7 @@
 
 
 		echo "Package '$package_name' has been removed from your configuration.nix."
-		nixupdate
+		nixupdate "Uninstalled $package_name"
 	}
 
 
