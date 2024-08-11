@@ -168,7 +168,7 @@
     wezterm
     weather-icons
 
-    bats
+
 ];
 
   # Enable zsh
