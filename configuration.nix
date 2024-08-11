@@ -166,6 +166,7 @@
     tldr
     todo
     wezterm
+    weather-icons
 ];
 
   # Enable zsh
