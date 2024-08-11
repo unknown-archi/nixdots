@@ -84,7 +84,7 @@
 		python3 -m http.server
 	}
 
-      install() {
+    install() {
 	local package_name=$1
 	local config_file="~/.dotfiles/configuration.nix"
 	local indentation="    "
@@ -95,11 +95,12 @@
 		return
 	fi
 
-	# Use sed to insert the package at the end of the list
-	sed -i "/environment.systemPackages = with pkgs;/,/];/ s/];/${indentation}${package_name}\n&/" $config_file
+	# Use sed to insert the package at the correct position
+	sed -i "/environment.systemPackages = with pkgs;/,/];/ s/];/${indentation}${package_name}\n${indentation}&/" "$config_file"
 
 	echo "Package '$package_name' has been added to your configuration.nix."
 }
+
 
 
       # Zoxide
