@@ -9,10 +9,6 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    initExtra = ''
-      eval "$(zoxide init zsh)"
-      source ~/.dotfiles/p10k.zsh
-    '';
     plugins = [   
       {                                                                                   
         name = "powerlevel10k";                                                           
@@ -26,6 +22,7 @@
       plugins = [ "git" "thefuck" ];
       theme = "robbyrussell";
     };
+
     shellAliases = {
       notebook="/Users/mathieuhommet/opt/anaconda3/bin/jupyter_mac.command ; exit;";
       python="python3";
@@ -52,5 +49,45 @@
       homeupdate = "save; home-manager switch --flake ~/.dotfiles#mathieu";
       # john="~/tools/john/run/john";
     };
+
+    initExtra = ''
+      # My functions
+      rm()
+	{
+	if [ ! -d "/tmp/trash" ]; then
+		mkdir -p /tmp/trash
+		echo "Created trash folder"
+	fi
+
+	if [ "$#" -eq 0 ]; then
+		echo "No files provided."
+		return 1
+	fi
+
+	mv $@ /tmp/trash
+	echo "\033[1;32mMoved $@ to /tmp/trash.\033[0m"
+	}
+
+	# Create a new directory and cd into it
+	nd(){mkdir $1; cd $1}
+
+	# Get Local IP address
+	localIP(){
+		IP=$(ifconfig | grep 'inet ' | grep -Fv 127.0.0.1 | awk '{print $2}')
+		echo "Your local IP address is : $IP"
+	}
+
+	# Creates a python HTTP server and displays its IP address
+	shareLocal() {
+		IP=$(ifconfig | grep 'inet ' | grep -Fv 127.0.0.1 | awk '{print $2}')
+		echo "\nServing on : http://$IP:8000\n\n"
+		python3 -m http.server
+	}
+      # Zoxide
+      eval "$(zoxide init zsh)"
+      # Powerlevel 10k
+      source ~/.dotfiles/p10k.zsh
+    '';
+
   };
 }
