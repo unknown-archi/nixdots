@@ -45,8 +45,8 @@
       chmox="chmod +x";
       cat="bat -p";
       lsa= "ls -a";
-      nixupdate = "save; sudo nixos-rebuild switch --flake ~/.dotfiles#mathieu";
-      homeupdate = "save; home-manager switch --flake ~/.dotfiles#mathieu";
+      # nixupdate = "save; sudo nixos-rebuild switch --flake ~/.dotfiles#mathieu";
+      # homeupdate = "save; home-manager switch --flake ~/.dotfiles#mathieu";
       # john="~/tools/john/run/john";
     };
 
@@ -83,6 +83,15 @@
 		echo "\nServing on : http://$IP:8000\n\n"
 		python3 -m http.server
 	}
+    nixupdate() {
+	save
+	sudo nixos-rebuild switch --flake ~/.dotfiles#mathieu
+    }
+    
+    homeupdate() {
+	save
+	home-manager switch --flake ~/.dotfiles#mathieu
+    }
 
     nixstall() {
 	local package_name=$1

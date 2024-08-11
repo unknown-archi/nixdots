@@ -166,7 +166,8 @@
     tldr
     todo
     wezterm
-    ];
+    test
+];
 
   # Enable zsh
   environment.shells = with pkgs; [ zsh ];
