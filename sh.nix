@@ -84,7 +84,7 @@
 		python3 -m http.server
 	}
 
-    install() {
+    nixstall() {
 	local config_file="~/.dotfiles/configuration.nix"
 
 	# Check if the package is already in the list
