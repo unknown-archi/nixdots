@@ -95,9 +95,10 @@
 	fi
 
 	# Use sed to insert the package at the correct position
-	sed -i "/environment.systemPackages = with pkgs;/,/];/ s/];/    $1\n    &/" "$config_file"
+	sed -i "/environment.systemPackages = with pkgs;/,/];/ s/];/    $1\n&/" "$config_file"
 
 	echo "Package '$package_name' has been added to your configuration.nix."
+	nixupdate()
 }
 
 

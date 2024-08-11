@@ -165,7 +165,8 @@
     thefuck
     tldr
     todo
-  ];
+    wezterm
+    ];
 
   # Enable zsh
   environment.shells = with pkgs; [ zsh ];
