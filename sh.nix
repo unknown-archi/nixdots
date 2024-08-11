@@ -9,11 +9,11 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    plugins = [   
-      {                                                                                   
-        name = "powerlevel10k";                                                           
-        src = pkgs.zsh-powerlevel10k;                                                     
-        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";                         
+    plugins = [
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }
     ];
 
@@ -38,8 +38,6 @@
       runc="comp; ./a.out";
       trash="command rm -rf /tmp/trash ; echo 'Emptied the trash !'";
       codeC="code *.c";
-      save="git add .; git commit -m 'Save'; git push";
-      msave= "git add .; git commit -m '$1'; git push";
       # done="mv $(pwd) "$(pwd)_DONE"';
       ubuntu_docker="sudo docker run -it ubuntu bash";
       chmox="chmod +x";
@@ -51,21 +49,34 @@
     };
 
     initExtra = ''
-      # My functions
-      rm()
+	# My functions
+	
+	save() {
+		if [ -z "$1" ]; then
+			commit_message="Save"
+		else
+			commit_message="$1"
+		fi
+
+		git add .
+		git commit -m '$commit_message'
+		git push
+	}
+
+	rm()
 	{
-	if [ ! -d "/tmp/trash" ]; then
-		mkdir -p /tmp/trash
-		echo "Created trash folder"
-	fi
+		if [ ! -d "/tmp/trash" ]; then
+			mkdir -p /tmp/trash
+			echo "Created trash folder"
+		fi
 
-	if [ "$#" -eq 0 ]; then
-		echo "No files provided."
-		return 1
-	fi
+		if [ "$#" -eq 0 ]; then
+			echo "No files provided."
+			return 1
+		fi
 
-	mv $@ /tmp/trash
-	echo "\033[1;32mMoved $@ to /tmp/trash.\033[0m"
+		mv $@ /tmp/trash
+		echo "\033[1;32mMoved $@ to /tmp/trash.\033[0m"
 	}
 
 	# Create a new directory and cd into it
@@ -83,31 +94,31 @@
 		echo "\nServing on : http://$IP:8000\n\n"
 		python3 -m http.server
 	}
-    nixupdate() {
-	save
-	sudo nixos-rebuild switch --flake ~/.dotfiles#mathieu
-    }
-    
-    homeupdate() {
-	save
-	home-manager switch --flake ~/.dotfiles#mathieu
-    }
+	nixupdate() {
+		save
+		sudo nixos-rebuild switch --flake ~/.dotfiles#mathieu
+	}
 
-    nixstall() {
-	local package_name=$1
-	local config_file="/home/mathieu/.dotfiles/configuration.nix"
+	homeupdate() {
+		save
+		home-manager switch --flake ~/.dotfiles#mathieu
+	}
 
-	# Check if the package is already in the list
-	if grep -q "$package_name" "$config_file"; then
-		echo "Package '$package_name' is already in the list."
-		return
-	fi
+	nixstall() {
+		local package_name=$1
+		local config_file="/home/mathieu/.dotfiles/configuration.nix"
 
-	# Use sed to insert the package at the correct position
-	sed -i "/environment.systemPackages = with pkgs;/,/];/ s/];/$1\n&/" "$config_file"
+		# Check if the package is already in the list
+		if grep -q "$package_name" "$config_file"; then
+			echo "Package '$package_name' is already in the list."
+			return
+		fi
 
-	echo "Package '$package_name' has been added to your configuration.nix."
-	nixupdate
+		# Use sed to insert the package at the correct position
+		sed -i "/environment.systemPackages = with pkgs;/,/];/ s/];/    $1\n&/" "$config_file"
+
+		echo "Package '$package_name' has been added to your configuration.nix."
+		nixupdate
 }
 
 
