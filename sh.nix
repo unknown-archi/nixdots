@@ -85,7 +85,7 @@
 	}
 
     nixstall() {
-	local config_file="~/.dotfiles/configuration.nix"
+	local config_file="/home/mathieu/.dotfiles/configuration.nix"
 
 	# Check if the package is already in the list
 	if grep -q "$package_name" "$config_file"; then
