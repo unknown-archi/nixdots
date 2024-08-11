@@ -166,7 +166,6 @@
     tldr
     todo
     wezterm
-
 ];
 
   # Enable zsh
