@@ -85,9 +85,7 @@
 	}
 
     install() {
-	local package_name=$1
 	local config_file="~/.dotfiles/configuration.nix"
-	local indentation="    "
 
 	# Check if the package is already in the list
 	if grep -q "$package_name" "$config_file"; then
@@ -96,7 +94,7 @@
 	fi
 
 	# Use sed to insert the package at the correct position
-	sed -i "/environment.systemPackages = with pkgs;/,/];/ s/];/${indentation}${package_name}\n${indentation}&/" "$config_file"
+	sed -i "/environment.systemPackages = with pkgs;/,/];/ s/];/    $1\n    &/" "$config_file"
 
 	echo "Package '$package_name' has been added to your configuration.nix."
 }
