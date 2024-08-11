@@ -94,13 +94,14 @@
 		echo "\nServing on : http://$IP:8000\n\n"
 		python3 -m http.server
 	}
+
 	nixupdate() {
-		save
+		save $1
 		sudo nixos-rebuild switch --flake ~/.dotfiles#mathieu
 	}
 
 	homeupdate() {
-		save
+		save $1
 		home-manager switch --flake ~/.dotfiles#mathieu
 	}
 
