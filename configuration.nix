@@ -168,7 +168,7 @@
     wezterm
     weather-icons
     waybar
-    protonvpn-gui_legacy
+
 ];
 
   # Enable zsh
