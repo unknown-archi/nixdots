@@ -153,7 +153,7 @@
     hyprpicker
     hyprcursor
     swaybg # Wallpaper
-    waybar
+
     fira
     arandr # Screens GUI
     rofi
