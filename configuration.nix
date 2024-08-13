@@ -161,7 +161,7 @@
     hyprlock
     hypridle
     hyprpicker
-    hyprcursor-
+    hyprcursor
     swaybg # Wallpaper
     fira
     arandr # Screens GUI
