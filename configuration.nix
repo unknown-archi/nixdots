@@ -130,7 +130,17 @@
     bat
     btop
     clang
-    cmake
+    cmake        # Build system generator
+    libevdev     # Library for handling input events
+    libconfig    # Simple config file library
+    glib         # Core library for system utilities
+    systemd      # System and service manager
+    gcc          # GNU C/C++ compiler
+    binutils     # Binary tools (assembler, linker, etc.)
+    gnumake      # GNU Make tool
+    automake     # Generate Makefile.in files
+    autoconf     # Generate configure scripts
+    pkg-config   # Helper tool for compiling applications
     cron
     docker
     ffmpeg
@@ -151,9 +161,8 @@
     hyprlock
     hypridle
     hyprpicker
-    hyprcursor
+    hyprcursor-
     swaybg # Wallpaper
-
     fira
     arandr # Screens GUI
     rofi
