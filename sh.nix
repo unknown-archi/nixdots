@@ -140,6 +140,24 @@
 		nixupdate "Uninstalled $package_name"
 	}
 
+	nixlist() {
+		local config_file="/home/mathieu/.dotfiles/configuration.nix"
+
+		# Extract lines between environment.systemPackages and the closing bracket
+		sed -n '/environment.systemPackages = with pkgs;/,/];/p' "$config_file" | \
+		# Remove the first and last lines (containing the opening and closing brackets)
+		sed '1d;$d' | \
+		# Trim leading/trailing spaces and commas
+		sed 's/^[[:space:]]*//;s/[[:space:]]*,[[:space:]]*$//' | \
+		# Filter out any empty lines
+		sed '/^$/d'
+
+		# Check if no packages were found
+		if [[ $? -ne 0 ]]; then
+			echo "No packages found in $config_file."
+		fi
+	}
+
 
 	# Zoxide
 	eval "$(zoxide init zsh)"
