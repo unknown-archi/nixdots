@@ -133,7 +133,7 @@
     cmake        # Build system generator
     libevdev     # Library for handling input events
     libconfig    # Simple config file library
-    glib         # Core library for system utilities
+    glib.dev     # Core library for system utilities
     systemd      # System and service manager
     gcc          # GNU C/C++ compiler
     binutils     # Binary tools (assembler, linker, etc.)
