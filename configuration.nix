@@ -110,7 +110,10 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  
 
+  let 
+    zen-flake = builtins.getFlake(toString ./.);
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -177,7 +180,7 @@
     wezterm
     weather-icons
     waybar
-    inputs.zen-browser.packages."${system}".default
+    zen-flake.inputs.zen-browser.packages."${system}".default
 ];
 
   # Enable zsh
