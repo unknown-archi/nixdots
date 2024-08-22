@@ -6,6 +6,6 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
-    zenBrowserFlake.packages.${system}.default
+    zenBrowserFlake.packages.${system}.generic
   ];
 }
