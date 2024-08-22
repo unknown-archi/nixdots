@@ -6,8 +6,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
-
   };
 
   outputs = { self, nixpkgs, home-manager, ... }:
@@ -27,7 +25,6 @@
         inherit pkgs;
         modules = [ 
           ./home.nix
-          ./zen.nix # Include the zen.nix module
         ];
       };      
     };
