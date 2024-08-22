@@ -178,6 +178,7 @@
     wezterm
     weather-icons
     waybar
+    inputs.zen-browser.packages."${system}".default
 ];
 
   # Enable zsh
