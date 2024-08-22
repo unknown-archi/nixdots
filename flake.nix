@@ -25,7 +25,10 @@
     homeConfigurations = {
       mathieu = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home.nix ];
+        modules = [ 
+          ./home.nix
+          ./zen.nix # Include the zen.nix module
+        ];
       };      
     };
   };
