@@ -114,11 +114,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = let
-
-  zen-flake = builtins.getFlake (toString ./.);
-
-    in with pkgs; [
+  environment.systemPackages = with pkgs; [
     # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     unzip
@@ -182,7 +178,6 @@
     wezterm
     weather-icons
     waybar
-    zen-flake.inputs.zen-browser.packages."${system}".default
 ];
 
   # Enable zsh
