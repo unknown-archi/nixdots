@@ -178,6 +178,7 @@
     wezterm
     weather-icons
     waybar
+    flatpak
 ];
 
   # Enable zsh
