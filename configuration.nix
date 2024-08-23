@@ -181,6 +181,7 @@
     flatpak
     dolphin
     gnome.nautilus
+    kdeconnect
 ];
 
   # Enable zsh
