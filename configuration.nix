@@ -179,6 +179,7 @@
     weather-icons
     waybar
     flatpak
+    dolphin
 ];
 
   # Enable zsh
