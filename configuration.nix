@@ -180,6 +180,7 @@
     waybar
     flatpak
     dolphin
+    gnome.nautilus
 ];
 
   # Enable zsh
