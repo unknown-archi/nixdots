@@ -182,6 +182,7 @@
     dolphin
     gnome.nautilus
     kdeconnect
+    burpsuite
 ];
 
   # Enable zsh
