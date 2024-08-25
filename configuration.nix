@@ -183,6 +183,7 @@
     gnome.nautilus
     kdeconnect
     burpsuite
+    pamixer
 ];
 
   # Enable zsh
