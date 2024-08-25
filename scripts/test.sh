@@ -1,1 +1,0 @@
-pamixer -i 10
