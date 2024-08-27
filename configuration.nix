@@ -187,11 +187,8 @@
     xdg-desktop-portal-gtk
     appflowy
     mullvad-vpn
-
     nomacs
-
-
-
+    qView
 ];
 
   # Enable zsh
