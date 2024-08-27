@@ -189,6 +189,7 @@
     mullvad-vpn
     nomacs
 
+    loupe
 ];
 
   # Enable zsh
