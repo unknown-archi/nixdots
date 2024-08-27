@@ -11,7 +11,7 @@
     
     sessionVariables = {
       XCURSOR_THEME="Capitaine Cursors";
-      export XCURSOR_SIZE=21
+      XCURSOR_SIZE=21
     };
  
     plugins = [
