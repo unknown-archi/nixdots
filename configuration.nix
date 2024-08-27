@@ -187,7 +187,9 @@
     xdg-desktop-portal-gtk
     appflowy
     mullvad-vpn
-    feh
+
+    nomacs
+    viewnior
 ];
 
   # Enable zsh
