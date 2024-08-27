@@ -185,6 +185,7 @@
     burpsuite
     pamixer
     xdg-desktop-portal
+    xdg-desktop-portal-gtk
 ];
 
   # Enable zsh
