@@ -190,6 +190,7 @@
 
     nomacs
 
+    sxiv
 ];
 
   # Enable zsh
