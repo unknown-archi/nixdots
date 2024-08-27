@@ -191,6 +191,7 @@
     nomacs
 
 
+    okular
 ];
 
   # Enable zsh
