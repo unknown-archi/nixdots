@@ -190,6 +190,7 @@
     nomacs
 
     loupe
+    imv
 ];
 
   # Enable zsh
