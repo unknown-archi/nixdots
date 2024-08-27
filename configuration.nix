@@ -185,6 +185,7 @@
     pamixer
     xdg-desktop-portal
     xdg-desktop-portal-gtk
+    appflowy
 ];
 
   # Enable zsh
