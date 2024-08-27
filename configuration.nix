@@ -186,6 +186,7 @@
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     appflowy
+    mullvad-vpn
 ];
 
   # Enable zsh
