@@ -204,7 +204,6 @@
   
   # Link nautilus to browser
   services.dbus.enable = true;  
-  services.xdg-desktop-portal.enable = true;
   
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
