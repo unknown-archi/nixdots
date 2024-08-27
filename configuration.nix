@@ -209,6 +209,15 @@
   environment.sessionVariables = {
     XDG_CURRENT_DESKTOP = "Hyprland";
   };
+
+  # Set cursor theme
+  xsession.windowManager.default = {
+    session = "hyprland";
+    extraSessionCommands = ''
+      export XCURSOR_THEME="Capitaine Cursors"              # Replace with your cursor theme name
+      export XCURSOR_SIZE=21             # Replace with your desired cursor size
+    '';
+  };
   
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
