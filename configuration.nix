@@ -204,6 +204,11 @@
   
   # Link nautilus to browser
   services.dbus.enable = true;  
+
+  # Set environment variables
+  environment.sessionVariables = {
+    XDG_CURRENT_DESKTOP = "Hyprland";
+  };
   
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
