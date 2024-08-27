@@ -161,7 +161,7 @@
     hyprlock
     hypridle
     hyprpicker
-    hyprcursor
+    # hyprcursor
     swaybg # Wallpaper
     fira
     arandr # Screens GUI
@@ -211,16 +211,6 @@
     XDG_CURRENT_DESKTOP = "Hyprland";
   };
 
-  # Set cursor theme
-  programs.gtk = {
-    enable = true;
-    cursorTheme = {
-      package = pkgs.gnome3.adwaita-icon-theme; # Replace with your desired theme package
-      name = "Capitaine Cursors";               # Replace with your cursor theme name
-      size = 21;                                # Replace with your desired cursor size
-    };
-  };
-  
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
