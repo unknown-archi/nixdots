@@ -188,7 +188,7 @@
     appflowy
     mullvad-vpn
     nomacs
-    qView
+    qview
 ];
 
   # Enable zsh
