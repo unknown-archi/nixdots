@@ -189,7 +189,7 @@
     mullvad-vpn
 
     nomacs
-    viewnior
+
 ];
 
   # Enable zsh
