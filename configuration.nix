@@ -184,6 +184,7 @@
     kdeconnect
     burpsuite
     pamixer
+    xdg-desktop-portal
 ];
 
   # Enable zsh
