@@ -203,6 +203,10 @@
   ];
 
   programs.thefuck.enable = true;
+
+  # VPN
+  services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.package = pkgs.mullvad-vpn;
   
   # Link nautilus to browser
   services.dbus.enable = true;  
