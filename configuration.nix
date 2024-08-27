@@ -191,6 +191,7 @@
 
     loupe
 
+    swappy
 ];
 
   # Enable zsh
