@@ -8,7 +8,12 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-
+    
+    sessionVariables = {
+      XCURSOR_THEME="Capitaine Cursors";
+      export XCURSOR_SIZE=21
+    };
+ 
     plugins = [
       {
         name = "powerlevel10k";
