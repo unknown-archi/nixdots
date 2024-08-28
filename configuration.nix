@@ -187,8 +187,8 @@
     xdg-desktop-portal-gtk
     appflowy
     mullvad-vpn
-    loupe
-    evince
+    loupe # Image viewer
+    evince # PDF viewer
 ];
 
   # Enable zsh
