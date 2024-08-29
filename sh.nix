@@ -51,6 +51,7 @@
       # nixupdate = "save; sudo nixos-rebuild switch --flake ~/.dotfiles#mathieu";
       # homeupdate = "save; home-manager switch --flake ~/.dotfiles#mathieu";
       # john="~/tools/john/run/john";
+      wezterm="WAYLAND_DISPLAY=wayland-0 wezterm"
     };
 
     initExtra = ''
