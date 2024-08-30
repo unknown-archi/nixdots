@@ -189,6 +189,7 @@
     mullvad-vpn
     loupe # Image viewer
     evince # PDF viewer
+    eza
 ];
 
   # Enable zsh
