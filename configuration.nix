@@ -191,6 +191,7 @@
     eza
     neovim
 
+    ungoogled-chromium
 ];
 
   # Enable zsh
