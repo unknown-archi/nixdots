@@ -152,7 +152,7 @@
     pandoc
     python3
     sqlite
-    tree
+
     ninja
     xxd
     zoxide
