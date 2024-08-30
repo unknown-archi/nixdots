@@ -152,7 +152,6 @@
     pandoc
     python3
     sqlite
-
     ninja
     xxd
     zoxide
@@ -190,7 +189,7 @@
     loupe # Image viewer
     evince # PDF viewer
     eza
-    nvim
+    neovim
 ];
 
   # Enable zsh
