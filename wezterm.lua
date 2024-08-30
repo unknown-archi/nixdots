@@ -6,8 +6,7 @@ local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices
 
-config.color_scheme = 'Argonaut'
-
+config.color_scheme = "Batman"
 config.font = wezterm.font("MesloLGS Nerd Font Mono")
 config.font_size = 13
 
