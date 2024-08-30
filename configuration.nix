@@ -190,6 +190,7 @@
     loupe # Image viewer
     evince # PDF viewer
     eza
+    nvim
 ];
 
   # Enable zsh
