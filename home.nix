@@ -94,9 +94,7 @@
   # HyprIdle
   home.file.".config/hypr/hypridle.conf".source = ./hypridle.conf;
 
-  # Alacritty
-  home.file.".config/alacritty/alacritty.toml".source = ./alacritty.toml;
-  
+  home.file.".config/wezterm/wezterm.lua".source = ./wezterm.lua;  
 }
 
 
