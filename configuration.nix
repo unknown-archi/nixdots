@@ -190,7 +190,7 @@
     evince # PDF viewer
     eza
     neovim
-    chromium
+
 ];
 
   # Enable zsh
