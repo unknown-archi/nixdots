@@ -188,11 +188,9 @@
     mullvad-vpn
     loupe # Image viewer
     evince # PDF viewer
-    eza
+    eza # Better ls
     neovim
-
-
-    chafa
+    chafa # In terminal image viewer
 ];
 
   # Enable zsh
