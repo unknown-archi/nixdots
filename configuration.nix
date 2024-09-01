@@ -192,6 +192,7 @@
     neovim
 
 
+    chafa
 ];
 
   # Enable zsh
