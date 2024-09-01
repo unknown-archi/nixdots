@@ -52,6 +52,7 @@
       # homeupdate = "save; home-manager switch --flake ~/.dotfiles#mathieu";
       # john="~/tools/john/run/john";
       ls="eza --icons";
+      sl="ls";
       tree="eza --icons --tree";
       wezterm="WAYLAND_DISPLAY=wayland-0 wezterm";
     };
