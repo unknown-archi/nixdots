@@ -191,6 +191,7 @@
     eza # Better ls
     neovim
     chafa # In terminal image viewer
+    fzf
 ];
 
   # Enable zsh
