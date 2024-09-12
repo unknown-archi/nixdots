@@ -191,6 +191,7 @@
     chafa # In terminal image viewer
     fzf
     swaybg
+    wl-clipboard
 ];
 
   # Enable zsh
