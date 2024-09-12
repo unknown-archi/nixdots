@@ -190,6 +190,7 @@
     neovim
     chafa # In terminal image viewer
     fzf
+    swaybg
 ];
 
   # Enable zsh
