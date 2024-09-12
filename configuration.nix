@@ -160,8 +160,6 @@
     hyprlock
     hypridle
     hyprpicker
-    # hyprcursor
-    swaybg # Wallpaper
     fira
     arandr # Screens GUI
     rofi
