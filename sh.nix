@@ -58,7 +58,7 @@
     };
 
     initExtra = ''
-	
+	WAYLAND_DISPLAY=wayland-1
 	# Better autocompletion
 	HISTFILE=$HOME/.zhistory
 	SAVEHIST=1000
