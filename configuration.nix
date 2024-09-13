@@ -175,7 +175,7 @@
     weather-icons
     waybar
     flatpak
-    dolphin
+
     gnome.nautilus
     kdeconnect
     burpsuite
