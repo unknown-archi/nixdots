@@ -13,7 +13,7 @@ config.enable_tab_bar = false
 
 config.window_background_opacity = 0.8
 
-config.enable_mouse_reporting = true
+# config.enable_mouse_reporting = true
 
 -- my coolnight colorscheme:
 config.colors = {
