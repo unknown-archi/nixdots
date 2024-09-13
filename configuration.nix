@@ -126,7 +126,7 @@
     blueman # Bluetooth Manager
     swaynotificationcenter
     webcord # Discord
-    nwg-look
+    # nwg-look
     bat
     btop
     clang
