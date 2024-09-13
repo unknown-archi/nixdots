@@ -192,6 +192,9 @@
     fzf
     swaybg
     wl-clipboard
+    glib
+    gobject-introspection
+    gtk3
 ];
 
   # Enable zsh
