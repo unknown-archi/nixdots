@@ -195,6 +195,7 @@
     glib
     gobject-introspection
     gtk3
+    vlc
 ];
 
   # Enable zsh
