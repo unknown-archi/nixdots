@@ -197,6 +197,7 @@
     gobject-introspection
     gtk3
     vlc
+    prismlauncher
 ];
 
   # Enable zsh
