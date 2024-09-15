@@ -188,6 +188,7 @@
     evince # PDF viewer
     eza # Better ls
     neovim
+    vim
     chafa # In terminal image viewer
     fzf
     swaybg
