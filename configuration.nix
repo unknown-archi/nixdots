@@ -219,7 +219,10 @@
 
   # VIRTUALISATION -------------------------------
   # Enable the libvirtd service
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    dnsmasq.enable = true;
+  }
 
   # Specify the QEMU package
   virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
