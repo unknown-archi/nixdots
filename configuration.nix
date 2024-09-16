@@ -99,7 +99,7 @@
   users.users.mathieu = {
     isNormalUser = true;
     description = "Mathieu";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" ];
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -230,8 +230,6 @@
     unix_sock_ro_perms = "0777"
     unix_sock_rw_perms = "0770"
   '';
-
-  users.users.mathieu.extraGroups = [ "libvirtd" "kvm" ];
  
   # VIRTUALISATION --------------------------------
 
