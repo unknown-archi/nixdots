@@ -224,20 +224,6 @@
   # Specify the QEMU package
   virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
 
-  # Enable the default virtual network for libvirt
-  virtualisation.libvirtd.withDefaultNetwork = true;
-
-  # Use nftables for network filtering support
-  virtualisation.libvirtd.nftablesSupport = true;
-
-  # Enable IPv4 forwarding
-  networking.ipForward = true;
-
-  # Optionally, adjust firewall settings to allow libvirt traffic
-  networking.firewall.allowedTCPPorts = [ 16509 ];
-  networking.firewall.allowedUDPPorts = [ ];
-  networking.firewall.allowPing = true;
-
   # (Optional) Additional libvirtd configuration
   virtualisation.libvirtd.extraConfig = ''
     unix_sock_group = "libvirtd"
