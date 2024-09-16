@@ -95,6 +95,14 @@
   home.file.".config/hypr/hypridle.conf".source = ./hypridle.conf;
 
   home.file.".config/wezterm/wezterm.lua".source = ./wezterm.lua;  
+
+  # Virt manager
+  dconf.settings = {
+  "org/virt-manager/virt-manager/connections" = {
+    autoconnect = ["qemu:///system"];
+    uris = ["qemu:///system"];
+  };
+};  
 }
 
 
