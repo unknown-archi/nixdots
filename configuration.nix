@@ -175,7 +175,6 @@
     weather-icons
     waybar
     flatpak
-
     gnome.nautilus
     kdeconnect
     burpsuite
@@ -198,6 +197,9 @@
     gtk3
     vlc
     prismlauncher
+    virt-manager
+    dnsmasq  # For network configuration
+    bridge-utils # For bridging networks
 ];
 
   # Enable zsh
@@ -207,13 +209,31 @@
 
   # Fonts
   fonts.packages = with pkgs; [
-  
     nerdfonts
     fira-code-symbols
     montserrat
   ];
 
   programs.thefuck.enable = true;
+
+
+  # VIRTUALISATION -------------------------------
+  # Enable the libvirtd service
+  virtualisation.libvirtd.enable = true;
+
+  # Specify the QEMU package
+  virtualisation.libvirtd.qemuPackage = pkgs.qemu_kvm;
+
+  # (Optional) Additional libvirtd configuration
+  virtualisation.libvirtd.extraConfig = ''
+    unix_sock_group = "libvirt"
+    unix_sock_ro_perms = "0777"
+    unix_sock_rw_perms = "0770"
+  '';
+
+  users.users.mathieu.extraGroups = [ "libvirtd" "kvm" ];
+ 
+  # VIRTUALISATION --------------------------------
 
   # VPN
   services.mullvad-vpn.enable = true;
