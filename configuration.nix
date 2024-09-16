@@ -231,7 +231,7 @@
   virtualisation.libvirtd.nftablesSupport = true;
 
   # Enable IPv4 forwarding
-  networking.sysctl."net.ipv4.ip_forward" = true;
+  networking.ipForward = true;
 
   # Optionally, adjust firewall settings to allow libvirt traffic
   networking.firewall.allowedTCPPorts = [ 16509 ];
