@@ -222,7 +222,7 @@
   virtualisation.libvirtd.enable = true;
 
   # Specify the QEMU package
-  virtualisation.libvirtd.qemuPackage = pkgs.qemu_kvm;
+  virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
 
   # (Optional) Additional libvirtd configuration
   virtualisation.libvirtd.extraConfig = ''
