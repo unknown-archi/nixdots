@@ -221,7 +221,6 @@
   # Enable the libvirtd service
   virtualisation.libvirtd = {
     enable = true;
-    dnsmasq.enable = true;
   };
 
   # Specify the QEMU package
