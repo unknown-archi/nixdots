@@ -226,7 +226,7 @@
 
   # (Optional) Additional libvirtd configuration
   virtualisation.libvirtd.extraConfig = ''
-    unix_sock_group = "libvirt"
+    unix_sock_group = "libvirtd"
     unix_sock_ro_perms = "0777"
     unix_sock_rw_perms = "0770"
   '';
