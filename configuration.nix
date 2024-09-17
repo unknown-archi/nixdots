@@ -99,7 +99,7 @@
   users.users.mathieu = {
     isNormalUser = true;
     description = "Mathieu";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "docker" ];
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -253,6 +253,9 @@
   };
 
   # VIRTUALISATION --------------------------------
+
+  # Docker
+  services.docker.enable = true;
 
   # VPN
   services.mullvad-vpn.enable = true;
