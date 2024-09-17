@@ -201,6 +201,7 @@
     dnsmasq  # For network configuration
     bridge-utils # For bridging networks
     brave
+    gimp
 ];
 
   # Enable zsh
