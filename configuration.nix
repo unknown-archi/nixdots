@@ -200,6 +200,7 @@
     virt-manager
     dnsmasq  # For network configuration
     bridge-utils # For bridging networks
+    brave
 ];
 
   # Enable zsh
