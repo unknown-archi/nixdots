@@ -254,6 +254,20 @@
 
   # VIRTUALISATION --------------------------------
 
+  ## DOCKER
+  # Set the necessary kernel modules for Docker
+  boot.kernelModules = [ "overlay" "br_netfilter" ];
+
+  # Enable the Docker daemon (use systemd)
+  systemd.services.docker = {
+    enable = true;
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.docker}/bin/dockerd";
+    };
+  };
+
+
   # VPN
   services.mullvad-vpn.enable = true;
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
