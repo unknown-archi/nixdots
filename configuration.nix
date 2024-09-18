@@ -202,6 +202,7 @@
     bridge-utils # For bridging networks
     brave
     gimp
+    telegram-desktop
 ];
 
   # Enable zsh
