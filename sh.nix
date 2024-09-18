@@ -12,7 +12,7 @@
     sessionVariables = {
       XCURSOR_THEME="Capitaine Cursors";
       XCURSOR_SIZE=21;
-      BAT_THEME="tokyonight";
+      BAT_THEME="base16-256";
     };
  
     plugins = [
