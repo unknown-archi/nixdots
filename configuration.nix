@@ -204,6 +204,7 @@
     gimp
     telegram-desktop
     fd
+    delta
 ];
 
   # Enable zsh
