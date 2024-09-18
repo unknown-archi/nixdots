@@ -55,7 +55,7 @@
       sl="ls";
       tree="eza --icons --tree";
       wezterm="WAYLAND_DISPLAY=wayland-0 wezterm";
-      alpine="sudo docker run -it --mount type=bind,source=/home/mathieu/VMs/alpine_data,target=/mydata alpine /bin/sh";
+      alpine="sudo docker run -it --mount type=bind,source=/home/mathieu/VMs/alpine_data,target=/mydata my_alpine";
     };
 
     initExtra = ''
