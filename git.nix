@@ -4,15 +4,36 @@
   programs.git = {
     enable = true;
 
-    # Set your Git user name and email
+    # Existing configurations
     userName = "Mathieu";
     userEmail = "usmathieu@gmail.com";
 
-    # Extra Git configurations
+    # Add your Git configurations here
     extraConfig = {
-      core.editor = "nano";        # Set default editor
-      pull.rebase = true;         # Rebase on pull
-      alias.co = "checkout";      # Short aliases
+      # Existing extraConfig settings if any
+      core.editor = "nano";
+      pull.rebase = true;
+
+      # New configurations based on your .gitconfig snippet
+      core.pager = "delta";
+
+      interactive.diffFilter = "delta --color-only";
+
+      delta = {
+        navigate = true;        # use n and N to move between diff sections
+        "side-by-side" = true;
+
+        # Uncomment one of the following if you want to disable auto-detection of terminal colors
+        # dark = true;
+        # light = true;
+      };
+
+      merge.conflictstyle = "diff3";
+
+      diff.colorMoved = "default";
+
+      # Optionally, add your aliases back if they were in extraConfig
+      alias.co = "checkout";
       alias.br = "branch";
       alias.ci = "commit";
       alias.st = "status";
