@@ -205,6 +205,9 @@
 	_fzf_compgen_dir() {
 	  fd --type=d --hidden --exclude .git . "$1"
 	}
+	
+	# Launch fzf-git script (https://github.com/junegunn/fzf-git.sh.git)
+	source /home/mathieu/.dotfiles/scripts/fzf-git.sh
     '';
 
   };
