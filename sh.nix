@@ -184,6 +184,9 @@
 	eval "$(zoxide init zsh)"
 	# Powerlevel 10k
 	source ~/.dotfiles/p10k.zsh
+
+	# Fzf
+	eval "$(fzf --zsh)"
     '';
 
   };
