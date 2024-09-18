@@ -203,6 +203,7 @@
     brave
     gimp
     telegram-desktop
+    fd
 ];
 
   # Enable zsh
