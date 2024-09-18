@@ -305,8 +305,7 @@
 				<key>settings</key>
 				<dict>
 					<key>foreground</key>
-					<!-- <string>#10000000</string>  CHANGED HERE-->
-					<string>#20000000</string>
+					<string>#10000000</string>
 				</dict>
 			</dict>
 			<dict>
@@ -543,6 +542,19 @@
 					<string>#08000000</string>
 					<key>foreground</key>
 					<string>#0f000000</string>
+				</dict>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Broken</string>
+				<key>scope</key>
+				<string>invalid.broken</string>
+				<key>settings</key>
+				<dict>
+					<key>background</key>
+					<string>#10000000</string>
+					<key>foreground</key>
+					<string>#B7000000</string>
 				</dict>
 			</dict>
 		</array>
