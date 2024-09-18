@@ -98,7 +98,7 @@
   home.file.".config/wezterm/wezterm.lua".source = ./wezterm.lua;  
 
   # Bat theme
-  home.file.".config/bat/themes/tokyonight.tmTheme".source = ./tokyonight.tmTheme;
+  # home.file.".config/bat/themes/tokyonight.tmTheme".source = ./tokyonight.tmTheme;
 
   # Virt manager
   dconf.settings = {
