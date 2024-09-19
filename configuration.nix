@@ -207,6 +207,7 @@
     delta
 
     fuse
+    patchelf
 ];
 
   # Enable zsh
