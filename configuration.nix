@@ -206,6 +206,7 @@
     fd
     delta
     appimage-run
+    libsecret
 ];
 
   # Enable zsh
