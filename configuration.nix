@@ -206,6 +206,7 @@
     fd
     delta
 
+    fuse
 ];
 
   # Enable zsh
