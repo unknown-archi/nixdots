@@ -205,9 +205,7 @@
     telegram-desktop
     fd
     delta
-
-    fuse
-    patchelf
+    appimage-run
 ];
 
   # Enable zsh
