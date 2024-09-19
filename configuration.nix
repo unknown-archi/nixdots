@@ -282,6 +282,14 @@
   environment.sessionVariables = {
     XDG_CURRENT_DESKTOP = "Hyprland";
   };
+  
+  # Flatpak
+  services.flatpak.enable = true;
+  environment.sessionVariables.XDG_DATA_DIRS = [
+    "/var/lib/flatpak/exports/share"
+    "${config.environment.homeProfileDirectory}/.local/share/flatpak/exports/share"
+    "${pkgs.xdg_utils}/share"
+ ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
