@@ -205,6 +205,7 @@
     telegram-desktop
     fd
     delta
+    steam
 ];
 
   # Enable zsh
