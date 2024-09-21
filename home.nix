@@ -107,7 +107,26 @@
     autoconnect = ["qemu:///system"];
     uris = ["qemu:///system"];
   };
+  
+  # Waybar
+  programs.waybar = {
+    enable = true;
+
+    # Specify where the Waybar config and style files are located
+    configFile = "${config.home.homeDirectory}/.dotfiles/waybar/config";
+    styleFile = "${config.home.homeDirectory}/.dotfiles/waybar/style.css";
+
+    # Enable auto-starting Waybar on session startup (optional)
+    enableAutostart = true;
+
+    # Ensure that Waybar runs with the Hyprland compositor
+    extraOptions = {
+      layer-shell = "hyprland";
+    };
+  };
+
 };  
 }
+
 
 

@@ -1,0 +1,82 @@
+/* Waybar Style Sheet for Hyprland */
+
+/* Global style for all elements */
+* {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: #FFFFFF;           /* Text color */
+  background: #1E1E2E;      /* Background color */
+}
+
+/* Style for the workspaces module */
+#workspaces button {
+  padding: 0 10px;
+  color: #A6E3A1;           /* Text color for workspace buttons */
+}
+
+#workspaces button.focused {
+  background: #45475A;      /* Background color for the active workspace */
+  color: #89B4FA;           /* Text color for the active workspace */
+}
+
+/* Style for the clock module */
+#clock {
+  padding: 0 10px;
+  color: #F38BA8;           /* Text color for the clock */
+}
+
+/* Style for resource modules */
+#cpu, #memory, #network, #pulseaudio, #battery {
+  padding: 0 10px;
+  color: #89DCEB;           /* Text color for these modules */
+}
+
+/* Style for the active window title */
+#window {
+  padding: 0 20px;
+  color: #CBA6F7;           /* Text color for the window title */
+  max-width: 500px;         /* Maximum width to prevent overflow */
+  overflow: hidden;
+  text-overflow: ellipsis;  /* Ellipsis for overflowed text */
+}
+
+/* Style for the system tray */
+#tray {
+  padding: 0 10px;
+}
+
+/* Style for tooltips */
+.tooltip {
+  font-size: 11px;
+  background: #45475A;
+  color: #FFFFFF;
+}
+
+/* Style for the bar itself */
+#bar {
+  padding: 0 10px;
+  height: 30px;
+  background: #1E1E2E;
+  border-bottom: 1px solid #313244;  /* Border at the bottom of the bar */
+}
+
+/* Style for battery states */
+#battery.charging, #battery.full {
+  color: #A6E3A1;           /* Color when charging or full */
+}
+
+#battery.low {
+  color: #F38BA8;           /* Color when battery is low */
+}
+
+/* Style when network is disconnected */
+#network.disconnected {
+  color: #F38BA8;           /* Color when no network */
+}
+
+/* Separator between modules */
+.separator {
+  background: #313244;
+  width: 1px;
+  margin: 0 5px;
+}
