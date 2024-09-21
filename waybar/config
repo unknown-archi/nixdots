@@ -90,7 +90,7 @@
   // Global settings applied to the bar
   "settings": {
     "icon_theme": "Papirus",                // Icon theme to use
-    "font": "Montserrat 12",     // Font family and size
+    "font": "MesloLGS Nerd Font Mono 12",     // Font family and size
     "spacing": 10                          // Spacing between modules
   }
 }
