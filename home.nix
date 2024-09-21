@@ -120,8 +120,8 @@
     };
   };
 
-   home.file.".config/waybar/config".source = /home/mathieu/.dotfiles/waybar/config;
-   home.file.".config/waybar/style.css".source = /home/mathieu/.dotfiles/waybar/style.css;
+  home.file.".config/waybar/config".source = ./waybar/config;
+  home.file.".config/waybar/style.css".source = ./waybar/style.css;
 
 
 };  
