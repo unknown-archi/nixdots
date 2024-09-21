@@ -105,6 +105,8 @@
 	# Create a new directory and cd into it
 	nd(){mkdir $1; cd $1}
 
+	findps(){ps -aux | grep $1}
+
 	# Get Local IP address
 	localIP(){
 		IP=$(ifconfig | grep 'inet ' | grep -Fv 127.0.0.1 | awk '{print $2}')
