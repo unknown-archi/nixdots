@@ -111,11 +111,6 @@
   # Waybar
   programs.waybar = {
     enable = true;
-
-    # Specify where the Waybar config and style files are located
-    configFile = "${config.home.homeDirectory}/.dotfiles/waybar/config";
-    styleFile = "${config.home.homeDirectory}/.dotfiles/waybar/style.css";
-
     # Enable auto-starting Waybar on session startup (optional)
     enableAutostart = true;
 
@@ -124,6 +119,10 @@
       layer-shell = "hyprland";
     };
   };
+
+   home.file.".config/waybar/config".source = /home/mathieu/.dotfiles/waybar/config;
+   home.file.".config/waybar/style.css".source = /home/mathieu/.dotfiles/waybar/style.css;
+
 
 };  
 }
