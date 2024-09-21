@@ -41,7 +41,7 @@
 
   // Clock module configuration
   "clock": {
-    "format": "{:%A, %B %d, %Y %H:%M}", // Display format of the date and time
+    "format": "{:%A, %B %d, %Y %H:%M:%S}", // Display format of the date and time
     "tooltip": false                    // Disable tooltip
   },
 
@@ -65,7 +65,7 @@
     "format-wifi": "WiFi: {essid} ({signalStrength}%)",   // Format when connected to WiFi
     "format-ethernet": "LAN: {ipaddr}",    // Format when connected via Ethernet
     "format-disconnected": "No Network",   // Format when disconnected
-    "interval": 10                         // Update interval in seconds
+    "interval": 5                         // Update interval in seconds
   },
 
   // Volume module configuration using PulseAudio
@@ -89,8 +89,7 @@
   // Global settings applied to the bar
   "settings": {
     "icon_theme": "Papirus",                // Icon theme to use
-    "font": "JetBrains Mono Medium 12",     // Font family and size
-    "spacing": 10,                          // Spacing between modules
-    "gtk-theme": "Adwaita-dark"             // GTK theme
+    "font": "Montserrat 12",     // Font family and size
+    "spacing": 10                          // Spacing between modules
   }
 }
