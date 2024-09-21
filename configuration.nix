@@ -156,7 +156,6 @@
     xxd
     zoxide
     gparted
-    warp-terminal
     hyprlock
     hypridle
     hyprpicker
@@ -165,7 +164,6 @@
     rofi
     tofi
     wlsunset # Gamma 
-    alacritty
     zsh-powerlevel10k
     blackbox-terminal
     thefuck
@@ -196,15 +194,15 @@
     gobject-introspection
     gtk3
     vlc
-    prismlauncher
+    prismlauncher # Minecraft
     virt-manager
     dnsmasq  # For network configuration
     bridge-utils # For bridging networks
     brave
     gimp
     telegram-desktop
-    fd
-    delta
+    fd # Better find
+    delta # Better git diff
     appimage-run
     libsecret
 ];
