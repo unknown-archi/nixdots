@@ -4,7 +4,7 @@
 
   imports = [
   
-    ./sh.nix
+    ./term/sh.nix
     ./git.nix
 
   ];
