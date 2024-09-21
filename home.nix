@@ -102,8 +102,8 @@
   # home.file.".config/bat/themes/custom.tmTheme".source = ./custom.tmTheme;
 
   # Waybar
-  home.file.".config/waybar/config".source = ./waybar/config;
-  home.file.".config/waybar/style.css".source = ./waybar/style.css;
+  # home.file.".config/waybar/config".source = ./waybar/config;
+  # home.file.".config/waybar/style.css".source = ./waybar/style.css;
 
   # Virt manager
   dconf.settings = {
