@@ -112,20 +112,6 @@
     uris = ["qemu:///system"];
   };
   
-  # Waybar
-  programs.waybar = {
-    enable = true;
-    # Enable auto-starting Waybar on session startup (optional)
-    enableAutostart = true;
-
-    # Ensure that Waybar runs with the Hyprland compositor
-    extraOptions = {
-      layer-shell = "hyprland";
-    };
-  };
-
-
-
 };  
 }
 
