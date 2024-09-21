@@ -87,16 +87,16 @@
   # home.file.".config/tofi/config".source = ./tofi/config;
 
   # Hyprland
-  home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
+  home.file.".config/hypr/hyprland.conf".source = ./hypr/hyprland.conf;
 
   # Hyprlock
-  home.file.".config/hypr/hyprlock.conf".source = ./hyprlock.conf;
+  home.file.".config/hypr/hyprlock.conf".source = ./hypr/hyprlock.conf;
   
   # HyprIdle
-  home.file.".config/hypr/hypridle.conf".source = ./hypridle.conf;
+  home.file.".config/hypr/hypridle.conf".source = ./hypr/hypridle.conf;
   
   # Wezterm
-  home.file.".config/wezterm/wezterm.lua".source = ./wezterm.lua;  
+  home.file.".config/wezterm/wezterm.lua".source = ./term/wezterm.lua;  
 
   # Bat theme
   # home.file.".config/bat/themes/custom.tmTheme".source = ./custom.tmTheme;

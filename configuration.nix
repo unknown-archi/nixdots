@@ -105,9 +105,6 @@
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;  
 
@@ -219,7 +216,7 @@
     montserrat
   ];
 
-  programs.thefuck.enable = true;
+  programs.thefuck.enable = true; # Useless ?
 
 
   # VIRTUALISATION -------------------------------
