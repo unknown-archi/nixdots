@@ -147,7 +147,7 @@
     obs-studio
     openvpn
     pandoc
-    python3
+    python3Full
     sqlite
     ninja
     xxd
