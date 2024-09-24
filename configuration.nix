@@ -208,7 +208,8 @@
     qt5.qtwayland
     qt5.qttools
     qt5.qtx11extras
-    ipython
+    
+    python312Packages.ipython
 ];
 
   # Enable zsh
