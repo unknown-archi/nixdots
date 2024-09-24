@@ -208,6 +208,7 @@
     qt5.qtwayland
     qt5.qttools
     qt5.qtx11extras
+    ipython
 ];
 
   # Enable zsh
