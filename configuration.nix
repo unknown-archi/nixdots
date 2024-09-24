@@ -147,7 +147,6 @@
     obs-studio
     openvpn
     pandoc
-    python3Full
     sqlite
     ninja
     xxd
@@ -209,7 +208,11 @@
     qt5.qttools
     qt5.qtx11extras
     
-    python312Packages.ipython
+    # Python
+    python3Full
+    pkgs.python3Packages.pip  # pip for installing Python packages
+    pkgs.python3Packages.virtualenv # virtualenv for creating isolated environments    
+
 ];
 
   # Enable zsh
