@@ -202,6 +202,12 @@
     delta # Better git diff
     appimage-run
     libsecret
+
+    # Qt Packages
+    qt5.qtbase
+    qt5.qtwayland
+    qt5.qttools
+    qt5.qtx11extras
 ];
 
   # Enable zsh
