@@ -34,7 +34,7 @@
       python="python3";
       py="python3";
       pip="pip3";
-      pyvenv="python3 -m venv";
+      pyvenv="python3 -m venv .venv";
       activate="source .venv/bin/activate";
       getip="curl icanhazip.com";
       # gsh="gcloud cloud-shell ssh --authorize-session";
