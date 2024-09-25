@@ -213,6 +213,7 @@
     pkgs.python3Packages.pip  # pip for installing Python packages
     pkgs.python3Packages.virtualenv # virtualenv for creating isolated environments    
 
+    buttercup-desktop
 ];
 
   # Enable zsh
