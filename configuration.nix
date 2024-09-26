@@ -222,6 +222,7 @@
     heroic
 
     nh
+    wofi
 ];
 
   # Enable zsh
