@@ -36,7 +36,8 @@
          "format": "{name}",
     },
     "hyprland/window": {
-      "separate-outputs": true
+      "separate-outputs": true,
+      "format": {}
     },
     "keyboard-state": {
         "numlock": true,
