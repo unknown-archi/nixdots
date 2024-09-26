@@ -121,7 +121,6 @@
     pavucontrol # Sound Manager
     blueman # Bluetooth Manager
     swaynotificationcenter
-    mako
     webcord # Discord
     # nwg-look
     bat
@@ -157,8 +156,6 @@
     hyprpicker
     fira
     arandr # Screens GUI
-    # rofi
-    # tofi
     wlsunset # Gamma 
     zsh-powerlevel10k
     blackbox-terminal
@@ -175,7 +172,6 @@
     pamixer
     xdg-desktop-portal
     xdg-desktop-portal-gtk
-    appflowy
     mullvad-vpn
     loupe # Image viewer
     evince # PDF viewer
