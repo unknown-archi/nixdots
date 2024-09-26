@@ -303,7 +303,8 @@
   environment.sessionVariables = {
     XDG_CURRENT_DESKTOP = "Hyprland";
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/mathieu/.steam/root/compatibilitytools.d";
-  };
+    FLAKE = "/home/mathieu/.dotfiles"; 
+ };
   
   # Flatpak
   services.flatpak.enable = true;
