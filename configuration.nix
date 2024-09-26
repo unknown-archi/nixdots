@@ -185,8 +185,6 @@
     glib
     gobject-introspection
     gtk3
-    qt5-wayland
-    qt6-wayland
     vlc
     prismlauncher # Minecraft
     virt-manager
