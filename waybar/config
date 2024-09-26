@@ -42,7 +42,8 @@
          }
     },
     "hyprland/window": {
-      "separate-outputs": true
+      "separate-outputs": true,
+      "icon": true
     },
     "keyboard-state": {
         "numlock": true,
