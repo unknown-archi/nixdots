@@ -170,8 +170,8 @@
     kdeconnect
     burpsuite
     pamixer
-    xdg-desktop-portal
-    xdg-desktop-portal-gtk
+    # xdg-desktop-portal-gtk
+    xdg-desktop-portal-hyprland
     mullvad-vpn
     loupe # Image viewer
     evince # PDF viewer
