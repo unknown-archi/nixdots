@@ -10,8 +10,8 @@
     syntaxHighlighting.enable = true;
     
     sessionVariables = {
-     #  XCURSOR_THEME="Capitaine Cursors";
-     #  XCURSOR_SIZE=21;
+      XCURSOR_THEME="Capitaine Cursors";
+      XCURSOR_SIZE=21;
       BAT_THEME="base16";
     };
  
