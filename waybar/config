@@ -1,7 +1,7 @@
 // Waybar Configuration File for Hyprland
 {
   // Define the position and appearance of the bar
-  "layer": "top",
+  "layer": "bottom",
   "position": "top",
   "height": 30,
 
