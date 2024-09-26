@@ -156,8 +156,8 @@
     hyprpicker
     fira
     arandr # Screens GUI
-    rofi
-    tofi
+    # rofi
+    # tofi
     wlsunset # Gamma 
     zsh-powerlevel10k
     blackbox-terminal
