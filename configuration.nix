@@ -216,6 +216,7 @@
     buttercup-desktop
     bottles
     mangohud # Gaming monitoring
+    protonup
 ];
 
   # Enable zsh
@@ -298,6 +299,7 @@
   # Set environment variables
   environment.sessionVariables = {
     XDG_CURRENT_DESKTOP = "Hyprland";
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/mathieu/.steam/root/compatibilitytools.d";
   };
   
   # Flatpak
