@@ -129,7 +129,7 @@
 	homeupdate() {
 		save $1
 		# home-manager switch --flake ~/.dotfiles#mathieu
-		sudo nh home switch -u
+		nh home switch -u
 	}
 
 	nixstall() {
