@@ -34,16 +34,21 @@
          "disable-scroll": true,
          "all-outputs": true,
          "warp-on-scroll": false,
-         "format": "{name}: {icon}",
+         "format": "{name} {icon}",
          "format-icons": {
-             "urgent": "",
              "active": "",
              "default": ""
-         }
+         },
+         "window-rewrite": {
+            "title<.*youtube.*>": "", // Windows whose titles contain "youtube"
+	    "class<firefox>": "", // Windows whose classes are "firefox"
+	    "class<firefox> title<.*github.*>": "", // Windows whose class is "firefox" and title contains "github". Note that "class" always comes first.
+	    "foot": "", // Windows that contain "foot" in either class or title. For optimization reasons, it will only match against a title if at least one other window explicitly matches against a title.
+	    "code": "󰨞",
+	},
     },
     "hyprland/window": {
-      "separate-outputs": true,
-      "icon": true
+      "separate-outputs": true
     },
     "keyboard-state": {
         "numlock": true,
