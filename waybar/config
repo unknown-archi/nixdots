@@ -17,19 +17,16 @@
         // "idle_inhibitor",
         "pulseaudio",
         // "network",
-        // "power-profiles-daemon",
         "cpu",
         "memory",
         "temperature",
-        // "backlight",
-        // "keyboard-state",
-        // "battery",
-        // "battery#bat2",
+        "hyprland/submap",
         "hyprland/language",
         "clock",
         "tray"
         // "custom/power"
     ],
+
     // Modules configuration
     "hyprland/workspaces": {
          "disable-scroll": true,
@@ -53,10 +50,14 @@
             "unlocked": ""
         }
     },
+    "hyprland/submap": {
+      "format": "{}",
+      "max-length": 8
+    },
     "hyprland/language": {
       "format": "{}",
-       "format-en": "US",
-       "format-fr": "FR",
+       "format-en": "us",
+       "format-fr": "fr",
     },
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
