@@ -213,12 +213,18 @@
     pkgs.python3Packages.virtualenv # virtualenv for creating isolated environments    
 
     buttercup-desktop
+
+    # Games
     bottles
     mangohud # Gaming monitoring
     protonup
     lutris
     heroic
+
     nh
+    nix-output-monitor
+    nvd
+    
 ];
 
   # Enable zsh
