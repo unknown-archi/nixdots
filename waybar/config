@@ -23,8 +23,8 @@
         "hyprland/submap",
         "hyprland/language",
         "clock",
-        "tray"
-        // "custom/power"
+        "tray",
+        "custom/media"
     ],
 
     // Modules configuration
