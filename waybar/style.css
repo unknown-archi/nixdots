@@ -5,10 +5,11 @@
 }
 
 window#waybar {
-    background-color: rgba(3, 33, 33, 0.2);
+    background-color: rgba(3, 33, 33, 0.3);
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
+    box-shadow: 0 0 5px rgba(20,20,20,0.1);
 }
 
 window#waybar.hidden {
