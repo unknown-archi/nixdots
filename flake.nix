@@ -23,10 +23,12 @@
     };
     homeConfigurations = {
       mathieu = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs inputs;
+        inherit pkgs;
         modules = [ 
           ./home.nix
         ];
+
+	specialArgs = { inherit hyprland; };
       };      
     };
   };
