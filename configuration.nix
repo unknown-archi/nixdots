@@ -116,12 +116,11 @@
     unzip
     curl
     vscode  
-    kitty
     bluez
     bluez-tools
     pavucontrol # Sound Manager
     blueman # Bluetooth Manager
-    swaynotificationcenter
+    # swaynotificationcenter
     webcord # Discord
     # nwg-look
     bat
