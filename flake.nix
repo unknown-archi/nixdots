@@ -23,7 +23,7 @@
     };
     homeConfigurations = {
       mathieu = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+        inherit pkgs inputs;
         modules = [ 
           ./home.nix
         ];
