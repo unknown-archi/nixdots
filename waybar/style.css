@@ -49,7 +49,7 @@ button:hover {
 
 /* you can set a style on hover for any module like this*/
 #pulseaudio:hover {
-    font-weight: 500;
+    color: white;
 }
 
 #workspaces button {
