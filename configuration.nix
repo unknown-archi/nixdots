@@ -219,6 +219,7 @@
     protonup
     lutris
     heroic
+    nh
 ];
 
   # Enable zsh
