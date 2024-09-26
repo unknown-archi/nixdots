@@ -214,6 +214,7 @@
     pkgs.python3Packages.virtualenv # virtualenv for creating isolated environments    
 
     buttercup-desktop
+    bottles
 ];
 
   # Enable zsh
