@@ -78,10 +78,10 @@
   programs.home-manager.enable = true;
   
   # Rofi
-  # programs.rofi = {
-  #   enable = true;
+  programs.rofi = {
+    enable = true;
   #   theme = "~/.dotfiles/rofi-theme.rasi";
-  # };
+  };
 
   # Tofi 
   # home.file.".config/tofi/config".source = ./tofi/config;
