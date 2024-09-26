@@ -121,6 +121,7 @@
     pavucontrol # Sound Manager
     blueman # Bluetooth Manager
     swaynotificationcenter
+    mako
     webcord # Discord
     # nwg-look
     bat
