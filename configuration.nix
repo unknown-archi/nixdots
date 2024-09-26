@@ -217,6 +217,7 @@
     bottles
     mangohud # Gaming monitoring
     protonup
+    lutris
 ];
 
   # Enable zsh
