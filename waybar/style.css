@@ -98,9 +98,6 @@ button:hover {
     margin: 0 4px;
 }
 
-#window {
-    max-width: 100px;
-}
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
