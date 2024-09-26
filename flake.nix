@@ -13,7 +13,7 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [ hyprland.overlay.default ];
+      overlays = [ hyprland.overlays.default ];
     };
   in {
     nixosConfigurations = {
