@@ -47,10 +47,10 @@ button:hover {
     box-shadow: inset 0 -3px #e2c7ff;;
 }
 
-/* you can set a style on hover for any module like this
+/* you can set a style on hover for any module like this*/
 #pulseaudio:hover {
-    background-color: #a37800;
-}*/
+    font-weight: 500;
+}
 
 #workspaces button {
     color : #e2c7ff;
