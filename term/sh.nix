@@ -123,7 +123,7 @@
 	nixupdate() {
 		save $1
 		# sudo nixos-rebuild switch --flake ~/.dotfiles#mathieu
-		sudo nh os switch -u
+		nh os switch -u
 	}
 
 	homeupdate() {
