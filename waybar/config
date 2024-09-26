@@ -95,7 +95,7 @@
         "spacing": 10
     },
     "clock": {
-        "format-alt": "{:%d-%m-%Y}",
+        "format-alt": "{:%d/%m/%Y}",
         "tooltip": false
     },
     "cpu": {
