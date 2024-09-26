@@ -10,9 +10,7 @@
         "hyprland/workspaces",
     ],
     "modules-center": [
-        "hyprland/window": {
-          "separate-outputs": true
-        }
+        "hyprland/window"
     ],
     "modules-right": [
         "mpd",
