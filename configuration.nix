@@ -215,6 +215,7 @@
 
     buttercup-desktop
     bottles
+    mangohud # Gaming monitoring
 ];
 
   # Enable zsh
@@ -280,6 +281,12 @@
     };
   };
 
+  # GAMING --------------------------------
+  programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+  programs.gamemode.enable = true;
+
+  # GAMING --------------------------------
 
   # VPN
   services.mullvad-vpn.enable = true;
