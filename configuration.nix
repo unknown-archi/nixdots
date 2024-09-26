@@ -218,6 +218,7 @@
     mangohud # Gaming monitoring
     protonup
     lutris
+    heroic
 ];
 
   # Enable zsh
