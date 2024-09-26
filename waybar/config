@@ -25,7 +25,7 @@
         // "keyboard-state",
         // "battery",
         // "battery#bat2",
-        "hyrpland/language",
+        "hyprland/language",
         "clock",
         "tray"
         // "custom/power"
