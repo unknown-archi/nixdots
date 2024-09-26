@@ -11,12 +11,11 @@
         "hyprland/window"
     ],
     "modules-center": [
-        "clock"
-
     ],
     "modules-right": [
         // "mpd",
         // "idle_inhibitor",
+        "clock",
         "pulseaudio",
         // "network",
         "cpu",
