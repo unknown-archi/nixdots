@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  hyprlandPkgs = pkgs.callPackage inputs.hyprland {};
+  hyprlandPkgs = pkgs.callPackage hyprland {};
 in
 
 {
