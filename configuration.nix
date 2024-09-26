@@ -222,9 +222,6 @@
     heroic
 
     nh
-    nix-output-monitor
-    nvd
-    
 ];
 
   # Enable zsh
