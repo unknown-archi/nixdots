@@ -93,6 +93,7 @@ button:hover {
 
 #window,
 #workspaces {
+    color : rgb(226, 199, 255);
     margin: 0 4px;
 }
 
