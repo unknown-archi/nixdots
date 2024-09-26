@@ -37,7 +37,7 @@
     },
     "hyprland/window": {
       "separate-outputs": true,
-      "format": {class}
+      "format": {}
     },
     "keyboard-state": {
         "numlock": true,
