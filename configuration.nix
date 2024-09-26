@@ -220,7 +220,7 @@
 
     nh
     wofi
-    xdg-desktop-portal-hyprland # From hyprland flake
+    xdph # From hyprland flake
 ];
 
   # Enable zsh

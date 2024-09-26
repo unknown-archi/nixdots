@@ -7,22 +7,42 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland.url = "github:hyprwm/Hyprland";
-    hyprland-community.url = "github:hyprwm/community";
+
+    xdph = {
+      url = "github:hyprwm/xdg-desktop-portal-hyprland";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        hyprland.follows = "hyprland";
+        hyprlang.url = "github:hyprwm/hyprlang";
+        hyprutils.url = "github:hyprwm/hyprutils";
+        hyprwayland-scanner.url = "github:hyprwm/hyprwayland-scanner";
+      };
+    };
+
+    hyprlang.url = "github:hyprwm/hyprlang";
+    hyprutils.url = "github:hyprwm/hyprutils";
+    hyprwayland-scanner.url = "github:hyprwm/hyprwayland-scanner";
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, hyprland-community, ... }:
+  outputs = { self, nixpkgs, home-manager, hyprland, xdph, hyprlang, hyprutils, hyprwayland-scanner, ... }:
   let
     system = "x86_64-linux";
+
     pkgs = import nixpkgs {
       inherit system;
       overlays = [
         hyprland.overlays.default
-        hyprland-community.overlays.default
+        hyprlang.overlays.default
+        hyprutils.overlays.default
+        hyprwayland-scanner.overlays.default
+        (final: prev: {
+          xdph = xdph.packages.${system}.default;
+        })
       ];
     };
   in {
     nixosConfigurations = {
-      mathieu = nixpkgs.lib.nixosSystem {
+      mathieu = pkgs.lib.nixosSystem {
         inherit system;
         modules = [ ./configuration.nix ];
       };
