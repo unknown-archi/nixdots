@@ -28,7 +28,9 @@
           ./home.nix
         ];
 
-	specialArgs = { inherit hyprland; };
+	specialArgs = {
+		hyprland = hyprland; 
+	};
       };      
     };
   };
