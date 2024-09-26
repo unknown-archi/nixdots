@@ -152,6 +152,7 @@
     gparted
     hyprlock
     hypridle
+    hyprcursor
     hyprpicker
     fira
     arandr # Screens GUI
