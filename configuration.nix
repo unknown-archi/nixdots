@@ -291,6 +291,13 @@
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
+  
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32bit = true;
+  };
+  services.xserver.videoDrivers = ["amdgpu"];
 
   # GAMING --------------------------------
 
