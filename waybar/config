@@ -15,7 +15,7 @@
     "modules-right": [
         // "mpd",
         // "idle_inhibitor",
-        "clock",
+        "tray",
         "pulseaudio",
         // "network",
         "cpu",
@@ -23,7 +23,7 @@
         "temperature",
         "hyprland/submap",
         "hyprland/language",
-        "tray",
+        "clock",
         "custom/media"
     ],
 
