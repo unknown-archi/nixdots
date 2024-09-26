@@ -19,6 +19,7 @@
     nixosConfigurations = {
       mathieu = lib.nixosSystem {
         inherit system;
+        specialArgs = { inherit inputs; };
         modules = [ ./configuration.nix ];
       };
     };
