@@ -122,7 +122,6 @@
     blueman # Bluetooth Manager
     swaynotificationcenter
     webcord # Discord
-    # nwg-look
     bat
     btop
     clang
@@ -170,7 +169,7 @@
     kdeconnect
     burpsuite
     pamixer
-    # xdg-desktop-portal-gtk
+    xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland
     mullvad-vpn
     loupe # Image viewer
