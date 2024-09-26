@@ -220,6 +220,7 @@
 
     nh
     wofi
+    xdph # From hyprland flake
 ];
 
   # Enable zsh
