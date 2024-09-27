@@ -22,7 +22,7 @@
         "memory",
         "temperature",
         "hyprland/submap",
-        "hyprland/language",
+        // "hyprland/language",
         "clock"
     ],
 
