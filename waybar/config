@@ -94,8 +94,9 @@
         "spacing": 10
     },
     "clock": {
-        "format": "{:%d/%m/%y  %H:%M:%OS}",
-        "tooltip": false
+        "format": "{: %d/%m/%y  %H:%M:%OS}",
+        "tooltip": false,
+	"interval" : 1
     },
     "cpu": {
         "format": "{usage}% ",
