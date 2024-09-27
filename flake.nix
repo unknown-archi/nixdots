@@ -18,16 +18,14 @@
   in {
     nixosConfigurations.mathieu = lib.nixosSystem {
         inherit system;
-        specialArgs = {
-          inherit inputs; 
-        };
+        specialArgs = { inherit inputs; };
         
         modules = [
           ./configuration.nix 
         ];
       
       };
-    };
+    # };
 
     homeConfigurations = {
       mathieu = home-manager.lib.homeManagerConfiguration {
@@ -37,5 +35,5 @@
         ];
       };      
     };
-
+  };
 }
