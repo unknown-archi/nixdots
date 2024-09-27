@@ -79,6 +79,9 @@
     # EDITOR = "emacs";
   };
 
+  xdg.dataFile."icons/rose-pine-hyprcursor".source = "${inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default}/share/icons/rose-pine-hyprcursor";
+
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   
