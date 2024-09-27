@@ -60,9 +60,6 @@
     enable = true;    
     xwayland.enable = true;
   }; 
-  hyprland.override {
-    debug = true;
-  };
 
   security.pam.services.hyprlock = { };
 
