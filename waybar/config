@@ -94,21 +94,21 @@
         "spacing": 10
     },
     "clock": {
-        "format": "   {:%a. %d/%m/%y     %H:%M:%OS}",
+        "format": "{:%a. %d/%m/%y     %H:%M:%OS}  ",
 	"interval": 1
     },
     "cpu": {
-        "format": "   {usage}%",
+        "format": "{usage}%  ",
         "tooltip": false
     },
     "memory": {
-        "format": "   {}%"
+        "format": "{}%  "
     },
     "temperature": {
         // "thermal-zone": 2,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
-        // "format-critical": "{icon}   {temperatureC}°C",
+        // "format-critical": "{temperatureC}°C  {icon}",
         "format": "{icon}   {temperatureC}°C",
         "format-icons": ["", "", ""]
     },
@@ -158,8 +158,8 @@
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}%  {icon}",
-        "format-bluetooth": "{icon}  {volume}%",
-        "format-bluetooth-muted": "{icon}  ",
+        "format-bluetooth": "{volume}%  {icon}",
+        "format-bluetooth-muted": "  {icon}",
         "format-muted": "",
         // "format-source": "  {volume}% ",
         // "format-source-muted": " ",
