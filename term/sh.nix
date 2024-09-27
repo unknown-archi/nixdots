@@ -127,7 +127,7 @@
 	}
 
 	homeupdate() {
-		# home-manager switch --flake ~/.dotfiles#mathieu
+		# home-manager switch --flake ~/.dotfiles#mathieu #  old command
 		nh home switch -u
 		save $1
 	}
