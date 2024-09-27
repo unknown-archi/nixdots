@@ -15,14 +15,13 @@
     // ],
     "modules-right": [
         // "idle_inhibitor",
+        "hyprland/language",
         "tray",
         "pulseaudio",
         // "network",
         "cpu",
         "memory",
         "temperature",
-        "hyprland/submap",
-        // "hyprland/language",
         "clock"
     ],
 
@@ -51,9 +50,9 @@
       "max-length": 8
     },
     "hyprland/language": {
-      "format": "{} ",
-       "format-en": "US",
-       "format-fr": "FR",
+      "format": "{}",
+       "format-en": "",
+       "format-fr": "",
     },
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
