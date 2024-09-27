@@ -58,7 +58,8 @@
   # services.displayManager.sddm.enable = true;
   programs.hyprland = {    
     enable = true;    
-    xwayland.enable = true;    
+    xwayland.enable = true;
+    override.debug = true;   
   }; 
   security.pam.services.hyprlock = { };
 
