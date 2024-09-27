@@ -7,7 +7,6 @@
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @inputs:
@@ -23,6 +22,7 @@
         modules = [ ./configuration.nix ];
       };
     };
+
     homeConfigurations = {
       mathieu = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;

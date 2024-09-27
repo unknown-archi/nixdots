@@ -220,8 +220,6 @@
 
     nh
     wofi
-
-    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
 ];
 
   # Enable zsh
