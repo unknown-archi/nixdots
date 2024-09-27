@@ -95,7 +95,7 @@
     },
     "clock": {
         "format": "{: %d/%m/%y   %H:%M:%OS}",
-	"interval": 30
+	"interval": "1"
     },
     "cpu": {
         "format": "{usage}% ",
