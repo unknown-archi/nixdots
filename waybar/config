@@ -51,7 +51,7 @@
       "max-length": 8
     },
     "hyprland/language": {
-      "format": "{}",
+      "format": "{} ",
        "format-en": "$",
        "format-fr": "€",
     },
@@ -93,7 +93,7 @@
         "spacing": 10
     },
     "clock": {
-        "format": "{:%a. %d/%m/%y     %H:%M:%OS} ",
+        "format": "{:%a. %d/%m/%y      %H:%M:%OS}  ",
 	"interval": 1
     },
     "cpu": {
