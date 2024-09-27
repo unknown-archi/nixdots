@@ -94,8 +94,9 @@
         "spacing": 10
     },
     "clock": {
-        "format": "\ueab0 {:%a. %d/%m/%y}  \ue641 {:%H:%M:%OS}",
-	"interval": 1
+        "format": "{} {:%a. %d/%m/%y  %H:%M:%OS}",
+	"interval": 1,
+	"icon": ""
     },
     "cpu": {
         "format": "{usage}% ",
