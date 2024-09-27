@@ -221,6 +221,8 @@
 
     nh
     wofi
+    rofi
+    tofi
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
 ];
 
