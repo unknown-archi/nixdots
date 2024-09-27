@@ -10,11 +10,10 @@
         "hyprland/workspaces",
         "hyprland/window"
     ],
-    "modules-center": [
-	"clock"
-    ],
+    // "modules-center": [
+    // 	 "clock"
+    // ],
     "modules-right": [
-        // "mpd",
         // "idle_inhibitor",
         "tray",
         "pulseaudio",
@@ -24,8 +23,7 @@
         "temperature",
         "hyprland/submap",
         "hyprland/language",
-        // "clock",
-        "custom/media"
+        "clock"
     ],
 
     // Modules configuration
