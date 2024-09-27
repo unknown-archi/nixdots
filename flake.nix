@@ -7,6 +7,7 @@
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @inputs:
@@ -15,11 +16,16 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system}; 
   in {
-    nixosConfigurations = {
-      mathieu = lib.nixosSystem {
+    nixosConfigurations.mathieu = lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs; };
-        modules = [ ./configuration.nix ];
+        specialArgs = {
+          inherit inputs; 
+        };
+        
+        modules = [
+          ./configuration.nix 
+        ];
+      
       };
     };
 
