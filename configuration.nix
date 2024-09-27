@@ -59,8 +59,11 @@
   programs.hyprland = {    
     enable = true;    
     xwayland.enable = true;
-    override.debug = true;   
   }; 
+  hyprland.override {
+    debug = true;
+  };
+
   security.pam.services.hyprlock = { };
 
   # Configure keymap in X11
