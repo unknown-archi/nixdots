@@ -224,6 +224,7 @@
     rofi
     tofi
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+    font-awesome
 ];
 
   # Enable zsh
