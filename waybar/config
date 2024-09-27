@@ -94,22 +94,22 @@
         "spacing": 10
     },
     "clock": {
-        "format": "  {:%a. %d/%m/%y    %H:%M:%OS}",
+        "format": "   {:%a. %d/%m/%y     %H:%M:%OS}",
 	"interval": 1
     },
     "cpu": {
-        "format": "  {usage}%",
+        "format": "   {usage}%",
         "tooltip": false
     },
     "memory": {
-        "format": "  {}%"
+        "format": "   {}%"
     },
     "temperature": {
         // "thermal-zone": 2,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
-        // "format-critical": "{icon}  {temperatureC}°C",
-        "format": "{temperatureC}°C {icon}",
+        // "format-critical": "{icon}   {temperatureC}°C",
+        "format": "{icon}   {temperatureC}°C",
         "format-icons": ["", "", ""]
     },
     "backlight": {
