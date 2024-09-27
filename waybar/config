@@ -52,7 +52,7 @@
       "max-length": 8
     },
     "hyprland/language": {
-      "format": "{} ",
+      "format": "{}",
        "format-en": "us",
        "format-fr": "fr",
     },

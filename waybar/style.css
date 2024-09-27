@@ -188,11 +188,6 @@ label:focus {
     background-color: #51a37a;
 }
 
-#language {
-    padding: 0 5px;
-    margin: 0 5px;
-}
-
 #keyboard-state {
     background: #97e1ad;
     padding: 0 0px;
