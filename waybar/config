@@ -52,8 +52,8 @@
     },
     "hyprland/language": {
       "format": "{} ",
-       "format-en": "$",
-       "format-fr": "€",
+       "format-en": "US",
+       "format-fr": "FR",
     },
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",

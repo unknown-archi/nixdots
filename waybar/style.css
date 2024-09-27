@@ -89,7 +89,7 @@ button:hover {
 }
 
 #language {
-    padding: 0 8px;
+    padding: 0 8px 0 0;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
