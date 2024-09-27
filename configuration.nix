@@ -221,8 +221,10 @@
     nh
     wofi
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
-
 ];
+
+  xdg.dataFile."icons/rose-pine-hyprcursor".source = "${inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default}/share/icons/rose-pine-hyprcursor";
+
 
   # Enable zsh
   environment.shells = with pkgs; [ zsh ];
