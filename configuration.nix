@@ -226,6 +226,7 @@
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default # hyprcursor theme
     font-awesome
     signal-desktop-beta
+    libreoffice
 ];
 
   # Enable zsh
