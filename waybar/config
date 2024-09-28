@@ -93,7 +93,7 @@
     },
     "clock": {
         "format": "{:%H:%M:%OS}   ",
-	"formatalt": "{:%a. %d/%m/%y   }", 
+	"format-alt": "{:%a. %d/%m/%y   }", 
 	"interval": 1
     },
     "cpu": {
