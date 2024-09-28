@@ -223,9 +223,8 @@
     wofi
     rofi
     tofi
-    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default # hyprcursor theme
     font-awesome
-    signal-cli
     signal-desktop-beta
 ];
 
