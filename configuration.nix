@@ -225,6 +225,7 @@
     tofi
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
     font-awesome
+    signal-cli
 ];
 
   # Enable zsh
