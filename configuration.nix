@@ -226,6 +226,7 @@
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
     font-awesome
     signal-cli
+    signal-desktop-beta
 ];
 
   # Enable zsh
