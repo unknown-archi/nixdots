@@ -67,7 +67,7 @@
   services.xserver = {
     xkb.layout = "us,fr";
     xkb.variant = "";
-    xkbOptions = "grp:alt_space_toggle";
+    xkb.options = "grp:alt_space_toggle";
   };
 
   # Enable CUPS to print documents.
