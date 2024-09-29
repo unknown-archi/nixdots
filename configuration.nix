@@ -218,7 +218,9 @@
     protonup
     lutris
     heroic
-
+    file
+    filezilla
+    fileinfo
     nh
     wofi
     rofi
