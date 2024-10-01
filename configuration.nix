@@ -229,7 +229,7 @@
     font-awesome
     signal-desktop-beta
     libreoffice
-    gammastep
+
 ];
 
   # Enable zsh
