@@ -237,6 +237,15 @@
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
 
+  # Night light
+  services.gammastep = {
+    enable = true;
+    provider = "manual";
+    latitude = 48.79;
+    longitude = 2.3;
+  };
+
+
   # Fonts
   fonts.packages = with pkgs; [
     nerdfonts
