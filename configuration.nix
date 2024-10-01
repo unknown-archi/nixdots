@@ -229,7 +229,7 @@
     font-awesome
     signal-desktop-beta
     libreoffice
-    wl-gammarelay-rs
+
 ];
 
   # Enable zsh
