@@ -229,7 +229,7 @@
     font-awesome
     signal-desktop-beta
     libreoffice
-
+    gammastep
 ];
 
   # Enable zsh
@@ -238,12 +238,12 @@
   programs.zsh.enable = true;
 
   # Night light
-  services.gammastep = {
-    enable = true;
-    provider = "manual";
-    latitude = 48.79;
-    longitude = 2.3;
-  };
+  #services.gammastep = {
+  #  enable = true;
+  #  provider = "manual";
+  #  latitude = 48.79;
+  #  longitude = 2.3;
+  #};
 
 
   # Fonts
