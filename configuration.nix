@@ -245,6 +245,14 @@
   #  longitude = 2.3;
   #};
 
+  # Enable Printer
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
 
   # Fonts
   fonts.packages = with pkgs; [
