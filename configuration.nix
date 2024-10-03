@@ -69,9 +69,6 @@
     xkb.variant = "";
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
   # Enable Bluetooth
   hardware.bluetooth.enable = true;
 
