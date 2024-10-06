@@ -227,6 +227,7 @@
     signal-desktop-beta
     libreoffice
 
+    aider-chat
 ];
 
   # Enable zsh
