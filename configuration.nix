@@ -228,6 +228,7 @@
     libreoffice
 
 
+    googleearth-pro
 ];
 
   # Enable zsh
