@@ -227,6 +227,7 @@
     signal-desktop-beta
     libreoffice
     via
+    p7zip
 ];
 
   # Enable zsh
