@@ -68,6 +68,12 @@
     xkb.layout = "us";
     xkb.variant = "";
   };
+  
+  # Enable QMK (Keyboard config)  
+  hardware.keyboard.qmk.enable = true
+
+  # VIA
+  services.udev.packages = [ pkgs.via ];
 
   # Enable Bluetooth
   hardware.bluetooth.enable = true;
