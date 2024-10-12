@@ -234,6 +234,7 @@
     libreoffice
     via
     p7zip
+    qmk
 ];
 
   # Enable zsh
