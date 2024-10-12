@@ -70,7 +70,7 @@
   };
   
   # Enable QMK (Keyboard config)  
-  hardware.keyboard.qmk.enable = true
+  hardware.keyboard.qmk.enable = true;
 
   # VIA
   services.udev.packages = [ pkgs.via ];
