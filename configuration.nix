@@ -226,9 +226,7 @@
     font-awesome
     signal-desktop-beta
     libreoffice
-
-
-
+    via
 ];
 
   # Enable zsh
