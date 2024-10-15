@@ -235,6 +235,7 @@
     via
     p7zip
     qmk
+    whois
 ];
 
   # Enable zsh
