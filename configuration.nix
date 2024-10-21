@@ -236,6 +236,7 @@
     p7zip
     qmk
     whois
+    hyprshot
 ];
 
   # Enable zsh
