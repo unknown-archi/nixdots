@@ -238,6 +238,7 @@
     whois
     hyprshot
     bitwarden-desktop
+    bitwarden-cli
 ];
 
   # Enable zsh
