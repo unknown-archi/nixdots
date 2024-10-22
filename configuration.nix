@@ -237,6 +237,7 @@
     qmk
     whois
     hyprshot
+    bitwarden-desktop
 ];
 
   # Enable zsh
