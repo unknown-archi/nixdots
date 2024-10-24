@@ -239,6 +239,7 @@
     hyprshot
     bitwarden-desktop
     bitwarden-cli
+    resumed
 ];
 
   # Enable zsh
