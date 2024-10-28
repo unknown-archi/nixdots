@@ -143,6 +143,7 @@
     cron
     docker
     ffmpeg
+    gnupg
     git
     glow
     nmap
