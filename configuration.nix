@@ -155,6 +155,7 @@
     xxd
     zoxide
     gparted
+    parted
     hyprlock
     hypridle
     hyprcursor
