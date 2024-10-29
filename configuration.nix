@@ -242,6 +242,7 @@
     bitwarden-desktop
     bitwarden-cli
     resumed
+    exiftool
 ];
 
   # Enable zsh
