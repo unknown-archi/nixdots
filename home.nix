@@ -28,9 +28,9 @@
     settings.experimental-features = [ "nix-command" "flakes" ]; 
   };  
 
-  home.environment = {
-    extraPath = [ "~/Tools" ];
-  };
+  shellPath = [
+    "${home.homeDirectory}/Tools"
+  ];
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
