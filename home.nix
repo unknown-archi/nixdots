@@ -29,7 +29,7 @@
   };  
 
   home.environment = {
-    extraPath = [ "${HOME}/Tools" ];
+    extraPath = [ "~/Tools" ];
   };
 
   # The home.packages option allows you to install Nix packages into your
