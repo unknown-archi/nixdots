@@ -214,7 +214,7 @@
     python3Full
     pkgs.python3Packages.pip  # pip for installing Python packages
     pkgs.python3Packages.virtualenv # virtualenv for creating isolated environments    
-
+    pkgs.python3Packages.dnspython
     buttercup-desktop
 
     # Games
