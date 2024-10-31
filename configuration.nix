@@ -247,6 +247,7 @@
     resumed
     exiftool
     dig
+    csvkit
 ];
 
   # Enable zsh
