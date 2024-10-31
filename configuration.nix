@@ -248,6 +248,7 @@
     exiftool
     dig
     csvkit
+    go-ethereum
 ];
 
   # Enable zsh
