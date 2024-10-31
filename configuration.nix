@@ -222,6 +222,7 @@
     pkgs.python3Packages.numpy
     
     buttercup-desktop
+    go
 
     # Games
     bottles
