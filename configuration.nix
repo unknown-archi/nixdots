@@ -321,6 +321,8 @@
     br0.interfaces = [ "enp2s0" ]; # On ajoute enp2s0 au bridge
   };
   };
+  # Waydroid
+  virtualisation.waydroid.enable = true;
 
   # VIRTUALISATION --------------------------------
 
