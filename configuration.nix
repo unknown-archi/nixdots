@@ -218,8 +218,8 @@
     pkgs.python3Packages.requests
     pkgs.python3Packages.dns
     pkgs.python3Packages.web3
-    pkgs.python3Packages.pandas
-    pkgs.python3Packages.numpy
+    # pkgs.python3Packages.pandas
+    # pkgs.python3Packages.numpy
     
     buttercup-desktop
     go
