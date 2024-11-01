@@ -253,6 +253,7 @@
     dig
     csvkit
     go-ethereum
+    poetry
 ];
 
   # Enable zsh
