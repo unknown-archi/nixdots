@@ -255,6 +255,7 @@
     go-ethereum
     poetry
 
+    jetbrains.datagrip
 ];
 
   # Enable zsh
