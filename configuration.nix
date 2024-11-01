@@ -254,6 +254,7 @@
     csvkit
     go-ethereum
     poetry
+    waydroid
 ];
 
   # Enable zsh
