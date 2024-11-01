@@ -34,7 +34,7 @@
       python="python3";
       py="python3";
       pip="pip3";
-      pyvenv="python3 -m venv .venv";
+      pyvenv="python3 -m venv .venv --copies";
       activate="source .venv/bin/activate";
       getip="curl icanhazip.com";
       # gsh="gcloud cloud-shell ssh --authorize-session";
@@ -58,6 +58,7 @@
       tree="eza --icons --tree";
       wezterm="WAYLAND_DISPLAY=wayland-0 wezterm";
       alpine="sudo docker run -it --mount type=bind,source=/home/mathieu/VMs/alpine_docker/alpine_data,target=/mydata my_alpine";
+      fix_python="fix-python --venv .venv"
     };
 
     initExtra = ''
