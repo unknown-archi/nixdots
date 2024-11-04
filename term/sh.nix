@@ -59,6 +59,7 @@
       wezterm="WAYLAND_DISPLAY=wayland-0 wezterm";
       alpine="sudo docker run -it --mount type=bind,source=/home/mathieu/VMs/alpine_docker/alpine_data,target=/mydata my_alpine";
       fix_python="fix-python --venv .venv";
+      open_resume="docker run -p 3000:3000 open-resume";
     };
 
     initExtra = ''
