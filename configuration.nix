@@ -387,22 +387,31 @@
   # List services that you want to enable:
 
   # SSH --------------------------------
-   services.openssh = {
+  services.openssh = {
     enable = true;
     permitRootLogin = "no"; # Désactive la connexion en tant que root
     passwordAuthentication = false; # Désactive l'authentification par mot de passe
-    # Autorise uniquement les utilisateurs spécifiés
-    allowUsers = [ "mathieu" ];
+    extraConfig = ''
+      AllowUsers mathieu
+    '';
     # Utiliser des clés SSH pour l'authentification
-    authorizedKeys = {
-      "mathieu" = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD..." ];
-    };
+    # Vous pouvez spécifier les clés autorisées ici ou utiliser les fichiers standards
+    authorizedKeysFile = "/home/mathieu/.ssh/authorized_keys";
   };
 
   # Configurer le pare-feu
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22 ]; # Port SSH
+    allowedTCPPorts = [ 22 ];
+  };
+
+  # Assurez-vous que votre utilisateur est défini correctement
+  users.users.votre_nom_utilisateur = {
+    isNormalUser = true;
+    home = "/home/mathieu";
+    shell = "/run/current-system/sw/bin/zsh";
+    # Assurez-vous que le répertoire .ssh existe et contient la clé publique
+    extraGroups = [ "wheel" ]; # Ajoutez à wheel si vous souhaitez permettre sudo
   };
 
   # Open ports in the firewall.
