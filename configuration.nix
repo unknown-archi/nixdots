@@ -422,12 +422,9 @@
   };
 
   services.fail2ban = {
-  enable = true;
-  sshd = {
-    enabled = true;
+    enable = true;
     maxretry = 5;      # Nombre maximal de tentatives avant bannissement
-    bantime = 3600;    # Durée du bannissement en secondes (1 heure)
-    };
+    bantime = "1h";
   };
 
   # Open ports in the firewall.
