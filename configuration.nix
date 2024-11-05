@@ -386,8 +386,24 @@
 
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  # SSH --------------------------------
+   services.openssh = {
+    enable = true;
+    permitRootLogin = "no"; # Désactive la connexion en tant que root
+    passwordAuthentication = false; # Désactive l'authentification par mot de passe
+    # Autorise uniquement les utilisateurs spécifiés
+    allowUsers = [ "mathieu" ];
+    # Utiliser des clés SSH pour l'authentification
+    authorizedKeys = {
+      "mathieu" = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD..." ];
+    };
+  };
+
+  # Configurer le pare-feu
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 22 ]; # Port SSH
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
