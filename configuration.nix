@@ -397,8 +397,8 @@
     settings = { 
       PermitRootLogin = "no";
       PasswordAuthentication = false;
-      AllowUsers = [ "mathieu" ]
-    }
+      AllowUsers = [ "mathieu" ];
+    };
     ports = [ 2222 ];                         # Vous pouvez changer ce port pour une sécurité accrue, par exemple 2222
   };
 
