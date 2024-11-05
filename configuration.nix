@@ -107,6 +107,10 @@
     packages = with pkgs; [
     #  thunderbird
     ];
+    openssh.authorizedKeys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBG... votre_email@example.com"
+      # Ajoutez d'autres clés publiques ici si nécessaire
+    ];
   };
 
   # Allow unfree packages
@@ -387,32 +391,24 @@
   # List services that you want to enable:
 
   # SSH --------------------------------
+  # Activer le service SSH
   services.openssh = {
     enable = true;
-    permitRootLogin = "no"; # Désactive la connexion en tant que root
-    passwordAuthentication = false; # Désactive l'authentification par mot de passe
+    permitRootLogin = "no";               # Désactiver la connexion en tant que root
+    passwordAuthentication = false;       # Désactiver l'authentification par mot de passe
+    port = 2222;                          # Vous pouvez changer ce port pour une sécurité accrue, par exemple 2222
     extraConfig = ''
       AllowUsers mathieu
     '';
-    # Utiliser des clés SSH pour l'authentification
-    # Vous pouvez spécifier les clés autorisées ici ou utiliser les fichiers standards
-    authorizedKeysFile = "/home/mathieu/.ssh/authorized_keys";
   };
 
-  # Configurer le pare-feu
+  # Configurer le pare-feu pour autoriser le port SSH
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22 ];
+    allowedTCPPorts = [ 22 ]; # Ajoutez d'autres ports si vous en utilisez
   };
 
-  # Assurez-vous que votre utilisateur est défini correctement
-  users.users.votre_nom_utilisateur = {
-    isNormalUser = true;
-    home = "/home/mathieu";
-    shell = "/run/current-system/sw/bin/zsh";
-    # Assurez-vous que le répertoire .ssh existe et contient la clé publique
-    extraGroups = [ "wheel" ]; # Ajoutez à wheel si vous souhaitez permettre sudo
-  };
+
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
