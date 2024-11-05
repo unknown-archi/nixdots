@@ -396,7 +396,7 @@
     enable = true;
     permitRootLogin = "no";               # Désactiver la connexion en tant que root
     passwordAuthentication = false;       # Désactiver l'authentification par mot de passe
-    port = 2222;                          # Vous pouvez changer ce port pour une sécurité accrue, par exemple 2222
+    ports = [ 2222 ];                         # Vous pouvez changer ce port pour une sécurité accrue, par exemple 2222
     extraConfig = ''
       AllowUsers mathieu
     '';
