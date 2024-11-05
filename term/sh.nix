@@ -54,8 +54,6 @@
       # john="~/tools/john/run/john";
       ls="eza --icons";
       sl="ls";
-      cd="z; ls";
-      z="z; ls";
       tree="eza --icons --tree";
       wezterm="WAYLAND_DISPLAY=wayland-0 wezterm";
       alpine="sudo docker run -it --mount type=bind,source=/home/mathieu/VMs/alpine_docker/alpine_data,target=/mydata my_alpine";
@@ -77,6 +75,9 @@
 	bindkey '^[[B' history-search-forward	
 
 	# My functions
+	z() { z $1; ls }
+	cd() { z $1; ls }
+
 	save() {
 		if [ -z "$1" ]; then
 			commit_message="Save"
