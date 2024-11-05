@@ -107,7 +107,7 @@
     packages = with pkgs; [
     #  thunderbird
     ];
-    openssh.authorizedKeys = [
+    openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBG... votre_email@example.com"
       # Ajoutez d'autres clés publiques ici si nécessaire
     ];
