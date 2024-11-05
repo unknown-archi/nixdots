@@ -394,12 +394,12 @@
   # Activer le service SSH
   services.openssh = {
     enable = true;
-    permitRootLogin = "no";               # Désactiver la connexion en tant que root
-    passwordAuthentication = false;       # Désactiver l'authentification par mot de passe
+    settings = { 
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
+      AllowUsers = [ "mathieu" ]
+    }
     ports = [ 2222 ];                         # Vous pouvez changer ce port pour une sécurité accrue, par exemple 2222
-    extraConfig = ''
-      AllowUsers mathieu
-    '';
   };
 
   # Configurer le pare-feu pour autoriser le port SSH
