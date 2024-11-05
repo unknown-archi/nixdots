@@ -75,7 +75,6 @@
 	bindkey '^[[B' history-search-forward	
 
 	# My functions
-	z() { z $1; ls }
 	cd() { z $1; ls }
 
 	save() {
