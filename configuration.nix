@@ -38,7 +38,7 @@
       nameservers = [ "8.8.8.8" "8.8.4.4" ]; # Serveurs DNS (Google DNS)
     };
   };
-}
+};
 
   # Enable networking
   networking.networkmanager.enable = true;
