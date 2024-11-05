@@ -25,6 +25,21 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  networking.interfaces = {
+  br0 = {
+    ipv4 = {
+      addresses = [
+        {
+          address = "192.168.1.100";
+          prefixLength = 24;
+        }
+      ];
+      gateway = "192.168.1.1";   # Adresse IP de la Livebox
+      nameservers = [ "8.8.8.8" "8.8.4.4" ]; # Serveurs DNS (Google DNS)
+    };
+  };
+}
+
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -408,7 +423,14 @@
     allowedTCPPorts = [ 2222 ]; # Ajoutez d'autres ports si vous en utilisez
   };
 
-
+  services.fail2ban = {
+  enable = true;
+  sshd = {
+    enabled = true;
+    maxretry = 5;      # Nombre maximal de tentatives avant bannissement
+    bantime = 3600;    # Durée du bannissement en secondes (1 heure)
+    };
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
