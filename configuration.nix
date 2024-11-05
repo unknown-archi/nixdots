@@ -26,19 +26,17 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   networking.interfaces = {
-  br0 = {
-    ipv4 = {
-      addresses = [
-        {
-          address = "192.168.1.100";
-          prefixLength = 24;
-        }
-      ];
-      gateway = "192.168.1.1";   # Adresse IP de la Livebox
-      nameservers = [ "8.8.8.8" "8.8.4.4" ]; # Serveurs DNS (Google DNS)
+    br0 = {
+      ipv4 = {
+        addresses = [
+          {
+            address = "192.168.1.100";
+            prefixLength = 24;
+          }
+        ];
+      };
     };
   };
-};
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -414,6 +412,9 @@
     };
     ports = [ 2222 ];                         # Vous pouvez changer ce port pour une sécurité accrue, par exemple 2222
   };
+
+  # networking.defaultGateway = "192.168.1.1"; # Adresse IP de la Livebox (passerelle)
+  # networking.nameservers = [ "1.1.1.1" "1.0.0.1" ]; # Serveurs DNS (Cloudflare DNS)
 
   # Configurer le pare-feu pour autoriser le port SSH
   networking.firewall = {
