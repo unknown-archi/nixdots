@@ -404,7 +404,7 @@
   # SSH --------------------------------
   # Activer le service SSH
   services.openssh = {
-    enable = true;
+    enable = false;
     settings = { 
       PermitRootLogin = "no";
       PasswordAuthentication = false;
