@@ -261,6 +261,7 @@
 
     jetbrains.datagrip
     docker-compose
+    imagemagick
 ];
 
   # Enable zsh
