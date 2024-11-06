@@ -404,7 +404,7 @@
   # SSH --------------------------------
   # Activer le service SSH
   services.openssh = {
-    enable = true;
+    enable = false; # Reenable here if needed
     settings = { 
       PermitRootLogin = "no";
       PasswordAuthentication = false;
@@ -420,10 +420,6 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 2222 ]; # Ajoutez d'autres ports si vous en utilisez
-    extraCommands = ''
-      sudo ip rule add from 192.168.1.100 table local_route
-      sudo ip route add default via 192.168.1.1 dev enp2s0 table local_route
-    '';
   };
 
   services.fail2ban = {
