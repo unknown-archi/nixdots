@@ -273,6 +273,7 @@
     poetry
 
     jetbrains.datagrip
+    docker-compose
 ];
 
   # Enable zsh
