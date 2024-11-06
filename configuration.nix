@@ -262,6 +262,7 @@
     jetbrains.datagrip
     docker-compose
     imagemagick
+    ghostscript
 ];
 
   # Enable zsh
