@@ -416,7 +416,7 @@
       };
     };
   };
-  networking.nameservers = [ "1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4" "9.9.9.9" ]; # Serveurs DNS (Cloudflare DNS and Google DNS)
+  networking.nameservers = [ "1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4" ]; # Serveurs DNS (Cloudflare DNS and Google DNS)
 
   # Configurer le pare-feu pour autoriser le port SSH
   networking.firewall = {
