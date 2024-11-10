@@ -242,6 +242,7 @@
     rofi
     tofi
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default # hyprcursor theme
+    inputs.superfile.packages.${system}.default
     font-awesome
     signal-desktop-beta
     libreoffice
