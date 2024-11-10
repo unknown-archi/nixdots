@@ -110,6 +110,13 @@
   home.file.".config/waybar/config".source = ./waybar/config;
   home.file.".config/waybar/style.css".source = ./waybar/style.css;
 
+  # Tools
+    # linkding
+    home.file."~/Tools/linkding/docker-compose.yml".source = ./tools/linkding/docker-compose.yml;
+    home.file."~/Tools/linkding/.env".source = ./tools/linkding/.env;
+    
+
+
   # Virt manager
   dconf.settings = {
   "org/virt-manager/virt-manager/connections" = {

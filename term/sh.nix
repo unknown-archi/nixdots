@@ -54,6 +54,7 @@
       # john="~/tools/john/run/john";
       ls="eza --icons";
       sl="ls";
+      lls="ls";
       tree="eza --icons --tree";
       wezterm="WAYLAND_DISPLAY=wayland-0 wezterm";
       alpine="sudo docker run -it --mount type=bind,source=/home/mathieu/VMs/alpine_docker/alpine_data,target=/mydata my_alpine";
