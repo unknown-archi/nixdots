@@ -112,8 +112,8 @@
 
   # Tools
     # linkding
-    home.file."~/Tools/linkding/docker-compose.yml".source = ./tools/linkding/docker-compose.yml;
-    home.file."~/Tools/linkding/.env".source = ./tools/linkding/.env;
+    home.file."/home/mathieu/Tools/linkding/docker-compose.yml".source = ./tools/linkding/docker-compose.yml;
+    home.file."/home/mathiue/Tools/linkding/.env".source = ./tools/linkding/.env;
     
 
 
