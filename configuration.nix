@@ -264,6 +264,7 @@
     docker-compose
     imagemagick
     ghostscript
+    obsidian
 ];
 
   # Enable zsh
