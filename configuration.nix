@@ -266,6 +266,7 @@
     ghostscript
     obsidian
     pciutils
+    onlyoffice-desktopeditors
 ];
 
   # Enable zsh
