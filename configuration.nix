@@ -265,6 +265,7 @@
     imagemagick
     ghostscript
     obsidian
+    pciutils
 ];
 
   # Enable zsh
