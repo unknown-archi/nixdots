@@ -118,6 +118,9 @@
     # Superfile    
     home.file.".config/superfile/config.toml".source = ./tools/superfile/config.toml;
 
+    # Stirling pdf
+    home.file."/home/mathieu/Tools/stirling_pdf/docker-compose.yml".source = ./tools/stirling_pdf/docker-compose.yml;
+
   # Virt manager
   dconf.settings = {
   "org/virt-manager/virt-manager/connections" = {
