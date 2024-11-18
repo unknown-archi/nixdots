@@ -251,8 +251,8 @@
     qmk
     whois
     hyprshot
-    bitwarden-desktop
-    bitwarden-cli
+-desktop
+-cli
     resumed
     exiftool
     dig
