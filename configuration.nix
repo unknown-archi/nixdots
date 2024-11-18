@@ -251,15 +251,12 @@
     qmk
     whois
     hyprshot
--desktop
--cli
     resumed
     exiftool
     dig
     csvkit
     go-ethereum
     poetry
-
     jetbrains.datagrip
     docker-compose
     imagemagick
