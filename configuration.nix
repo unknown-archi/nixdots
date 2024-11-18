@@ -267,6 +267,7 @@
     obsidian
     pciutils
     onlyoffice-bin
+    rpcs3
 ];
 
   # Enable zsh
