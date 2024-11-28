@@ -265,6 +265,7 @@
     pciutils
     onlyoffice-bin
     rpcs3
+    tutanota-desktop
 ];
 
   # Enable zsh
