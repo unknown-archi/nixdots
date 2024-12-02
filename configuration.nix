@@ -108,7 +108,8 @@
     #  thunderbird
     ];
     openssh.authorizedKeys.keys = [
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCxaMaChsCwxzTcCGXnKMt0mUS05p8ABUsHxZ/l88SNhdOjlG7DABVJmTwL/oLoJmwOmOErvCNtEfr+zPkRq83ZsPBVTE4W4NqtcJv5zVBRjUGiTiorSvuNgsOm3L8d+UPToc+KEarDYxU6xiRG5JFNl56mzHKeO7X5jEPQvN9RKRLmUTmSV7NHpVS8KY0Y2ZCGDPW+GuX+CkIQbnfL38PZowaTh8qYMexIKELTHJ+Jbj0GzqYwKmfBSTGpgQStjFeo0o/v9wD1ZipOPEclO4rf5bfEBKm8uuOGcAh9iQc/6AKMCcDn9kS+OeeRfRHUHpQejoCsPQOr8myJa3ND4pAmt1hmkJIRrEwiO6RIIud4PzkEkXrprtYEiym1rBfk/xVJmhk+dNhCuWtrwTp6/wPPyXwC6i8TEqTFqoNSBVr7Yp9+MS6iVeN02pADZwXGEl7bKpFck/tu2BFkraISs7Gpxr3CGlLPLQm3t1n9gGQzSaG07oiA/14GT28ejIwfwyU= mathieu@mathieus-macbook-pro.home"
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCxaMaChsCwxzTcCGXnKMt0mUS05p8ABUsHxZ/l88SNhdOjlG7DABVJmTwL/oLoJmwOmOErvCNtEfr+zPkRq83ZsPBVTE4W4NqtcJv5zVBRjUGiTiorSvuNgsOm3L8d+UPToc+KEarDYxU6xiRG5JFNl56mzHKeO7X5jEPQvN9RKRLmUTmSV7NHpVS8KY0Y2ZCGDPW+GuX+CkIQbnfL38PZowaTh8qYMexIKELTHJ+Jbj0GzqYwKmfBSTGpgQStjFeo0o/v9wD1ZipOPEclO4rf5bfEBKm8uuOGcAh9iQc/6AKMCcDn9kS+OeeRfRHUHpQejoCsPQOr8myJa3ND4pAmt1hmkJIRrEwiO6RIIud4PzkEkXrprtYEiym1rBfk/xVJmhk+dNhCuWtrwTp6/wPPyXwC6i8TEqTFqoNSBVr7Yp9+MS6iVeN02pADZwXGEl7bKpFck/tu2BFkraISs7Gpxr3CGlLPLQm3t1n9gGQzSaG07oiA/14GT28ejIwfwyU= mathieu@mathieus-macbook-pro.home" 
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPua3xuqNnZ/MRiwZVzfepRVQBsuoQS2T+feMU2c9ZkB Shortcuts on iPhone"
       # Ajoutez d'autres clés publiques ici si nécessaire
     ];
   };
