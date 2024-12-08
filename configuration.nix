@@ -268,6 +268,7 @@
     onlyoffice-bin
     rpcs3
 
+    ani-cli
 ];
 
   # Enable zsh
