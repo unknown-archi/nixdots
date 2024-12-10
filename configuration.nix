@@ -267,10 +267,8 @@
     pciutils
     onlyoffice-bin
     rpcs3
-
     ani-cli
-
-    tor-browser-bundle-bin
+    tor-browser
 ];
 
   # Enable zsh
