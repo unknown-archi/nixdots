@@ -270,6 +270,7 @@
 
     ani-cli
 
+    tor-browser-bundle-bin
 ];
 
   # Enable zsh
