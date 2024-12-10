@@ -269,6 +269,7 @@
     rpcs3
 
     ani-cli
+    himalaya
 ];
 
   # Enable zsh
