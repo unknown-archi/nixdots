@@ -272,6 +272,7 @@
     workrave
     safeeyes
     stretchly
+    firefox
 ];
 
   # Enable zsh
