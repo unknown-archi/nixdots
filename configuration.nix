@@ -273,6 +273,7 @@
     safeeyes
     stretchly
     firefox
+    geckodriver
 ];
 
   # Enable zsh
