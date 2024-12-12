@@ -274,6 +274,7 @@
     stretchly
 
     geckodriver
+    firefox
 ];
 
   # Enable zsh
