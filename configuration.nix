@@ -269,6 +269,9 @@
     rpcs3
     ani-cli
     tor-browser-bundle-bin
+    workrave
+    safeeyes
+    stretchly
 ];
 
   # Enable zsh
