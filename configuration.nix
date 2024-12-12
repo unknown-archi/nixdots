@@ -272,7 +272,7 @@
     workrave
     safeeyes
     stretchly
-    firefox
+
     geckodriver
 ];
 
