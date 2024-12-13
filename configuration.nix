@@ -275,6 +275,7 @@
 
     geckodriver
     firefox
+    uv
 ];
 
   # Enable zsh
