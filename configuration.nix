@@ -244,7 +244,7 @@
     rofi
     tofi
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default # hyprcursor theme
-    inputs.superfile.packages.${system}.default
+    # inputs.superfile.packages.${system}.default
     font-awesome
     signal-desktop-beta
     libreoffice
@@ -312,6 +312,10 @@
 
 
   # VIRTUALISATION -------------------------------
+  
+  # Virtualbox
+  virtualisation.virtualbox.host.enable = true;
+
   # Enable the libvirtd service
   virtualisation.libvirtd = {
     enable = true;
