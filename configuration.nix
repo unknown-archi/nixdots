@@ -277,6 +277,7 @@
     firefox
     uv
     virtualbox
+    wireshark
 ];
 
   # Enable zsh
