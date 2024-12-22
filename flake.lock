@@ -186,11 +186,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1734567386,
-        "narHash": "sha256-GL5FUjXdXsvFFGfvtNes7FoJDnJDm9/7m1O1e5PWsTU=",
+        "lastModified": 1734623740,
+        "narHash": "sha256-0SDKlae6mwkat1+mvOUl2+U+AFYIJZrgAz46GsX1nhQ=",
         "owner": "yorukot",
         "repo": "superfile",
-        "rev": "7c8eff55bce3cddff57459689997bce6eccecc82",
+        "rev": "303a6cfcc1067ad66d453567e344d98ab5e92774",
         "type": "github"
       },
       "original": {
