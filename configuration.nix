@@ -279,7 +279,7 @@
     virtualbox
     wireshark
     # webcord-vencord
-    vencord
+
 ];
 
   # Enable zsh
