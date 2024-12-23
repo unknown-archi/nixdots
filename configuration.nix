@@ -278,7 +278,8 @@
     uv
     virtualbox
     wireshark
-    webcord-vencord
+    # webcord-vencord
+    vencord
 ];
 
   # Enable zsh
