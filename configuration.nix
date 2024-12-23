@@ -131,7 +131,6 @@
     pavucontrol # Sound Manager
     blueman # Bluetooth Manager
     swaynotificationcenter
-    webcord # Discord
     bat
     btop
     clang
