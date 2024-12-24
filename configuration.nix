@@ -125,7 +125,7 @@
     unzip
     zip
     curl
-    # vscode  
+    vscode  
     bluez
     bluez-tools
     pavucontrol # Sound Manager
