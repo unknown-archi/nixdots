@@ -278,6 +278,7 @@
     virtualbox
     wireshark
     vesktop
+    vscode-with-extensions
 ];
 
   # Enable zsh
