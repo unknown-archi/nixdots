@@ -244,7 +244,7 @@
     inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default # hyprcursor theme
     # inputs.superfile.packages.${system}.default
     font-awesome
-    signal-desktop-beta
+    signal-desktop
     libreoffice
     via
     p7zip
