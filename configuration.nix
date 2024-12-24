@@ -395,7 +395,7 @@
   environment.sessionVariables.XDG_DATA_DIRS = [
     "/var/lib/flatpak/exports/share"
     "/home/mathieu/.local/share/flatpak/exports/share"
-    "${pkgs.xdg_utils}/share"
+    "${pkgs.xdg-utils}/share"
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
