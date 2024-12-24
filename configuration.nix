@@ -278,6 +278,7 @@
     wireshark
     vesktop
     vscodium
+    kitty
 ];
 
   # Enable zsh
