@@ -279,6 +279,7 @@
     vesktop
     vscodium
     kitty
+    heroku
 ];
 
   # Enable zsh
