@@ -280,7 +280,7 @@
     vscodium
     kitty
     heroku
-    ghostty.packages.x86_64-linux.default
+    inputs.ghostty.packages.x86_64-linux.default
 ];
 
   # Enable zsh
