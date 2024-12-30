@@ -12,9 +12,9 @@
 
     rose-pine-hyprcursor.url = "github:ndom91/rose-pine-hyprcursor";
 
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
+    # ghostty = {
+    #  url = "github:ghostty-org/ghostty";
+    #};
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @inputs:
