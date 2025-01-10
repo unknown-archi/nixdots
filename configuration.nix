@@ -282,6 +282,7 @@
     heroku
     # inputs.ghostty.packages.x86_64-linux.default
     stacer
+    dust
 ];
 
   # Enable zsh
