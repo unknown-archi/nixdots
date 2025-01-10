@@ -268,8 +268,8 @@
     ani-cli
     tor-browser-bundle-bin
     workrave
-    safeeyes
-    stretchly
+    # safeeyes
+    # stretchly
 
     geckodriver
     firefox
