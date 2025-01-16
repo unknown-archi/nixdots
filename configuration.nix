@@ -100,7 +100,7 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 14d --keep 6";
-    flake = "/.dotfiles";
+    flake = "/home/mathieu/.dotfiles";
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
