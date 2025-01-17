@@ -99,7 +99,7 @@
   programs.nh = {
     enable = true;
     clean.enable = true;
-    clean.extraArgs = "--keep-since 14d --keep 6";
+    clean.extraArgs = "--keep-since 20d --keep 6";
     flake = "/home/mathieu/.dotfiles";
   };
 
