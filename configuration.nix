@@ -16,7 +16,14 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.configurationLimit = 3;
+  boot.loader.systemd-boot.configurationLimit = 7;
+
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 20d --keep 6";
+    flake = "/home/mathieu/.dotfiles";
+  };
   
   networking.hostName = "mathieu"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -94,13 +101,6 @@
 
     # Switch to WirePlumber
     wireplumber.enable = true;
-  };
-
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep-since 20d --keep 6";
-    flake = "/home/mathieu/.dotfiles";
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
