@@ -284,7 +284,6 @@
     virtualbox
     wireshark
     vesktop
-    vscodium
     kitty
     heroku
     # inputs.ghostty.packages.x86_64-linux.default
