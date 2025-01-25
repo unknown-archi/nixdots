@@ -291,6 +291,7 @@
     dust
     code-cursor
     electrum
+    wasabiwallet
 ];
 
   # Enable zsh
