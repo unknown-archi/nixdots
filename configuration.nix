@@ -290,6 +290,7 @@
     stacer
     dust
     code-cursor
+    electrum
 ];
 
   # Enable zsh
