@@ -293,6 +293,7 @@
     electrum
     wasabiwallet
     ollama
+    lmstudio
 ];
 
   # Enable zsh
