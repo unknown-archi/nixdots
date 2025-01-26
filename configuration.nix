@@ -292,6 +292,7 @@
     code-cursor
     electrum
     wasabiwallet
+    ollama
 ];
 
   # Enable zsh
