@@ -296,6 +296,7 @@
     lmstudio
     freerdp
     remmina
+    tigervnc
 ];
 
   # Enable zsh
