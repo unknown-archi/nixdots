@@ -35,17 +35,15 @@
   # Enable networking
   # networking.networkmanager.enable = true;
   networking.networkmanager = {
-  enable = true;
-  settings = {
-    main = {
-      # Ignore vboxnet0 and any interface starting with veth
-      unmanaged-devices = [
-        "interface-name:vboxnet0"
-        "interface-name:veth*"
-        ];
+    enable = true;
+    settings = {
+      main = {
+        # Ignore vboxnet0 and any interface starting with veth
+        unmanaged-devices = "interface-name:vboxnet0;interface-name:veth*";
       };
     };
   };
+
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
