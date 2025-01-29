@@ -37,12 +37,10 @@
   networking.networkmanager = {
   enable = true;
   extraConfig = ''
-    [main]
-    # Ignore vboxnet0 and any interface starting with veth
-    unmanaged-devices=interface-name:vboxnet0;interface-name:veth*
-  '';
+      [main]
+      unmanaged-devices=interface-name:vboxnet0;interface-name:veth*
+    '';
   };
-
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
