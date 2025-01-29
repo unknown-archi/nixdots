@@ -294,6 +294,7 @@
     wasabiwallet
     ollama
     lmstudio
+    freerdp
 ];
 
   # Enable zsh
