@@ -36,10 +36,15 @@
   # networking.networkmanager.enable = true;
   networking.networkmanager = {
   enable = true;
-  extraConfig = ''
-      [main]
-      unmanaged-devices=interface-name:vboxnet0;interface-name:veth*
-    '';
+  settings = {
+    main = {
+      # Ignore vboxnet0 and any interface starting with veth
+      unmanaged-devices = [
+        "interface-name:vboxnet0"
+        "interface-name:veth*"
+        ];
+      };
+    };
   };
 
   # Set your time zone.
