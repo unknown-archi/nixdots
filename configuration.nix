@@ -295,6 +295,7 @@
     ollama
     lmstudio
     freerdp
+    remmina
 ];
 
   # Enable zsh
