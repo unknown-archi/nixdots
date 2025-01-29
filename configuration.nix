@@ -33,17 +33,7 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  # networking.networkmanager.enable = true;
-  networking.networkmanager = {
-    enable = true;
-    settings = {
-      main = {
-        # Ignore vboxnet0 and any interface starting with veth
-        unmanaged-devices = "interface-name:vboxnet0;interface-name:veth*";
-      };
-    };
-  };
-
+  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
