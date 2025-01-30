@@ -297,6 +297,7 @@
     freerdp
     remmina
     tigervnc
+    tcpdump
 ];
 
   # Enable zsh
