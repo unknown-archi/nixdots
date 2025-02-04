@@ -298,6 +298,7 @@
     remmina
     tigervnc
     tcpdump
+    cmatrix
 ];
 
   # Enable zsh
