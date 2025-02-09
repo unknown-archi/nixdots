@@ -153,7 +153,7 @@
     autoconf     # Generate configure scripts
     pkg-config   # Helper tool for compiling applications
     cron
-    docker
+    # docker
     ffmpeg
     gnupg
     git
@@ -265,7 +265,7 @@
     go-ethereum
     poetry
     jetbrains.datagrip
-    docker-compose
+    # docker-compose
     imagemagick
     ghostscript
     obsidian
@@ -374,16 +374,16 @@
 
   ## DOCKER
   # Set the necessary kernel modules for Docker
-  boot.kernelModules = [ "overlay" "br_netfilter" ];
+  # boot.kernelModules = [ "overlay" "br_netfilter" ];
 
   # Enable the Docker daemon (use systemd)
-  systemd.services.docker = {
-    enable = true;
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.docker}/bin/dockerd";
-    };
-  };
+  # systemd.services.docker = {
+  #   enable = true;
+  #   wantedBy = [ "multi-user.target" ];
+  #  serviceConfig = {
+  #    ExecStart = "${pkgs.docker}/bin/dockerd";
+  #  };
+  # };
 
   # GAMING --------------------------------
   programs.steam.enable = true;
