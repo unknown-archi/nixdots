@@ -299,6 +299,7 @@
     tigervnc
     tcpdump
     cmatrix
+    fatresize
 ];
 
   # Enable zsh
