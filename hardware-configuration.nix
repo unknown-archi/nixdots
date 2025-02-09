@@ -24,11 +24,6 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  fileSystems."/var/lib/docker/overlay2/4207db3cf5f094ab3bc0d6554e13fec04fc6b9460a814963aa7e07b4a32976b7/merged" =
-    { device = "overlay";
-      fsType = "overlay";
-    };
-
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
