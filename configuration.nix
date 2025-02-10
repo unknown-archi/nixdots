@@ -16,12 +16,12 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.configurationLimit = 7;
+  boot.loader.systemd-boot.configurationLimit = 40;
 
   programs.nh = {
     enable = true;
     clean.enable = true;
-    clean.extraArgs = "--keep-since 20d --keep 6";
+    clean.extraArgs = "--keep-since 20d --keep 40";
     flake = "/home/mathieu/.dotfiles";
   };
   
