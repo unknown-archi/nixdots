@@ -6,7 +6,7 @@
 
     # Existing configurations
     userName = "Mathieu";
-    userEmail = "usmathieu@gmail.com";
+    userEmail = "unknown-archi@users.noreply.github.com";
 
     # Add your Git configurations here
     extraConfig = {
