@@ -231,7 +231,8 @@
     pkgs.python3Packages.web3
     # pkgs.python3Packages.pandas
     # pkgs.python3Packages.numpy
-    
+    # Fix-python : nix profile install github:GuillaumeDesforges/fix-python
+
     buttercup-desktop
     go
 
@@ -300,6 +301,7 @@
     tcpdump
     cmatrix
     fatresize
+    hdparm
 ];
 
   # Enable zsh
