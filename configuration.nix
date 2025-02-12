@@ -302,6 +302,7 @@
     cmatrix
     fatresize
     hdparm
+    cryptsetup
 ];
 
   # Enable zsh
