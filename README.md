@@ -1,6 +1,6 @@
 # My NixOS dotfiles
 
-## Cursor set up
+## Cursor theme set up
 [Hyprcursor fix](https://wiki.hyprland.org/Hypr-Ecosystem/hyprcursor/)
 The cursor theme is set up in hyprland but in order for it to work, download and put:
 - This [theme](https://github.com/ndom91/rose-pine-hyprcursor/releases/tag/v0.3.2) in both `/usr/share/themes` and `~/.themes`
