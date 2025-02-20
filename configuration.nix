@@ -229,6 +229,7 @@
     pkgs.python3Packages.requests
     pkgs.python3Packages.dns
     pkgs.python3Packages.web3
+    pkgs.python3Packages.setuptools
     # pkgs.python3Packages.pandas
     # pkgs.python3Packages.numpy
     # Fix-python : nix profile install github:GuillaumeDesforges/fix-python
