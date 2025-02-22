@@ -303,6 +303,7 @@
     cmatrix
     fatresize
     hdparm
+    unrar
 ];
 
   # Enable zsh
