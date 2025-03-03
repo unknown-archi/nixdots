@@ -304,6 +304,7 @@
     fatresize
     hdparm
     unrar
+    mullvad-browser
 ];
 
   # Enable zsh
