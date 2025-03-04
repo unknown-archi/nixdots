@@ -466,7 +466,7 @@
   # Configurer le pare-feu pour autoriser le port SSH
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 2222 ]; # Ajoutez d'autres ports si vous en utilisez
+    allowedTCPPorts = [ 2222 53317 ]; # Ajoutez d'autres ports si vous en utilisez
   };
 
   services.fail2ban = {
