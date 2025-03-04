@@ -467,6 +467,7 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 2222 53317 ]; # Ajoutez d'autres ports si vous en utilisez
+    allowedUDPPorts = [ 53317 ]; 
   };
 
   services.fail2ban = {
