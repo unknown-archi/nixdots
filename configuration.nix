@@ -306,6 +306,7 @@
     unrar
     mullvad-browser
     localsend
+    inetutils # Collection of common network programs
 ];
 
   # Enable zsh
