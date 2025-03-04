@@ -305,6 +305,7 @@
     hdparm
     unrar
     mullvad-browser
+    localsend
 ];
 
   # Enable zsh
