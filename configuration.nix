@@ -307,6 +307,7 @@
     mullvad-browser
     localsend
     inetutils # Collection of common network programs
+    nodejs
 ];
 
   # Enable zsh
