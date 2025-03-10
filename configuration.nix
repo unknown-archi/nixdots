@@ -310,6 +310,7 @@
     nodejs
     maltego
     nikto
+    lsusb
 ];
 
   # Enable zsh
