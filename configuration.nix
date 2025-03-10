@@ -110,7 +110,7 @@
   users.users.mathieu = {
     isNormalUser = true;
     description = "Mathieu";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "docker" "vboxusers" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "docker" ];
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -283,7 +283,6 @@
     geckodriver
     firefox
     uv
-    virtualbox
     wireshark
     vesktop
     kitty
@@ -346,11 +345,6 @@
 
 
   # VIRTUALISATION -------------------------------
-  
-  # Virtualbox
-  virtualisation.virtualbox.host.enable = true;
-  boot.kernelModules = [ "vboxdrv" "vboxnetadp" "vboxnetflt" ];  
-
 
   # Enable the libvirtd service
   virtualisation.libvirtd = {
@@ -473,8 +467,7 @@
   # Configurer le pare-feu pour autoriser le port SSH
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 2222 53317 ]; # Ajoutez d'autres ports si vous en utilisez
-    allowedUDPPorts = [ 53317 ]; 
+    allowedTCPPorts = [ 2222 ]; # Ajoutez d'autres ports si vous en utilisez
   };
 
   services.fail2ban = {
