@@ -110,7 +110,7 @@
   users.users.mathieu = {
     isNormalUser = true;
     description = "Mathieu";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "docker" "vboxusers" ];
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -349,6 +349,8 @@
   
   # Virtualbox
   virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.kernelModules = [ "vboxdrv" "vboxnetadp" "vboxnetflt" ];  
+
 
   # Enable the libvirtd service
   virtualisation.libvirtd = {
