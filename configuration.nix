@@ -362,21 +362,21 @@
   '';
 
   # BRIDGE  
-  # networking = {
-  # useDHCP = false; # On désactive le DHCP par défaut pour configurer le bridge
-  # interfaces = {
-  #   br0 = {
-  #     useDHCP = true; # Le bridge utilisera DHCP pour obtenir une adresse IP
-  #     ipv6.addresses = [ {
-  #       address = "fe80::1";
-  #       prefixLength = 64;
-  #     } ];
-  #   };
-  # };
-  # bridges = {
-  #   br0.interfaces = [ "enp2s0" ]; # On ajoute enp2s0 au bridge
-  # };
-  # };
+  networking = {
+  useDHCP = false; # On désactive le DHCP par défaut pour configurer le bridge
+  interfaces = {
+    br0 = {
+      useDHCP = true; # Le bridge utilisera DHCP pour obtenir une adresse IP
+      ipv6.addresses = [ {
+        address = "fe80::1";
+        prefixLength = 64;
+      } ];
+    };
+  };
+  bridges = {
+    br0.interfaces = [ "enp2s0" ]; # On ajoute enp2s0 au bridge
+  };
+  };
 
   # VIRTUALISATION --------------------------------
 
