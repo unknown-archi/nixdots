@@ -309,6 +309,7 @@
     inetutils # Collection of common network programs
     nodejs
     maltego
+    nikto
 ];
 
   # Enable zsh
