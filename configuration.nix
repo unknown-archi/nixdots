@@ -308,9 +308,9 @@
     localsend
     inetutils # Collection of common network programs
     nodejs
-    maltego
-    nikto
-    lsusb
+    maltego # Does not work
+    nikto # Web server scanner
+    usbutils
 ];
 
   # Enable zsh
