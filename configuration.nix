@@ -353,8 +353,8 @@
 
   # Specify the QEMU package
   virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
-  networking.ipv4.forwarding = true;
-    
+  boot.kernel.sysctl."net.ipv4.ip_forward" = "1";
+  
   # (Optional) Additional libvirtd configuration
   virtualisation.libvirtd.extraConfig = ''
     unix_sock_group = "libvirtd"
