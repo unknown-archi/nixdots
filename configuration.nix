@@ -349,7 +349,7 @@
   
   # Virtualbox
   virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.kernelModules = [ "vboxdrv" "vboxnetadp" "vboxnetflt" ];  
+  boot.kernelModules = [ "vboxdrv" "vboxnetadp" "vboxnetflt" ];  
 
 
   # Enable the libvirtd service
