@@ -308,6 +308,7 @@
     localsend
     inetutils # Collection of common network programs
     nodejs
+    maltego
 ];
 
   # Enable zsh
