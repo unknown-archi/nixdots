@@ -310,6 +310,7 @@
     maltego # Does not work
     nikto # Web server scanner
     usbutils
+    tutanota-desktop
 ];
 
   # Enable zsh
