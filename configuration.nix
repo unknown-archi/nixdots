@@ -310,9 +310,6 @@
     maltego # Does not work
     nikto # Web server scanner
     usbutils
-    tutanota-desktop
-    gnome-keyring
-    seahorse  # optional, provides a GUI for key management
 ];
 
   # Enable zsh
