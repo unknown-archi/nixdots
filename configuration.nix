@@ -205,6 +205,7 @@
     vlc
     prismlauncher # Minecraft
     virt-manager
+    swtpm # TPM for Windows
     dnsmasq  # For network configuration
     bridge-utils # For bridging networks
     brave
@@ -355,6 +356,18 @@
 
   # Specify the QEMU package
   virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
+  virtualisation.libvirtd.qemu = {
+  package = pkgs.qemu_kvm;
+  runAsRoot = true;
+  swtpm.enable = true; # Enable TPM for windows
+  ovmf = {
+      enable = true;
+      package = (pkgs.OVMFFull.override {
+        secureBoot = true;
+        tpmSupport = true;
+      });
+    }; 
+  };  
   boot.kernel.sysctl."net.ipv4.ip_forward" = "1";
   
   # (Optional) Additional libvirtd configuration
