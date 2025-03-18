@@ -349,11 +349,6 @@
 
   # VIRTUALISATION -------------------------------
 
-  # Enable the libvirtd service
-  virtualisation.libvirtd = {
-    enable = true;
-  };
-
   # Specify the QEMU package
   virtualisation.libvirtd = {
   enable = true;
