@@ -311,6 +311,7 @@
     nikto # Web server scanner
     usbutils
     sqlmap
+    lunatask
 ];
 
   # Enable zsh
