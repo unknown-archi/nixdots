@@ -355,7 +355,6 @@
   };
 
   # Specify the QEMU package
-  virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
   virtualisation.libvirtd.qemu = {
   package = pkgs.qemu_kvm;
   runAsRoot = true;
