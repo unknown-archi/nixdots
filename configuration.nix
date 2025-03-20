@@ -313,6 +313,7 @@
     usbutils
     sqlmap
     lunatask
+    pnpm
 ];
 
   # Enable zsh
