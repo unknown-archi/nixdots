@@ -314,6 +314,7 @@
     sqlmap
     lunatask
     pnpm
+    rustdesk
 ];
 
   # Enable zsh
