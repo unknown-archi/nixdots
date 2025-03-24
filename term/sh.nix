@@ -64,12 +64,8 @@
       spf="superfile";
     };
     
-    # Add to the $PATH
-    profileExtra = ''
-      export PATH="$HOME/dotfiles/scripts:$PATH"
-    '';
-
     initExtra = ''
+	export PATH="$HOME/dotfiles/scripts:$PATH"
 	WAYLAND_DISPLAY=wayland-1
 	# Better autocompletion
 	HISTFILE=$HOME/.zhistory
