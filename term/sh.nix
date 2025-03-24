@@ -65,7 +65,6 @@
     };
     
     initExtra = ''
-	export PATH="$HOME/dotfiles/scripts:$PATH"
 	WAYLAND_DISPLAY=wayland-1
 	# Better autocompletion
 	HISTFILE=$HOME/.zhistory
