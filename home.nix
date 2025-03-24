@@ -27,6 +27,9 @@
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ]; 
   };  
+  
+  home.sessionPath = [ "$HOME/dotfiles/scripts" ]; 
+
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
