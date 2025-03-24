@@ -315,6 +315,11 @@
     lunatask
     pnpm
     rustdesk
+
+    # Exegol
+     (writeShellScriptBin "exegol" ''
+    exec ${pkgs.python3}/bin/python ${~/Tools/Exegol/exegol.py} "$@"
+    '')
 ];
 
   # Enable zsh
