@@ -318,7 +318,7 @@
 
     # Exegol
      (writeShellScriptBin "exegol" ''
-    exec ${pkgs.python3}/bin/python ${~/Tools/Exegol/exegol.py} "$@"
+    exec ${pkgs.python3}/bin/python ${/home/mathieu/Tools/Exegol/exegol.py} "$@"
     '')
 ];
 
