@@ -63,6 +63,11 @@
       open_resume="docker run -p 3000:3000 open-resume";
       spf="superfile";
     };
+    
+    # Add to the $PATH
+    profileExtra = ''
+      export PATH="$HOME/dotfiles/scripts:$PATH"
+    '';
 
     initExtra = ''
 	WAYLAND_DISPLAY=wayland-1
