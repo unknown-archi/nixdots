@@ -153,7 +153,8 @@
     autoconf     # Generate configure scripts
     pkg-config   # Helper tool for compiling applications
     cron
-    # docker
+    docker
+    docker-compose    
     ffmpeg
     gnupg
     git
@@ -268,7 +269,6 @@
     go-ethereum
     poetry
     jetbrains.datagrip
-    # docker-compose
     imagemagick
     ghostscript
     obsidian
@@ -399,6 +399,7 @@
   # VIRTUALISATION --------------------------------
 
   ## DOCKER
+  virtualisation.docker.enable = true;
   # Set the necessary kernel modules for Docker
   # boot.kernelModules = [ "overlay" "br_netfilter" ];
 
