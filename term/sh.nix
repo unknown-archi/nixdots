@@ -197,9 +197,6 @@
         	column -s, -t < $1 | less -#2 -N -S
 	}
 
-	# Exegol autocompletion
-	eval "$(register-python-argcomplete --no-defaults exegol)"
-
 	# Zoxide
 	eval "$(zoxide init zsh)"
 	# Powerlevel 10k
