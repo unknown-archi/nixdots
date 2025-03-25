@@ -315,6 +315,7 @@
     lunatask
     pnpm
     rustdesk
+    xorg.xhost
 ];
 
   # Enable zsh
