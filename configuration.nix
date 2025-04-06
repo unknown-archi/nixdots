@@ -308,6 +308,7 @@
     localsend
     inetutils # Collection of common network programs
     nodejs
+    windsurf
     maltego # Does not work
     nikto # Web server scanner
     usbutils
@@ -316,7 +317,6 @@
     pnpm
     rustdesk
     xorg.xhost
-    windsurf
 ];
 
   # Enable zsh
