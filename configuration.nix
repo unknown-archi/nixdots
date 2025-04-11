@@ -317,6 +317,7 @@
     pnpm
     rustdesk
     xorg.xhost
+    prisma-engines
 ];
 
   # Enable zsh
