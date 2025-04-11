@@ -349,7 +349,6 @@
   ];
 
   programs.thefuck.enable = true; # Useless ?
-que
 
   # VIRTUALISATION -------------------------------
 
