@@ -5,9 +5,14 @@
 
 # --- Configuration ---
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-STOW_DIR="$DOTFILES_DIR/stow"
+STOW_DIR="$USER_HOME/.files" # Changed from $DOTFILES_DIR/stow
 USER_HOME="$HOME"
 USERNAME="$(whoami)"
+
+# Ensure the permanent Stow directory exists
+mkdir -p "$STOW_DIR"
+
+# --- Helper Functions ---
 
 # --- Helper Functions ---
 print_info() {
@@ -226,7 +231,7 @@ mkdir -p "$STOW_DIR"
 
 # Define stow packages based on observed config files and directories
 # Added 'tools' for docker-compose files, 'bat'/'btop'/'rofi'/'fonts' for potential future configs
-STOW_PACKAGES=("hypr" "waybar" "wezterm" "zsh" "git" "scripts" "superfile" "ssh" "rofi" "btop" "bat" "fonts" "tools")
+STOW_PACKAGES=("hypr" "waybar" "wezterm" "zsh" "git" "scripts" "ssh" "rofi" "bat" "fonts" "tools")
 
 print_info "Copying configuration files to $STOW_DIR..."
 
@@ -340,7 +345,7 @@ cat << 'EOF' > "$STOW_DIR/git/.gitconfig"
     email = unknown-archi@users.noreply.github.com
 
 [core]
-    editor = nvim # Changed from nano based on sh.nix alias
+    editor = nano
     pager = delta
 
 [pull]
@@ -387,8 +392,8 @@ fi
 
 # --- Environment Variables ---
 # Set preferred editor
-export EDITOR='nvim'
-export VISUAL='nvim'
+export EDITOR='nano'
+export VISUAL='nano'
 
 # XDG Base Directory Specification (Optional but recommended)
 # export XDG_CONFIG_HOME="$HOME/.config"
