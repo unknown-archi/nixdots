@@ -53,8 +53,17 @@ let
 
         mkdir -p "$app_dir"
 
-        # Find and remove old versions
-        find "$app_dir" -maxdepth 1 -type f -name '*.AppImage' ! -name "$filename" -print -delete
+        # Find and remove old versions - capturing result to determine if this is an update
+        old_versions=$(find "$app_dir" -maxdepth 1 -type f -name '*.AppImage' ! -name "$filename" -print)
+        if [ -n "$old_versions" ]; then
+            is_update=true
+            echo "Found old version(s). This is an update."
+            # Now actually delete them
+            find "$app_dir" -maxdepth 1 -type f -name '*.AppImage' ! -name "$filename" -delete
+        else
+            is_update=false
+            echo "No old versions found. This is a new installation."
+        fi
 
         # Move and make executable
         echo "Moving to $target_path"
@@ -86,11 +95,17 @@ EOF
 
         PROCESSED_APPIMAGES=$((PROCESSED_APPIMAGES + 1))
 
-        # Send notification
+        # Send notification with different messages for updates vs new installs
         notify_cmd="${pkgs.libnotify}/bin/notify-send"
         if command -v "$notify_cmd" > /dev/null; then
             echo "Sending notification..."
-            "$notify_cmd" -i applications-utilities -a "AppImage Handler" "Processed: $filename" "Moved to $APPIMAGES_DIR/$app_name"
+            if [ "$is_update" = true ]; then
+                "$notify_cmd" -i applications-utilities -a "AppImage Handler" \
+                  "Updated: $app_name" "New version: $(basename "$target_path")"
+            else
+                "$notify_cmd" -i applications-utilities -a "AppImage Handler" \
+                  "Installed: $app_name" "AppImage ready to use"
+            fi
         else
             echo "notify-send command not found, skipping notification."
         fi
