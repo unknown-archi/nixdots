@@ -25,13 +25,13 @@ let
         # Common extensions: .part, .crdownload, .download, .tmp
         # Check for both 'SomeApp.AppImage.part' and 'SomeApp.part'
         base_name_no_ext="''${filename%.AppImage}" # Escaped dollar sign
-        if [ -e "''${appimage_path}.part" ] || \ # Escaped dollar sign
-           [ -e "''${appimage_path}.crdownload" ] || \ # Escaped dollar sign
-           [ -e "''${appimage_path}.download" ] || \ # Escaped dollar sign
-           [ -e "''${appimage_path}.tmp" ] || \ # Escaped dollar sign
-           [ -e "''${DOWNLOADS_DIR}/''${base_name_no_ext}.part" ] || \ # Escaped dollar signs
-           [ -e "''${DOWNLOADS_DIR}/''${base_name_no_ext}.crdownload" ] || \ # Escaped dollar signs
-           [ -e "''${DOWNLOADS_DIR}/''${base_name_no_ext}.download" ] || \ # Escaped dollar signs
+        if [ -e "''${appimage_path}.part" ] || \
+           [ -e "''${appimage_path}.crdownload" ] || \
+           [ -e "''${appimage_path}.download" ] || \
+           [ -e "''${appimage_path}.tmp" ] || \
+           [ -e "''${DOWNLOADS_DIR}/''${base_name_no_ext}.part" ] || \
+           [ -e "''${DOWNLOADS_DIR}/''${base_name_no_ext}.crdownload" ] || \
+           [ -e "''${DOWNLOADS_DIR}/''${base_name_no_ext}.download" ] || \
            [ -e "''${DOWNLOADS_DIR}/''${base_name_no_ext}.tmp" ]; then # Escaped dollar signs
              echo "Skipping potential partial download: $filename"
              continue # Skip to the next file
