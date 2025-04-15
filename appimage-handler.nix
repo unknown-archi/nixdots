@@ -97,18 +97,18 @@ EOF
 
     # Update desktop database if we processed any files
     if [ $PROCESSED_APPIMAGES -gt 0 ]; then
-        echo "Attempting to update desktop database..."
-        update_cmd_path="${pkgs.xdg-utils}/bin/update-desktop-database"
-        
-        echo "Executing: $update_cmd_path $DESKTOP_DIR"
-        # Directly execute using the full path
-        "$update_cmd_path" "$DESKTOP_DIR"
+        echo "Attempting to update desktop database using PATH..."
+        # Rely on the PATH set in the systemd service Environment=
+        update_cmd="update-desktop-database"
+
+        echo "Executing: $update_cmd $DESKTOP_DIR"
+        "$update_cmd" "$DESKTOP_DIR"
         update_exit_code=$?
-        
-        echo "update-desktop-database finished with exit code: $update_exit_code"
+
+        echo "$update_cmd finished with exit code: $update_exit_code"
         if [ $update_exit_code -ne 0 ]; then
-            echo "Warning: update-desktop-database failed! Apps may not appear in launchers immediately."
-            echo "Ensure pkgs.xdg-utils is available and provides update-desktop-database."
+            echo "Warning: $update_cmd failed! Apps may not appear in launchers immediately."
+            echo "Ensure pkgs.xdg-utils is available and its bin directory is in the service PATH."
         fi
         echo "Done."
     else
