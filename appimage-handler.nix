@@ -124,10 +124,10 @@ let
         
         # Extract version from new file (everything after app_name but before .AppImage)
         if [[ "$filename" == "$app_name"* ]]; then
-            new_version="${filename#$app_name}"  # Remove app_name from the start
-            new_version="${new_version%.AppImage}"  # Remove .AppImage from the end
+            new_version="''${filename#$app_name}"  # Remove app_name from the start
+            new_version="''${new_version%.AppImage}"  # Remove .AppImage from the end
             # Clean up leading separators like - or _
-            new_version="${new_version#[-_]}"
+            new_version="''${new_version#[-_]}"
             echo "New version: $new_version"
         fi
             
@@ -141,10 +141,10 @@ let
             if [ -n "$old_file" ]; then
                 old_filename=$(basename "$old_file")
                 if [[ "$old_filename" == "$app_name"* ]]; then
-                    old_version="${old_filename#$app_name}"  # Remove app_name from the start
-                    old_version="${old_version%.AppImage}"  # Remove .AppImage from the end
+                    old_version="''${old_filename#$app_name}"  # Remove app_name from the start
+                    old_version="''${old_version%.AppImage}"  # Remove .AppImage from the end
                     # Clean up leading separators like - or _
-                    old_version="${old_version#[-_]}"
+                    old_version="''${old_version#[-_]}"
                     echo "Old version: $old_version"
                 fi
             fi
