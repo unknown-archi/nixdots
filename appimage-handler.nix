@@ -53,12 +53,13 @@ let
 
         mkdir -p "$app_dir"
 
-        # Find and remove old versions - capturing result to determine if this is an update
-        old_versions=$(find "$app_dir" -maxdepth 1 -type f -name '*.AppImage' ! -name "$filename" -print)
-        if [ -n "$old_versions" ]; then
+        # Find and count old versions to determine if this is an update
+        old_count=$(find "$app_dir" -maxdepth 1 -type f -name '*.AppImage' ! -name "$filename" | wc -l)
+        
+        if [ "$old_count" -gt 0 ]; then
             is_update=true
-            echo "Found old version(s). This is an update."
-            # Now actually delete them
+            echo "Found $old_count old version(s). This is an update."
+            # Now delete them
             find "$app_dir" -maxdepth 1 -type f -name '*.AppImage' ! -name "$filename" -delete
         else
             is_update=false
