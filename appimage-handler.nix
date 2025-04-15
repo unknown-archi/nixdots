@@ -49,9 +49,7 @@ let
         echo "Derived AppName: $app_name"
 
         app_dir="$APPIMAGES_DIR/$app_name"
-
-        # Define target path
-        target_path="${app_dir}/${filename}"
+        target_path="$app_dir/$filename"
         
         mkdir -p "$app_dir"
 
