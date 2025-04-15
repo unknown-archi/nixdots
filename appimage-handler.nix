@@ -119,34 +119,60 @@ let
         fi
         
         # Extract version information for updates
-        old_version=""
-        new_version=""
-        
-        # Extract version from new file (everything after app_name but before .AppImage)
-        if [[ "$filename" == "$app_name"* ]]; then
-            new_version="''${filename#$app_name}"  # Remove app_name from the start
-            new_version="''${new_version%.AppImage}"  # Remove .AppImage from the end
-            # Clean up leading separators like - or _
-            new_version="''${new_version#[-_]}"
-            echo "New version: $new_version"
-        fi
+        # More aggressively extract version info regardless of filename format
+        extract_version() {
+            local fname="$1"
+            local appname="$2"
             
-        # Delete old versions (if any) but capture version first
+            # First attempt: Standard format - remove app name and .AppImage
+            # CurseForge-1.2.3.AppImage → "1.2.3"
+            local version=""
+            
+            # Remove app name prefix if present
+            if [[ "$fname" == "$appname"* ]]; then
+                version="''${fname#$appname}"
+            else
+                version="$fname"
+            fi
+            
+            # Remove .AppImage extension
+            version="''${version%.AppImage}"
+            
+            # Clean leading separators
+            version="''${version#[-_]}"
+            
+            # If it's just the same as filename, try a more aggressive approach
+            # Extract anything that looks like a version (numbers, dots, etc.)
+            if [ -z "$version" ] || [ "$version" = "$fname" ]; then
+                # This regex extracts typical version patterns
+                version=$(echo "$fname" | grep -o '[0-9]\+\(\.[0-9]\+\)*\(-[0-9a-zA-Z]\+\)*')
+            fi
+            
+            # If still no version, use filename as-is without .AppImage
+            if [ -z "$version" ]; then
+                version="''${fname%.AppImage}"
+            fi
+            
+            echo "$version"
+        }
+        
+        # Get versions
+        new_version=$(extract_version "$filename" "$app_name")
+        echo "New version: $new_version"
+        
+        # Identify old version if this is an update
         if [ "$is_update" = true ]; then
             echo "Preparing to remove old versions..."
             
-            # Get first old file to extract version (if multiple, we just show one)
+            # Get first old file to extract version
             old_file=$(find "$app_dir" -maxdepth 1 -type f -name '*.AppImage' ! -name "$filename" | head -n 1)
             
             if [ -n "$old_file" ]; then
                 old_filename=$(basename "$old_file")
-                if [[ "$old_filename" == "$app_name"* ]]; then
-                    old_version="''${old_filename#$app_name}"  # Remove app_name from the start
-                    old_version="''${old_version%.AppImage}"  # Remove .AppImage from the end
-                    # Clean up leading separators like - or _
-                    old_version="''${old_version#[-_]}"
-                    echo "Old version: $old_version"
-                fi
+                old_version=$(extract_version "$old_filename" "$app_name")
+                echo "Old version: $old_version"
+            else
+                old_version="previous"
             fi
             
             # Now delete the old files
@@ -189,13 +215,9 @@ EOF
         if command -v "$notify_cmd" > /dev/null; then
             echo "Sending notification..."
             if [ "$is_update" = true ]; then
-                if [ -n "$old_version" ] && [ -n "$new_version" ]; then
-                    "$notify_cmd" -i applications-utilities -a "AppImage Handler" \
-                      "Updated: $app_name" "From version $old_version to $new_version"
-                else
-                    "$notify_cmd" -i applications-utilities -a "AppImage Handler" \
-                      "Updated: $app_name" "New version: $(basename "$target_path")"
-                fi
+                # Always use the version info for updates - use fallbacks if needed
+                "$notify_cmd" -i applications-utilities -a "AppImage Handler" \
+                  "Updated: $app_name" "From version $old_version to $new_version"
             else
                 "$notify_cmd" -i applications-utilities -a "AppImage Handler" \
                   "Installed: $app_name" "AppImage ready to use"
