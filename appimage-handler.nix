@@ -24,15 +24,15 @@ let
         # --- Check for partial download files --- 
         # Common extensions: .part, .crdownload, .download, .tmp
         # Check for both 'SomeApp.AppImage.part' and 'SomeApp.part'
-        base_name_no_ext="${filename%.AppImage}"
-        if [ -e "${appimage_path}.part" ] || \ 
-           [ -e "${appimage_path}.crdownload" ] || \ 
-           [ -e "${appimage_path}.download" ] || \ 
-           [ -e "${appimage_path}.tmp" ] || \ 
-           [ -e "${DOWNLOADS_DIR}/${base_name_no_ext}.part" ] || \ 
-           [ -e "${DOWNLOADS_DIR}/${base_name_no_ext}.crdownload" ] || \ 
-           [ -e "${DOWNLOADS_DIR}/${base_name_no_ext}.download" ] || \ 
-           [ -e "${DOWNLOADS_DIR}/${base_name_no_ext}.tmp" ]; then
+        base_name_no_ext="''${filename%.AppImage}" # Escaped dollar sign
+        if [ -e "''${appimage_path}.part" ] || \ # Escaped dollar sign
+           [ -e "''${appimage_path}.crdownload" ] || \ # Escaped dollar sign
+           [ -e "''${appimage_path}.download" ] || \ # Escaped dollar sign
+           [ -e "''${appimage_path}.tmp" ] || \ # Escaped dollar sign
+           [ -e "''${DOWNLOADS_DIR}/''${base_name_no_ext}.part" ] || \ # Escaped dollar signs
+           [ -e "''${DOWNLOADS_DIR}/''${base_name_no_ext}.crdownload" ] || \ # Escaped dollar signs
+           [ -e "''${DOWNLOADS_DIR}/''${base_name_no_ext}.download" ] || \ # Escaped dollar signs
+           [ -e "''${DOWNLOADS_DIR}/''${base_name_no_ext}.tmp" ]; then # Escaped dollar signs
              echo "Skipping potential partial download: $filename"
              continue # Skip to the next file
         fi
@@ -41,11 +41,11 @@ let
         echo "Processing: $filename"
 
         # Attempt to derive a clean application name
-        name_base="''${filename%.AppImage}" # Escaped braces
+        name_base="''${filename%.AppImage}" # Escaped dollar sign
         name_base=$(echo "$name_base" | sed -E 's/-(x86_64|amd64|aarch64|armhf|i386)$//i')
         app_name=$(echo "$name_base" | sed -E 's/[-_](v?[0-9._]+|[0-9]+[a-zA-Z0-9._-]*)$//; s/[-_](latest|stable)$//i; s/[_-]$//')
         if [ -z "$app_name" ] || [ "$app_name" = "appimage" ]; then
-            app_name="''${filename%.AppImage}" # Use filename without suffix as fallback (Escaped braces)
+            app_name="''${filename%.AppImage}" # Escaped dollar sign
         fi
         echo "Derived AppName: $app_name"
 
