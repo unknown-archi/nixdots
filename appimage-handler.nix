@@ -117,9 +117,39 @@ let
                 echo "Found $old_count old version(s). This is an update."
             fi
         fi
+        
+        # Extract version information for updates
+        old_version=""
+        new_version=""
+        
+        # Extract version from new file (everything after app_name but before .AppImage)
+        if [[ "$filename" == "$app_name"* ]]; then
+            new_version="${filename#$app_name}"  # Remove app_name from the start
+            new_version="${new_version%.AppImage}"  # Remove .AppImage from the end
+            # Clean up leading separators like - or _
+            new_version="${new_version#[-_]}"
+            echo "New version: $new_version"
+        fi
             
-        # Delete old versions (if any)
+        # Delete old versions (if any) but capture version first
         if [ "$is_update" = true ]; then
+            echo "Preparing to remove old versions..."
+            
+            # Get first old file to extract version (if multiple, we just show one)
+            old_file=$(find "$app_dir" -maxdepth 1 -type f -name '*.AppImage' ! -name "$filename" | head -n 1)
+            
+            if [ -n "$old_file" ]; then
+                old_filename=$(basename "$old_file")
+                if [[ "$old_filename" == "$app_name"* ]]; then
+                    old_version="${old_filename#$app_name}"  # Remove app_name from the start
+                    old_version="${old_version%.AppImage}"  # Remove .AppImage from the end
+                    # Clean up leading separators like - or _
+                    old_version="${old_version#[-_]}"
+                    echo "Old version: $old_version"
+                fi
+            fi
+            
+            # Now delete the old files
             echo "Removing old versions..."
             find "$app_dir" -maxdepth 1 -type f -name '*.AppImage' ! -name "$filename" -delete
         fi
@@ -159,8 +189,13 @@ EOF
         if command -v "$notify_cmd" > /dev/null; then
             echo "Sending notification..."
             if [ "$is_update" = true ]; then
-                "$notify_cmd" -i applications-utilities -a "AppImage Handler" \
-                  "Updated: $app_name" "New version: $(basename "$target_path")"
+                if [ -n "$old_version" ] && [ -n "$new_version" ]; then
+                    "$notify_cmd" -i applications-utilities -a "AppImage Handler" \
+                      "Updated: $app_name" "From version $old_version to $new_version"
+                else
+                    "$notify_cmd" -i applications-utilities -a "AppImage Handler" \
+                      "Updated: $app_name" "New version: $(basename "$target_path")"
+                fi
             else
                 "$notify_cmd" -i applications-utilities -a "AppImage Handler" \
                   "Installed: $app_name" "AppImage ready to use"
