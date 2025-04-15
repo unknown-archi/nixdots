@@ -16,9 +16,8 @@ let
     mkdir -p "$APPIMAGES_DIR"
     mkdir -p "$DESKTOP_DIR"
 
-    # Find AppImage files in Downloads
-    # We remove the -mmin check as we now explicitly check for partial files
-    find "$DOWNLOADS_DIR" -maxdepth 1 -type f -name '*.AppImage' -print0 | while IFS= read -r -d $'\0' appimage_path; do
+    # Use process substitution to avoid subshell issues with the loop variable
+    while IFS= read -r -d $'\0' appimage_path; do
         filename=$(basename "$appimage_path")
 
         # --- Check for partial download files --- 
@@ -94,7 +93,7 @@ EOF
         else
             echo "notify-send command not found, skipping notification."
         fi
-    done
+    done < <(find "$DOWNLOADS_DIR" -maxdepth 1 -type f -name '*.AppImage' -print0)
 
     # Update desktop database if we processed any files
     if [ $PROCESSED_APPIMAGES -gt 0 ]; then
