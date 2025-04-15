@@ -64,7 +64,7 @@ let
         # Create .desktop file
         desktop_file="$DESKTOP_DIR/$app_name.desktop"
         echo "Creating/Updating $desktop_file"
-        update_cmd="${pkgs.xdg-utils}/bin/update-desktop-database"
+        update_cmd="${pkgs.desktop-file-utils}/bin/update-desktop-database"
         if ! command -v "$update_cmd" > /dev/null; then
             update_cmd="update-desktop-database" # Fallback
         fi
@@ -97,18 +97,19 @@ EOF
 
     # Update desktop database if we processed any files
     if [ $PROCESSED_APPIMAGES -gt 0 ]; then
-        echo "Attempting to update desktop database using PATH..."
-        # Rely on the PATH set in the systemd service Environment=
-        update_cmd="update-desktop-database"
-
-        echo "Executing: $update_cmd $DESKTOP_DIR"
-        "$update_cmd" "$DESKTOP_DIR"
+        echo "Attempting to update desktop database..."
+        # Use desktop-file-utils directly
+        update_cmd_path="${pkgs.desktop-file-utils}/bin/update-desktop-database"
+        
+        echo "Executing: $update_cmd_path $DESKTOP_DIR"
+        # Directly execute using the full path
+        "$update_cmd_path" "$DESKTOP_DIR"
         update_exit_code=$?
-
-        echo "$update_cmd finished with exit code: $update_exit_code"
+        
+        echo "update-desktop-database finished with exit code: $update_exit_code"
         if [ $update_exit_code -ne 0 ]; then
-            echo "Warning: $update_cmd failed! Apps may not appear in launchers immediately."
-            echo "Ensure pkgs.xdg-utils is available and its bin directory is in the service PATH."
+            echo "Warning: update-desktop-database failed! Apps may not appear in launchers immediately."
+            echo "Ensure pkgs.desktop-file-utils is available and provides update-desktop-database."
         fi
         echo "Done."
     else
@@ -153,8 +154,9 @@ in
       # ProtectNetwork = true;
       # Need filesystem access, cannot use ProtectKernelTunables, ProtectKernelModules, ProtectControlGroups etc.
       NoNewPrivileges = true;
-      # Add pkgs required by the script (find, sed, coreutils, xdg-utils)
-      Environment = "PATH=${pkgs.coreutils}/bin:${pkgs.findutils}/bin:${pkgs.gnused}/bin:${pkgs.xdg-utils}/bin:${pkgs.gnugrep}/bin";
+      # Add pkgs required by the script (find, sed, coreutils, desktop-file-utils, appimage-run, libnotify, grep)
+      # Note: xdg-utils might still be needed if other xdg tools were used, but let's try without for now.
+      Environment = "PATH=${pkgs.coreutils}/bin:${pkgs.findutils}/bin:${pkgs.gnused}/bin:${pkgs.desktop-file-utils}/bin:${pkgs.appimage-run}/bin:${pkgs.libnotify}/bin:${pkgs.gnugrep}/bin";
     };
     Install = {
       # Ensure it's not enabled by default, only triggered by the path unit
