@@ -75,11 +75,12 @@ let
 [Desktop Entry]
 Name=$app_name
 Exec=$appimage_runner $target_path %U
-TryExec=$appimage_runner $target_path
+TryExec=$appimage_runner
 Terminal=false
 Type=Application
 Categories=Utility;
-# Icon needed? Might be extracted automatically, or add Icon=...
+StartupWMClass=$app_name
+Icon=applications-utilities
 EOF
         chmod +x "$desktop_file"
 
