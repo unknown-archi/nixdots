@@ -155,12 +155,8 @@ in
     };
   };
 
-  # Ensure xdg-utils is available for update-desktop-database
-  home.packages = [ pkgs.xdg-utils ];
-
   # Ensure required tools are available
   # appimage-run and xdg-utils are likely already in systemPackages
-  home.packages = [ 
-    pkgs.libnotify    # Needed for notify-send
-  ];
+  # libnotify (for notify-send) also seems to be available
+  # We removed the redundant home.packages definition here.
 } 
