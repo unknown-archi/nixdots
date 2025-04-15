@@ -24,7 +24,7 @@ let
         # --- Check for partial download files --- 
         # Common extensions: .part, .crdownload, .download, .tmp
         # Check for both 'SomeApp.AppImage.part' and 'SomeApp.part'
-        base_name_no_ext="''${filename%.AppImage}" # Escaped dollar sign
+        base_name_no_ext="''${filename%.AppImage}"
         if [ -e "''${appimage_path}.part" ] || \
            [ -e "''${appimage_path}.crdownload" ] || \
            [ -e "''${appimage_path}.download" ] || \
@@ -32,7 +32,7 @@ let
            [ -e "''${DOWNLOADS_DIR}/''${base_name_no_ext}.part" ] || \
            [ -e "''${DOWNLOADS_DIR}/''${base_name_no_ext}.crdownload" ] || \
            [ -e "''${DOWNLOADS_DIR}/''${base_name_no_ext}.download" ] || \
-           [ -e "''${DOWNLOADS_DIR}/''${base_name_no_ext}.tmp" ]; then # Escaped dollar signs
+           [ -e "''${DOWNLOADS_DIR}/''${base_name_no_ext}.tmp" ]; then
              echo "Skipping potential partial download: $filename"
              continue # Skip to the next file
         fi
@@ -67,7 +67,7 @@ let
         echo "Creating/Updating $desktop_file"
         # Use pkgs.xdg-utils for update-desktop-database if possible,
         # otherwise assume it's in PATH
-        local update_cmd="${pkgs.xdg-utils}/bin/update-desktop-database"
+        update_cmd="${pkgs.xdg-utils}/bin/update-desktop-database"
         if ! command -v "$update_cmd" > /dev/null; then
             update_cmd="update-desktop-database" # Fallback
         fi
