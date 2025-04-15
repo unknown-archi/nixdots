@@ -97,27 +97,22 @@ EOF
 
     # Update desktop database if we processed any files
     if [ $PROCESSED_APPIMAGES -gt 0 ]; then
-        echo "Checking for update-desktop-database..."
-        update_cmd="${pkgs.xdg-utils}/bin/update-desktop-database"
-        if ! command -v "$update_cmd" > /dev/null; then
-            echo "Using fallback update-desktop-database command."
-            update_cmd="update-desktop-database" # Fallback
-        fi
-
-        if command -v "$update_cmd" > /dev/null; then
-             echo "Running: $update_cmd $DESKTOP_DIR"
-             "$update_cmd" "$DESKTOP_DIR"
-             update_exit_code=$?
-             echo "update-desktop-database finished with exit code: $update_exit_code"
-             if [ $update_exit_code -ne 0 ]; then
-                echo "Warning: update-desktop-database failed! Apps may not appear in launchers immediately."
-             fi
-        else
-            echo "Warning: update-desktop-database command not found."
+        echo "Attempting to update desktop database..."
+        update_cmd_path="${pkgs.xdg-utils}/bin/update-desktop-database"
+        
+        echo "Executing: $update_cmd_path $DESKTOP_DIR"
+        # Directly execute using the full path
+        "$update_cmd_path" "$DESKTOP_DIR"
+        update_exit_code=$?
+        
+        echo "update-desktop-database finished with exit code: $update_exit_code"
+        if [ $update_exit_code -ne 0 ]; then
+            echo "Warning: update-desktop-database failed! Apps may not appear in launchers immediately."
+            echo "Ensure pkgs.xdg-utils is available and provides update-desktop-database."
         fi
         echo "Done."
     else
-        echo "No new AppImages found in $DOWNLOADS_DIR."
+        echo "No AppImages processed, skipping desktop database update."
     fi
   '';
 
