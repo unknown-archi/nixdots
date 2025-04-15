@@ -134,7 +134,6 @@ in
       # Adjust ProtectHome if script needs write access outside ~/AppImages or ~/.local/share/applications
       PrivateTmp = true;
       ProtectSystem = "strict";
-      ProtectHome = "read-write"; # Needs write access to ~/AppImages, ~/.local/share/applications, read from ~/Downloads
       # Need network access if downloading icons etc. in the future, otherwise set ProtectNetwork=true
       # ProtectNetwork = true;
       # Need filesystem access, cannot use ProtectKernelTunables, ProtectKernelModules, ProtectControlGroups etc.
