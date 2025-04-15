@@ -4,6 +4,7 @@
 
   imports = [
   
+    ./appimage-handler.nix
     ./term/sh.nix
     ./git.nix
     ./ssh.nix
