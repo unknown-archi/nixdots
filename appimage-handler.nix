@@ -56,12 +56,28 @@ let
         # Check if exactly the same file already exists in destination
         if [ -f "$target_path" ]; then
             echo "File with same name already exists at target location: $target_path"
-            # Check if they are identical using checksum
-            source_checksum=$(sha256sum "$appimage_path" | cut -d ' ' -f 1)
-            target_checksum=$(sha256sum "$target_path" | cut -d ' ' -f 1)
             
-            if [ "$source_checksum" = "$target_checksum" ]; then
-                echo "Files are identical. Skipping."
+            # Create temporary files to store checksums for more reliable comparison
+            source_checksum_file=$(mktemp)
+            target_checksum_file=$(mktemp)
+            
+            # Get checksums with enhanced debugging
+            echo "Computing checksum of downloaded file: $appimage_path"
+            sha256sum "$appimage_path" > "$source_checksum_file"
+            echo "Source checksum: $(cat "$source_checksum_file" | cut -d ' ' -f1)"
+            
+            echo "Computing checksum of existing file: $target_path"
+            sha256sum "$target_path" > "$target_checksum_file"
+            echo "Target checksum: $(cat "$target_checksum_file" | cut -d ' ' -f1)"
+            
+            # Extract just the hash portion for comparison
+            source_sum=$(cat "$source_checksum_file" | cut -d ' ' -f1)
+            target_sum=$(cat "$target_checksum_file" | cut -d ' ' -f1)
+            
+            # Compare with enhanced debugging
+            echo "Comparing checksums: [$source_sum] and [$target_sum]"
+            if [ "$source_sum" = "$target_sum" ]; then
+                echo "==> MATCH: Files are identical based on SHA256 checksums."
                 
                 # Send notification that file is already installed
                 notify_cmd="${pkgs.libnotify}/bin/notify-send"
@@ -71,25 +87,41 @@ let
                       "Already Installed: $app_name" "This exact version is already installed" 
                 fi
                 
-                # Remove the duplicate file from downloads and skip further processing
+                # Remove the duplicate file from downloads and cleanup
+                echo "Removing duplicate file from downloads"
                 rm "$appimage_path"
+                rm "$source_checksum_file" "$target_checksum_file"
                 continue
+            else
+                echo "==> DIFFERENT: Files have different checksums."
             fi
-            # If checksums don't match, it's a different file with the same name
-            # Continue processing as an update
-        fi
-        
-        # Find and count old versions to determine if this is an update
-        old_count=$(find "$app_dir" -maxdepth 1 -type f -name '*.AppImage' ! -name "$filename" | wc -l)
-        
-        if [ "$old_count" -gt 0 ]; then
+            
+            # Clean up temporary files
+            rm "$source_checksum_file" "$target_checksum_file"
+            
+            # Different checksums but same name = update case
             is_update=true
-            echo "Found $old_count old version(s). This is an update."
-            # Now delete them
-            find "$app_dir" -maxdepth 1 -type f -name '*.AppImage' ! -name "$filename" -delete
+            echo "Same filename but different checksums. Treating as update."
         else
             is_update=false
-            echo "No old versions found. This is a new installation."
+            echo "No existing file found. This is a new installation."
+        fi
+        
+        # Only count old versions with different names if we haven't already determined this is an update
+        if [ "$is_update" != true ]; then
+            # Find and count old versions to determine if this is an update
+            old_count=$(find "$app_dir" -maxdepth 1 -type f -name '*.AppImage' ! -name "$filename" | wc -l)
+            
+            if [ "$old_count" -gt 0 ]; then
+                is_update=true
+                echo "Found $old_count old version(s). This is an update."
+            fi
+        fi
+            
+        # Delete old versions (if any)
+        if [ "$is_update" = true ]; then
+            echo "Removing old versions..."
+            find "$app_dir" -maxdepth 1 -type f -name '*.AppImage' ! -name "$filename" -delete
         fi
 
         # Move and make executable
