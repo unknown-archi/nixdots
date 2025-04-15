@@ -7,9 +7,9 @@ let
 
     set -eu
 
-    DOWNLOADS_DIR="${HOME}/Downloads"
-    APPIMAGES_DIR="${HOME}/AppImages"
-    DESKTOP_DIR="${HOME}/.local/share/applications"
+    DOWNLOADS_DIR="''${HOME}/Downloads"
+    APPIMAGES_DIR="''${HOME}/AppImages"
+    DESKTOP_DIR="''${HOME}/.local/share/applications"
     PROCESSED_APPIMAGES=0
 
     # Ensure target directories exist
