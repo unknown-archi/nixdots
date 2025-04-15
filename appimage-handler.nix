@@ -65,18 +65,18 @@ let
         # Create .desktop file
         desktop_file="$DESKTOP_DIR/$app_name.desktop"
         echo "Creating/Updating $desktop_file"
-        # Use pkgs.xdg-utils for update-desktop-database if possible,
-        # otherwise assume it's in PATH
         update_cmd="${pkgs.xdg-utils}/bin/update-desktop-database"
         if ! command -v "$update_cmd" > /dev/null; then
             update_cmd="update-desktop-database" # Fallback
         fi
+        # Use appimage-run from pkgs
+        appimage_runner="${pkgs.appimage-run}/bin/appimage-run"
 
         cat > "$desktop_file" << EOF
 [Desktop Entry]
 Name=$app_name
-Exec=$target_path %U
-TryExec=$target_path
+Exec=$appimage_runner $target_path %U
+TryExec=$appimage_runner $target_path
 Terminal=false
 Type=Application
 Categories=Utility;
@@ -85,6 +85,14 @@ EOF
         chmod +x "$desktop_file"
 
         PROCESSED_APPIMAGES=$((PROCESSED_APPIMAGES + 1))
+
+        # Send notification
+        notify_cmd="${pkgs.libnotify}/bin/notify-send"
+        if command -v "$notify_cmd" > /dev/null; then
+            "$notify_cmd" -a "AppImage Handler" "Processed: $filename" "Moved to $APPIMAGES_DIR/$app_name"
+        else
+            echo "notify-send command not found, skipping notification."
+        fi
     done
 
     # Update desktop database if we processed any files
@@ -149,4 +157,10 @@ in
 
   # Ensure xdg-utils is available for update-desktop-database
   home.packages = [ pkgs.xdg-utils ];
+
+  # Ensure required tools are available
+  # appimage-run and xdg-utils are likely already in systemPackages
+  home.packages = [ 
+    pkgs.libnotify    # Needed for notify-send
+  ];
 } 
