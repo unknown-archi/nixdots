@@ -257,10 +257,13 @@ in
       Description = "Watch Downloads directory for new AppImages";
     };
     Path = {
-      PathChanged = "%h/Downloads/";
-      # Optional: Add a delay after modification to avoid triggering on partial downloads
-      # PathModified=%h/Downloads/
-      # UnitActivateRateLimitIntervalSec=30s
+      # PathChanged watches all file changes, which may trigger the service twice
+      # PathModified is more specific to completed files
+      # Use PathExistsGlob instead to watch for specific file patterns
+      PathExistsGlob = "%h/Downloads/*.AppImage";
+      
+      # Add rate limiting to prevent multiple executions in quick succession
+      # This helps avoid running the service twice for the same file
     };
     Install = {
       WantedBy = [ "default.target" ];
@@ -270,13 +273,17 @@ in
   systemd.user.services.appimage-watcher = {
     Unit = {
       Description = "Handle downloaded AppImages";
-      # Optional: Trigger only after path unit is inactive for a bit
-      #PartOf = "appimage-watcher.path";
+      # Add rate limiting to prevent too frequent service execution
+      # The path unit will queue events, but we'll wait before starting
+      StartLimitIntervalSec = "30s";
+      StartLimitBurst = 1;
     };
     Service = {
       Type = "oneshot";
       # Execute the script defined above
       ExecStart = "${handleAppimageScript}/bin/handle-appimage";
+      # Add a 2 second delay before starting, to ensure files are fully written
+      ExecStartPre = "${pkgs.coreutils}/bin/sleep 2";
 
       # Standard sandboxing recommended by systemd.exec(5)
       # Adjust ProtectHome if script needs write access outside ~/AppImages or ~/.local/share/applications
