@@ -49,10 +49,38 @@ let
         echo "Derived AppName: $app_name"
 
         app_dir="$APPIMAGES_DIR/$app_name"
-        target_path="$app_dir/$filename"
 
+        # Define target path
+        target_path="${app_dir}/${filename}"
+        
         mkdir -p "$app_dir"
 
+        # Check if exactly the same file already exists in destination
+        if [ -f "$target_path" ]; then
+            echo "File with same name already exists at target location: $target_path"
+            # Check if they are identical using checksum
+            source_checksum=$(sha256sum "$appimage_path" | cut -d ' ' -f 1)
+            target_checksum=$(sha256sum "$target_path" | cut -d ' ' -f 1)
+            
+            if [ "$source_checksum" = "$target_checksum" ]; then
+                echo "Files are identical. Skipping."
+                
+                # Send notification that file is already installed
+                notify_cmd="${pkgs.libnotify}/bin/notify-send"
+                if command -v "$notify_cmd" > /dev/null; then
+                    echo "Sending 'already installed' notification..."
+                    "$notify_cmd" -i applications-utilities -a "AppImage Handler" \
+                      "Already Installed: $app_name" "This exact version is already installed" 
+                fi
+                
+                # Remove the duplicate file from downloads and skip further processing
+                rm "$appimage_path"
+                continue
+            fi
+            # If checksums don't match, it's a different file with the same name
+            # Continue processing as an update
+        fi
+        
         # Find and count old versions to determine if this is an update
         old_count=$(find "$app_dir" -maxdepth 1 -type f -name '*.AppImage' ! -name "$filename" | wc -l)
         
