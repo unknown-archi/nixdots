@@ -5,14 +5,17 @@
 
 # --- Configuration ---
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-STOW_DIR="$USER_HOME/.files" # Changed from $DOTFILES_DIR/stow
-USER_HOME="$HOME"
+USER_HOME="$HOME"           
+STOW_DIR="$USER_HOME/.files"
 USERNAME="$(whoami)"
+
+# User customizable configuration
+GIT_USER_NAME="Mathieu"  # Change this if needed
+GIT_USER_EMAIL="unknown-archi@users.noreply.github.com"  # Change this if needed
+EDITOR_CMD="nano"  # Default editor (nano, vim, nvim)
 
 # Ensure the permanent Stow directory exists
 mkdir -p "$STOW_DIR"
-
-# --- Helper Functions ---
 
 # --- Helper Functions ---
 print_info() {
@@ -39,7 +42,7 @@ install_package() {
     local package_name="$1"
     if ! rpm -q "$package_name" >/dev/null; then
         print_info "Installing $package_name..."
-        sudo dnf install -y "$package_name"
+        sudo dnf install -y --allowerasing "$package_name"
         if [ $? -ne 0 ]; then
             print_error "Failed to install $package_name. Exiting."
             exit 1
@@ -90,8 +93,8 @@ sudo dnf install -y \
   "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
   "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
 
-print_info "Adding Docker CE repository..."
-sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+print_info "Adding Mullvad VPN repository..."
+sudo dnf config-manager addrepo --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo
 
 # --- Package Installation (DNF) ---
 print_info "Installing core utilities, development tools, and dependencies..."
@@ -99,27 +102,28 @@ print_info "Installing core utilities, development tools, and dependencies..."
 # Core Utils & System
 dnf_packages=(
     stow zsh curl wget unzip zip git gnupg util-linux-user tar
-    btop bat eza fzf zoxide tldr thefuck tree
+    btop bat eza zoxide tldr thefuck tree
     nmap openvpn network-manager-applet NetworkManager-openvpn-gnome bluez bluez-tools blueman
     pipewire pipewire-alsa pipewire-pulseaudio wireplumber pavucontrol pamixer
     libnotify procps-ng cronie
     libvirt qemu-kvm virt-manager # For VMs
     make automake gcc gcc-c++ cmake clang pkg-config ninja-build glib2-devel libevdev-devel libconfig-devel
-    polkit-gnome # PolicyKit Authentication Agent
+    lxpolkit # PolicyKit Authentication Agent
     xdg-utils xdg-desktop-portal xdg-desktop-portal-gtk xdg-user-dirs
     gparted parted # Disk management
     sqlite pandoc xxd
-    python3 python3-pip python3-devel python3-venv
+    python3 python3-pip python3-devel
     ffmpeg
     obs-studio # Needs RPM Fusion
     wl-clipboard # Wayland clipboard tool (used by some apps)
     swaybg # Background image viewer
-    qmk # Keyboard firmware tool
     mullvad-vpn # Needs Mullvad repo or manual install - assuming repo added/manual
     arandr # Screen GUI (X11 mostly, maybe useful)
     wlsunset # Gamma adjustment for Wayland
     chafa # In-terminal image viewer
     neovim vim
+    zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 
 # Hyprland & Wayland Ecosystem
@@ -128,7 +132,7 @@ dnf_packages+=(
     waybar
     rofi # Your config uses Rofi
     # tofi # Your config references tofi as well
-    swaynotificationcenter # Notification daemon
+    SwayNotificationCenter # Notification daemon
     xdg-desktop-portal-hyprland
 )
 
@@ -163,13 +167,36 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 dnf check-update
 install_package code
 
-# Install Docker
-print_info "Installing Docker CE, containerd, and Docker Compose..."
-install_package docker-ce
-install_package docker-ce-cli
-install_package containerd.io
-install_package docker-buildx-plugin
-install_package docker-compose-plugin
+# Install QMK CLI via pip
+print_info "Installing QMK CLI via pip..."
+pip3 install --user qmk
+if [ $? -ne 0 ]; then
+    print_warning "Failed to install QMK CLI via pip. Check pip setup and internet connection."
+    # Decide if this is critical enough to exit
+    # print_error "QMK installation failed. Exiting."
+    # exit 1
+else
+    # Add ~/.local/bin to PATH if not already present for the current session AND profile
+    if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+        print_info "Adding $HOME/.local/bin to PATH for this session."
+        export PATH="$HOME/.local/bin:$PATH"
+        # Also attempt to add to .bashrc or .zshrc (idempotently)
+        # Note: This assumes Zsh will be the default shell later.
+        ZSHRC_PATH="$USER_HOME/.zshrc"
+        BASHRC_PATH="$USER_HOME/.bashrc"
+        PATH_EXPORT_LINE='export PATH="$HOME/.local/bin:$PATH"'
+
+        grep -qF -- "$PATH_EXPORT_LINE" "$ZSHRC_PATH" || echo "$PATH_EXPORT_LINE" >> "$ZSHRC_PATH"
+        grep -qF -- "$PATH_EXPORT_LINE" "$BASHRC_PATH" || echo "$PATH_EXPORT_LINE" >> "$BASHRC_PATH"
+        print_info "Added $HOME/.local/bin to PATH in $ZSHRC_PATH and $BASHRC_PATH if not already present."
+    fi
+    print_success "QMK CLI installed."
+fi
+
+# Install Docker (using moby-engine from Fedora repos)
+print_info "Installing moby-engine and Docker Compose..."
+install_package moby-engine # Docker engine
+install_package docker-compose # Docker Compose V2 CLI
 
 # --- Flatpak Setup and Installation ---
 print_info "Setting up Flatpak and Flathub repository..."
@@ -199,6 +226,13 @@ mkdir -p "$NERDFONT_DIR"
 nerd_fonts=("FiraCode" "Hack" "JetBrainsMono" "Meslo")
 
 for font_name in "${nerd_fonts[@]}"; do
+    print_info "Checking for existing $font_name Nerd Font..."
+    # Check if any files containing the font name already exist in the target dir
+    if compgen -G "$NERDFONT_DIR/*${font_name}*" > /dev/null; then
+        print_success "$font_name Nerd Font already seems to be installed. Skipping download."
+        continue # Skip to the next font
+    fi
+
     print_info "Downloading and installing $font_name Nerd Font..."
     # Construct the download URL (adjust version if needed)
     zip_file="${font_name}.zip"
@@ -210,13 +244,28 @@ for font_name in "${nerd_fonts[@]}"; do
         continue
     fi
     
-    unzip -q -o "/tmp/${zip_file}" -d "$NERDFONT_DIR/" # Extract directly into font dir
+    # Create temporary directory for extraction
+    temp_font_dir="/tmp/nerd_fonts_${font_name}_extract"
+    mkdir -p "$temp_font_dir"
+    
+    # Extract to temporary directory
+    unzip -q -o "/tmp/${zip_file}" -d "$temp_font_dir/"
     if [ $? -ne 0 ]; then
         print_warning "Failed to unzip $font_name Nerd Font. Skipping."
-    else
-        print_success "Installed $font_name Nerd Font."
+        rm -rf "$temp_font_dir"
+        rm -f "/tmp/${zip_file}"
+        continue
     fi
+    
+    # Move only font files to font directory
+    print_info "Moving font files to $NERDFONT_DIR..."
+    find "$temp_font_dir" -type f \( -name "*.ttf" -o -name "*.otf" \) -exec cp -v {} "$NERDFONT_DIR/" \;
+    
+    # Clean up
+    rm -rf "$temp_font_dir"
     rm -f "/tmp/${zip_file}"
+    
+    print_success "Installed $font_name Nerd Font."
 done
 
 print_info "Updating font cache..."
@@ -229,11 +278,7 @@ print_info "Next steps involve setting up Stow, Zsh, and applying configurations
 print_info "Setting up Stow directory structure..."
 mkdir -p "$STOW_DIR"
 
-# Define stow packages based on observed config files and directories
-# Added 'tools' for docker-compose files, 'bat'/'btop'/'rofi'/'fonts' for potential future configs
-STOW_PACKAGES=("hypr" "waybar" "wezterm" "zsh" "git" "scripts" "ssh" "rofi" "bat" "fonts" "tools")
-
-print_info "Copying configuration files to $STOW_DIR..."
+print_info "Preparing configuration files for Stow..."
 
 # Function to safely copy files
 safe_copy() {
@@ -248,29 +293,27 @@ safe_copy() {
     fi
 }
 
-# Function to safely copy directory contents (use with caution)
+# Function to safely copy directory contents
 safe_copy_dir() {
     local src_dir="$1"
-    local dest_stow_subpath="$2" # e.g., hypr/.config/hypr
-    local target_dir="$STOW_DIR/$dest_stow_subpath"
+    local dest_dir="$2"
 
     if [ -d "$src_dir" ]; then
-        print_info "Copying contents of '$src_dir' to '$target_dir'..."
-        mkdir -p "$target_dir"
+        print_info "Copying contents of '$src_dir' to '$dest_dir'..."
+        mkdir -p "$dest_dir"
         # Use rsync for better handling of files/dirs
-        rsync -av --no-owner --no-group "$src_dir/" "$target_dir/"
-        print_success "Copied contents of '$src_dir' to '$target_dir'"
+        rsync -av --no-owner --no-group "$src_dir/" "$dest_dir/"
+        print_success "Copied contents of '$src_dir' to '$dest_dir'"
     else
         print_warning "Source directory not found, skipping copy: $src_dir"
     fi
 }
 
-
-# Hyprland
-safe_copy_dir "$DOTFILES_DIR/hypr" "hypr/.config/hypr"
+# Hyprland - Correct structure for stow is $STOW_DIR/hypr/.config/hypr/
+safe_copy_dir "$DOTFILES_DIR/hypr" "$STOW_DIR/hypr/.config/hypr"
 
 # Waybar
-safe_copy_dir "$DOTFILES_DIR/waybar" "waybar/.config/waybar"
+safe_copy_dir "$DOTFILES_DIR/waybar" "$STOW_DIR/waybar/.config/waybar"
 
 # Wezterm
 mkdir -p "$STOW_DIR/wezterm/.config/wezterm"
@@ -295,34 +338,58 @@ else
     print_warning "Original scripts directory not found: $DOTFILES_DIR/scripts"
 fi
 
-# Superfile
+# Superfile (now its own package)
 mkdir -p "$STOW_DIR/superfile/.config/superfile"
 safe_copy "$DOTFILES_DIR/tools/superfile/config.toml" "$STOW_DIR/superfile/.config/superfile/config.toml"
 
-# Rofi (Structure only)
+# Rofi
 mkdir -p "$STOW_DIR/rofi/.config/rofi"
-# If you have custom rofi config, copy it here:
-# safe_copy "$DOTFILES_DIR/rofi/your_config.rasi" "$STOW_DIR/rofi/.config/rofi/config.rasi"
 
-# Btop (Structure only)
+# Btop
 mkdir -p "$STOW_DIR/btop/.config/btop"
-# Copy custom btop.conf if exists
 
-# Bat (Structure only)
+# Bat
 mkdir -p "$STOW_DIR/bat/.config/bat"
-# Copy custom bat config if exists
 
 # Fonts (User font configuration structure)
 mkdir -p "$STOW_DIR/fonts/.config/fontconfig/conf.d"
-# Copy custom fontconfig rules if they exist
 
-# Tools (Docker compose etc.)
-mkdir -p "$STOW_DIR/tools/$USER_HOME/Tools/linkding"
-mkdir -p "$STOW_DIR/tools/$USER_HOME/Tools/stirling_pdf"
-safe_copy "$DOTFILES_DIR/tools/linkding/docker-compose.yml" "$STOW_DIR/tools/$USER_HOME/Tools/linkding/docker-compose.yml"
-safe_copy "$DOTFILES_DIR/tools/linkding/.env" "$STOW_DIR/tools/$USER_HOME/Tools/linkding/.env"
-safe_copy "$DOTFILES_DIR/tools/stirling_pdf/docker-compose.yml" "$STOW_DIR/tools/$USER_HOME/Tools/stirling_pdf/docker-compose.yml"
-# Copy .env for stirling if it exists
+# Tools (Docker compose etc.) - ONLY create nested tools/tools structure
+mkdir -p "$STOW_DIR/tools/tools/linkding"
+mkdir -p "$STOW_DIR/tools/tools/stirling_pdf"
+
+safe_copy "$DOTFILES_DIR/tools/linkding/docker-compose.yml" "$STOW_DIR/tools/tools/linkding/docker-compose.yml"
+if [ -f "$DOTFILES_DIR/tools/linkding/.env" ]; then
+    safe_copy "$DOTFILES_DIR/tools/linkding/.env" "$STOW_DIR/tools/tools/linkding/.env"
+fi
+
+safe_copy "$DOTFILES_DIR/tools/stirling_pdf/docker-compose.yml" "$STOW_DIR/tools/tools/stirling_pdf/docker-compose.yml"
+if [ -f "$DOTFILES_DIR/tools/stirling_pdf/.env" ]; then
+    safe_copy "$DOTFILES_DIR/tools/stirling_pdf/.env" "$STOW_DIR/tools/tools/stirling_pdf/.env"
+fi
+
+# Create tools README with usage instructions
+cat << EOF > "$STOW_DIR/tools/tools/README.md"
+# Tools Directory
+
+This directory contains various tool configurations and Docker Compose setups.
+
+## Available Tools
+
+### Linkding
+A bookmark management service. To start:
+\`\`\`bash
+cd ~/tools/linkding
+docker-compose up -d
+\`\`\`
+
+### Stirling PDF
+A PDF manipulation tool. To start:
+\`\`\`bash
+cd ~/tools/stirling_pdf
+docker-compose up -d
+\`\`\`
+EOF
 
 # SSH (Copy existing config if present)
 mkdir -p "$STOW_DIR/ssh/.ssh"
@@ -338,14 +405,14 @@ print_info "Stow directory setup complete."
 
 # --- Generate Config Files ---
 print_info "Generating .gitconfig into Stow directory..."
-cat << 'EOF' > "$STOW_DIR/git/.gitconfig"
+cat << EOF > "$STOW_DIR/git/.gitconfig"
 # Generated by setup script from git.nix
 [user]
-    name = Mathieu
-    email = unknown-archi@users.noreply.github.com
+    name = $GIT_USER_NAME
+    email = $GIT_USER_EMAIL
 
 [core]
-    editor = nano
+    editor = $EDITOR_CMD
     pager = delta
 
 [pull]
@@ -385,9 +452,16 @@ cat << 'EOF' > "$STOW_DIR/zsh/.zshrc"
 if [[ -d "$HOME/.local/bin" && ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
   export PATH="$HOME/.local/bin:$PATH"
 fi
-# Add custom scripts path from dotfiles if it exists (relative to HOME after stowing)
-if [[ -d "$HOME/.local/bin" && ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-  export PATH="$HOME/.local/bin:$PATH"
+
+# Add custom scripts directory from dotfiles source
+# Check if the directory exists and the path isn't already added
+if [[ -d "$DOTFILES_DIR/scripts" && ":$PATH:" != *":$DOTFILES_DIR/scripts:"* ]]; then
+  export PATH="$PATH:$DOTFILES_DIR/scripts"
+fi
+
+# Add ~/.cargo/bin for uv and other rust tools
+if [[ -d "$HOME/.cargo/bin" && ":$PATH:" != *":$HOME/.cargo/bin:"* ]]; then
+  export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
 # --- Environment Variables ---
@@ -430,7 +504,7 @@ export ZSH="${ZSH:-$HOME/.oh-my-zsh}"
 # NOTE: Consider managing OMZ plugins via a plugin manager instead for more flexibility.
 # OMZ Plugins from sh.nix: git, thefuck
 ZSH_THEME="robbyrussell" # Base theme, P10k will override if loaded later
-plugins=(git thefuck)
+plugins=(git thefuck eza zoxide)
 
 # Load OMZ - Check if it exists first
 if [ -d "$ZSH" ]; then
@@ -447,23 +521,23 @@ fi
 # mkdir -p "$ZSH_PLUGINS_DIR"
 
 # --- Zsh Plugins (Autosuggestions, Syntax Highlighting) ---
-# Assuming installed via DNF or manually cloned
-# Source Autosuggestions (adjust path if installed differently)
-if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-elif [ -f $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Source plugins from Fedora package locations if they exist.
+# Correct paths based on `rpm -ql` output.
+
+# Zsh Autosuggestions
+ZSH_AUTOSUGGEST_PATH="/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+if [ -f "$ZSH_AUTOSUGGEST_PATH" ]; then
+  source "$ZSH_AUTOSUGGEST_PATH"
 else
-  echo "[Warning] zsh-autosuggestions not found."
+  echo "[Warning] zsh-autosuggestions not found at $ZSH_AUTOSUGGEST_PATH"
 fi
 
-# Source Syntax Highlighting (adjust path if installed differently)
-if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [ -f $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Zsh Syntax Highlighting
+ZSH_SYNTAX_HIGHLIGHT_PATH="/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [ -f "$ZSH_SYNTAX_HIGHLIGHT_PATH" ]; then
+  source "$ZSH_SYNTAX_HIGHLIGHT_PATH"
 else
-  echo "[Warning] zsh-syntax-highlighting not found."
+  echo "[Warning] zsh-syntax-highlighting not found at $ZSH_SYNTAX_HIGHLIGHT_PATH"
 fi
 
 # --- Powerlevel10k Theme ---
@@ -482,8 +556,8 @@ fi
 # --- Aliases (from sh.nix, excluding NixOS-specific) ---
 alias python='python3'
 alias py='python3'
-alias pip='python3 -m pip' # Changed from 'uv pip' as uv might not be installed/preferred
-alias venv='python3 -m venv .venv && source .venv/bin/activate' # Simplified venv creation and activation
+alias pip='uv pip' # Changed from 'python3 -m pip'
+alias venv='uv venv .venv && source .venv/bin/activate' # Changed to uv venv
 alias activate='source .venv/bin/activate'
 alias getip='curl -4 icanhazip.com' # Force IPv4 for wider compatibility
 alias vi='nvim'
@@ -500,13 +574,13 @@ alias spf='superfile'
 alias exegol='echo "exegol alias requires manual setup of the Exegol container/script"' # Placeholder
 # Docker aliases
 alias ubuntu_docker='sudo docker run --rm -it ubuntu bash'
-alias alpine='sudo docker run --rm -it -v \"$HOME/VMs/alpine_docker/alpine_data:/mydata\" alpine' # Adjusted mount
+alias alpine='sudo docker run --rm -it -v "$HOME/VMs/alpine_docker/alpine_data:/mydata" alpine' # Adjusted mount
 # C compilation aliases
 alias cc='gcc -Wall -Werror -Wextra'
 alias comp='gcc -Wall -Werror -Wextra *.c'
 alias runc='comp && ./a.out'
 # Custom utility aliases
-alias trash='echo "Trash alias overridden by function below."' # Overridden by function
+alias trash='echo "Emptying trash directory in /tmp/trash-${USER}..." && command rm -rf /tmp/trash-${USER}/* && echo "Trash emptied."'
 alias codeC='code *.c' # Requires 'code' command (VS Code)
 alias open_resume='docker run --rm -p 3000:3000 open-resume' # Requires manual setup of open-resume image
 
@@ -515,10 +589,12 @@ alias open_resume='docker run --rm -p 3000:3000 open-resume' # Requires manual s
 cd() {
   # Check if argument is provided and if zoxide exists
   if [[ -n "$1" && -x "$(command -v zoxide)" ]]; then
-    zoxide cd "$@" && ls # Use zoxide cd, then list
+    # Use zoxide cd, then list if successful
+    z "$@" && ls
   else
     # Fallback to standard builtin cd if no arg or zoxide missing
-    builtin cd "$@" && ls # Use standard cd, then list
+    # Only run ls if cd was successful
+    command cd "$@" && ls
   fi
 }
 
@@ -530,31 +606,32 @@ save() {
     else
         commit_message="$1"
     fi
-    echo "Running: git add . && git commit -m \"$commit_message\" && git push"
+    echo "Running: git add . && git commit -m "$commit_message" && git push"
     git add . && git commit -m "$commit_message" && git push
 }
 
 # Safer rm (moves to a temporary trash directory)
+# Note: Files in /tmp are volatile and will be lost on reboot
 rm() {
-    local trash_dir=\"/tmp/trash-${USER}\" # User-specific trash
-    mkdir -p \"$trash_dir\"
+    local trash_dir="/tmp/trash-${USER}" # User-specific trash
+    mkdir -p "$trash_dir"
     if [ "$#" -eq 0 ]; then
-        echo \"Usage: rm <file1> [file2]...\" >&2
+        echo "Usage: rm <file1> [file2]..." >&2
         return 1
     fi
-    echo -e \"\\033[1;33mMoving to $trash_dir:\\033[0m $@\"
+    echo -e "\033[1;33mMoving to $trash_dir:\033[0m $@"
     # Use mv with --target-directory for robustness
-    command mv --target-directory=\"$trash_dir\" -- \"$@\"
+    command mv -v --target-directory="$trash_dir" -- "$@"
     if [ $? -eq 0 ]; then
-         echo -e \"\\033[1;32mSuccessfully moved to trash.\\033[0m\"
+         echo -e "\033[1;32mSuccessfully moved to trash.\033[0m"
     else
-         echo -e \"\\033[1;31mError moving files to trash.\\033[0m\" >&2
+         echo -e "\033[1;31mError moving files to trash.\033[0m" >&2
          return 1
     fi
 }
 
 # Create a new directory and cd into it
-nd(){ mkdir -p -- "$1" && cd -- "$1"; } # Added quotes and -p
+nd(){ mkdir -p "$1" && cd "$1"; } # Added quotes and -p
 
 # Find processes
 findps(){ ps -aux | grep --color=auto "$1"; }
@@ -576,9 +653,9 @@ shareLocal() {
     echo -e \"\\nServing current directory ($PWD) on : http://$ip_addr:$port\\n\\n\"
     # Check if python3 is available
     if command -v python3 >/dev/null; then
-        python3 -m http.server \"$port\"
+        python3 -m http.server "$port"
     elif command -v python >/dev/null; then
-        python -m SimpleHTTPServer \"$port\" # Fallback for older systems
+        python -m SimpleHTTPServer "$port" # Fallback for older systems
     else
         echo \"Python not found. Cannot start HTTP server.\" >&2
         return 1
@@ -600,20 +677,220 @@ csv() {
     echo \"Usage: csv <filename.csv>\" >&2
     return 1
   fi
-  column -s, -t < \"$1\" | less -#2 -N -S
+  column -s, -t < "$1" | less -#2 -N -S
 }
 
-# --- Keybindings ---
-# History search bindings from sh.nix
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-# Requires zsh-history-substring-search plugin or manual setup:
-# Clone if not using plugin manager:
-# if [ ! -d \"${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-history-substring-search\" ]; then
-#   git clone [https://github.com/zsh-users/zsh-history-substring-search](https://github.com/zsh-users/zsh-history-substring-search) \"${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-history-substring-search\"
-# fi
-# source \"${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh\"
-
+# Docker services management function
+docker-services() {
+  # Color definitions
+  local GREEN='\033[0;32m'
+  local YELLOW='\033[0;33m'
+  local RED='\033[0;31m'
+  local BLUE='\033[0;34m'
+  local NC='\033[0m' # No Color
+  
+  # Display usage information
+  usage() {
+    echo -e "${BLUE}Docker Services Helper${NC}"
+    echo "Manages Docker Compose services in the ~/tools directory"
+    echo
+    echo "Usage: docker-services [command] [service]"
+    echo
+    echo "Commands:"
+    echo "  list          - List all available services"
+    echo "  start [svc]   - Start a specific service or all services"
+    echo "  stop [svc]    - Stop a specific service or all services"
+    echo "  restart [svc] - Restart a specific service or all services"
+    echo "  status        - Show status of all services"
+    echo "  logs [svc]    - Show logs for a specific service"
+    echo
+    echo "Services:"
+    for dir in ~/tools/*/; do
+      if [ -f "${dir}docker-compose.yml" ]; then
+        svc=$(basename "$dir")
+        echo "  $svc"
+      fi
+    done
+  }
+  
+  # Check if Docker is running
+  check_docker() {
+    if ! docker info &>/dev/null; then
+      echo -e "${RED}Error: Docker is not running or you don't have permission.${NC}"
+      echo "Try starting Docker with: sudo systemctl start docker"
+      echo "Or add yourself to the docker group and log out/in."
+      return 1
+    fi
+    return 0
+  }
+  
+  # List available services
+  list_services() {
+    echo -e "${BLUE}Available services:${NC}"
+    local found=false
+    for dir in ~/tools/*/; do
+      if [ -f "${dir}docker-compose.yml" ]; then
+        svc=$(basename "$dir")
+        echo -e "- ${GREEN}$svc${NC}"
+        found=true
+      fi
+    done
+    if [ "$found" = false ]; then
+      echo -e "${YELLOW}No Docker Compose services found in ~/tools/${NC}"
+    fi
+  }
+  
+  # Start services
+  start_service() {
+    check_docker || return 1
+    
+    if [ -z "$1" ]; then
+      echo -e "${YELLOW}Starting all services...${NC}"
+      for dir in ~/tools/*/; do
+        if [ -f "${dir}docker-compose.yml" ]; then
+          svc=$(basename "$dir")
+          echo -e "${BLUE}Starting $svc...${NC}"
+          (cd "$dir" && docker-compose up -d)
+        fi
+      done
+    else
+      if [ -d ~/tools/"$1" ] && [ -f ~/tools/"$1"/docker-compose.yml ]; then
+        echo -e "${BLUE}Starting $1...${NC}"
+        (cd ~/tools/"$1" && docker-compose up -d)
+      else
+        echo -e "${RED}Service $1 not found or missing docker-compose.yml${NC}"
+        return 1
+      fi
+    fi
+  }
+  
+  # Stop services
+  stop_service() {
+    check_docker || return 1
+    
+    if [ -z "$1" ]; then
+      echo -e "${YELLOW}Stopping all services...${NC}"
+      for dir in ~/tools/*/; do
+        if [ -f "${dir}docker-compose.yml" ]; then
+          svc=$(basename "$dir")
+          echo -e "${BLUE}Stopping $svc...${NC}"
+          (cd "$dir" && docker-compose down)
+        fi
+      done
+    else
+      if [ -d ~/tools/"$1" ] && [ -f ~/tools/"$1"/docker-compose.yml ]; then
+        echo -e "${BLUE}Stopping $1...${NC}"
+        (cd ~/tools/"$1" && docker-compose down)
+      else
+        echo -e "${RED}Service $1 not found or missing docker-compose.yml${NC}"
+        return 1
+      fi
+    fi
+  }
+  
+  # Restart a service
+  restart_service() {
+    check_docker || return 1
+    
+    if [ -z "$1" ]; then
+      echo -e "${YELLOW}Restarting all services...${NC}"
+      for dir in ~/tools/*/; do
+        if [ -f "${dir}docker-compose.yml" ]; then
+          svc=$(basename "$dir")
+          echo -e "${BLUE}Restarting $svc...${NC}"
+          (cd "$dir" && docker-compose restart)
+        fi
+      done
+    else
+      if [ -d ~/tools/"$1" ] && [ -f ~/tools/"$1"/docker-compose.yml ]; then
+        echo -e "${BLUE}Restarting $1...${NC}"
+        (cd ~/tools/"$1" && docker-compose restart)
+      else
+        echo -e "${RED}Service $1 not found or missing docker-compose.yml${NC}"
+        return 1
+      fi
+    fi
+  }
+  
+  # Show service status
+  show_status() {
+    check_docker || return 1
+    
+    local found=false
+    echo -e "${BLUE}Services status:${NC}"
+    for dir in ~/tools/*/; do
+      if [ -f "${dir}docker-compose.yml" ]; then
+        svc=$(basename "$dir")
+        echo -e "${GREEN}$svc:${NC}"
+        
+        # Get container IDs for this service
+        local containers
+        containers=$(cd "$dir" && docker-compose ps -q 2>/dev/null)
+        
+        if [ -z "$containers" ]; then
+          echo -e "  ${YELLOW}Not running${NC}"
+        else
+          docker ps --format "  {{.Status}}\t{{.Ports}}" --filter "id=${containers}"
+          found=true
+        fi
+        echo
+      fi
+    done
+    
+    if [ "$found" = false ]; then
+      echo -e "${YELLOW}No active services found${NC}"
+    fi
+  }
+  
+  # Show logs for a service
+  show_logs() {
+    check_docker || return 1
+    
+    if [ -z "$1" ]; then
+      echo -e "${RED}Error: Please specify a service to show logs for${NC}"
+      return 1
+    fi
+    
+    if [ -d ~/tools/"$1" ] && [ -f ~/tools/"$1"/docker-compose.yml ]; then
+      echo -e "${BLUE}Showing logs for $1...${NC}"
+      (cd ~/tools/"$1" && docker-compose logs --tail=100 -f)
+    else
+      echo -e "${RED}Service $1 not found or missing docker-compose.yml${NC}"
+      return 1
+    fi
+  }
+  
+  # Handle arguments
+  if [ $# -eq 0 ]; then
+    usage
+    return 0
+  fi
+  
+  case "$1" in
+    list)
+      list_services
+      ;;
+    start)
+      start_service "$2"
+      ;;
+    stop)
+      stop_service "$2"
+      ;;
+    status)
+      show_status
+      ;;
+    logs)
+      show_logs "$2"
+      ;;
+    restart)
+      restart_service "$2"
+      ;;
+    *)
+      usage
+      return 1
+      ;;
+  esac
+}
 
 # --- Tool Initializations ---
 
@@ -623,34 +900,6 @@ if command -v zoxide >/dev/null; then
 else
   echo "[Warning] zoxide not found, 'cd' function will use standard builtin."
 fi
-
-# Initialize Fzf keybindings and fuzzy completion
-# Check if fzf is installed
-if command -v fzf >/dev/null; then
-  # Check if fzf zsh files exist (path might vary based on installation)
-  FZF_ZSH_PATH=\"/usr/share/fzf/shell/key-bindings.zsh\"
-  if [[ ! -f \$FZF_ZSH_PATH ]]; then
-    FZF_ZSH_PATH=\"\$HOME/.fzf/shell/key-bindings.zsh\" # Alternative path if installed manually
-  fi
-  if [[ -f \$FZF_ZSH_PATH ]]; then
-    source \"\$FZF_ZSH_PATH\"
-  else
-    echo \"[Warning] fzf key bindings script not found.\"
-  fi
-
-  FZF_COMPLETION_PATH=\"/usr/share/fzf/shell/completion.zsh\"
-   if [[ ! -f \$FZF_COMPLETION_PATH ]]; then
-    FZF_COMPLETION_PATH=\"\$HOME/.fzf/shell/completion.zsh\" # Alternative path
-  fi
-  if [[ -f \$FZF_COMPLETION_PATH ]]; then
-    source \"\$FZF_COMPLETION_PATH\"
-  else
-     echo \"[Warning] fzf completion script not found.\"
-  fi
-else
-  echo \"[Warning] fzf not found. Fuzzy completion/bindings unavailable.\"
-fi
-
 
 # --- Final Setup ---
 # Run pfetch if available
@@ -671,94 +920,132 @@ fi
 # unset ZSH_CUSTOM # Optional cleanup
 
 echo "Zsh setup complete." # Optional message
-
 EOF
-print_success "Generated $STOW_DIR/zsh/.zshrc"
 
-print_info "Configuration file generation complete."
+# --- Apply editor value in the generated zshrc ---
+sed -i "s/export EDITOR='nano'/export EDITOR='$EDITOR_CMD'/g" "$STOW_DIR/zsh/.zshrc"
+sed -i "s/export VISUAL='nano'/export VISUAL='$EDITOR_CMD'/g" "$STOW_DIR/zsh/.zshrc"
 
-# --- Zsh Setup and Finalization ---
-
-# Install Oh My Zsh if not already installed
-OH_MY_ZSH_DIR="$USER_HOME/.oh-my-zsh"
-if [ ! -d "$OH_MY_ZSH_DIR" ]; then
-    print_info "Installing Oh My Zsh..."
-    # Use non-interactive install
-    # Ensure curl and git are installed (should be from earlier steps)
-    if command -v curl >/dev/null && command -v git >/dev/null; then
-        sh -c "$(curl -fsSL [https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"](https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)") "" --unattended || print_error "Oh My Zsh installation failed."
-        # The install script might change the shell, but we'll set it explicitly later
-    else
-        print_error "curl or git not found. Cannot install Oh My Zsh automatically."
-    fi
-else
-    print_info "Oh My Zsh already installed."
-fi
-
-# Install Powerlevel10k Theme for Oh My Zsh if not installed
-P10K_DIR="${ZSH_CUSTOM:-$OH_MY_ZSH_DIR/custom}/themes/powerlevel10k"
-if [ ! -d "$P10K_DIR" ]; then
-    print_info "Installing Powerlevel10k theme..."
-    if command -v git >/dev/null; then
-        git clone --depth=1 [https://github.com/romkatv/powerlevel10k.git](https://github.com/romkatv/powerlevel10k.git) "$P10K_DIR" || print_error "Powerlevel10k installation failed."
-        # Note: The .zshrc generated earlier expects .p10k.zsh in $HOME.
-        # P10k wizard should run on first Zsh launch if .p10k.zsh doesn't exist.
-        # We copied the existing .p10k.zsh to the stow dir, so it should be linked.
-    else
-        print_error "git not found. Cannot install Powerlevel10k automatically."
-    fi
-else
-    print_info "Powerlevel10k theme already installed."
-fi
-
-# Install zsh-autosuggestions if not installed by package manager (alternative)
-# ZSH_AUTOSUGGEST_DIR="${ZSH_CUSTOM:-$OH_MY_ZSH_DIR/custom}/plugins/zsh-autosuggestions"
-# if [ ! -d "$ZSH_AUTOSUGGEST_DIR" ]; then
-#     print_info "Installing zsh-autosuggestions plugin..."
-#     git clone [https://github.com/zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) "$ZSH_AUTOSUGGEST_DIR" || print_error "zsh-autosuggestions installation failed."
-# else
-#      print_info "zsh-autosuggestions plugin already installed."
-# fi
-
-# Install zsh-syntax-highlighting if not installed by package manager (alternative)
-# ZSH_SYNTAX_HIGHLIGHT_DIR="${ZSH_CUSTOM:-$OH_MY_ZSH_DIR/custom}/plugins/zsh-syntax-highlighting"
-# if [ ! -d "$ZSH_SYNTAX_HIGHLIGHT_DIR" ]; then
-#     print_info "Installing zsh-syntax-highlighting plugin..."
-#     git clone [https://github.com/zsh-users/zsh-syntax-highlighting.git](https://github.com/zsh-users/zsh-syntax-highlighting.git) "$ZSH_SYNTAX_HIGHLIGHT_DIR" || print_error "zsh-syntax-highlighting installation failed."
-# else
-#      print_info "zsh-syntax-highlighting plugin already installed."
-# fi
+print_success "Generated $STOW_DIR/zsh/.zshrc with editor set to $EDITOR_CMD"
 
 # --- Stow Linking ---
-print_info "Running Stow to link configuration files..."
-if command -v stow >/dev/null; then
-    # Ensure we are in the Stow directory
-    pushd "$STOW_DIR" > /dev/null || { print_error "Could not change directory to $STOW_DIR"; exit 1; }
+print_info "Stowing configuration files from $STOW_DIR to $USER_HOME..."
+if [ -d "$STOW_DIR" ]; then
+    # Cleanup any problematic files before stowing
+    print_info "Cleaning up potential conflicts before stowing..."
+    
+    # Remove the problematic superfile config if it exists and is not a symlink
+    SUPERFILE_CONFIG="$USER_HOME/.config/superfile/config.toml"
+    if [ -f "$SUPERFILE_CONFIG" ] && [ ! -L "$SUPERFILE_CONFIG" ]; then
+        print_warning "Removing existing superfile config file: $SUPERFILE_CONFIG"
+        rm -f "$SUPERFILE_CONFIG"
+    fi
+    
+    # Make sure we don't have duplicate config paths in tools package
+    if [ -d "$STOW_DIR/tools/.config" ]; then
+        print_warning "Removing conflicting config directory in tools package"
+        rm -rf "$STOW_DIR/tools/.config"
+    fi
+    
+    # Remove any top-level linkding and stirling_pdf directories in the tools package
+    if [ -e "$STOW_DIR/tools/linkding" ] && [ ! -L "$STOW_DIR/tools/linkding" ]; then
+        print_warning "Removing top-level linkding directory in tools package"
+        rm -rf "$STOW_DIR/tools/linkding"
+    fi
+    
+    if [ -e "$STOW_DIR/tools/stirling_pdf" ] && [ ! -L "$STOW_DIR/tools/stirling_pdf" ]; then
+        print_warning "Removing top-level stirling_pdf directory in tools package"
+        rm -rf "$STOW_DIR/tools/stirling_pdf"
+    fi
+    
+    # Check for and remove linkding/stirling_pdf in home if they exist and are not symlinks
+    if [ -d "$USER_HOME/linkding" ] && [ ! -L "$USER_HOME/linkding" ]; then
+        print_warning "Removing existing linkding directory in home: $USER_HOME/linkding" 
+        rm -rf "$USER_HOME/linkding"
+    fi
+    
+    if [ -d "$USER_HOME/stirling_pdf" ] && [ ! -L "$USER_HOME/stirling_pdf" ]; then
+        print_warning "Removing existing stirling_pdf directory in home: $USER_HOME/stirling_pdf"
+        rm -rf "$USER_HOME/stirling_pdf"
+    fi
+    
+    # Change to the directory containing the packages to be stowed
+    cd "$STOW_DIR" || { print_error "Could not change to STOW_DIR: $STOW_DIR"; exit 1; }
 
-    # Stow packages one by one for better error handling
-    for pkg in "${STOW_PACKAGES[@]}"; do
-        if [ -d "$pkg" ]; then
-            print_info "Stowing package: $pkg"
-            # Use --restow to update links and handle existing files if needed
-            # Use --target=$USER_HOME to specify the target directory
-            stow --restow --target="$USER_HOME" "$pkg"
-            if [ $? -ne 0 ]; then
-                print_warning "Stow command failed for package: $pkg. Check for conflicts."
-                # Optionally, add --adopt flag if you want Stow to adopt existing files into the stow dir
-                # stow --adopt --restow --target="$USER_HOME" "$pkg"
-            else
-                print_success "Successfully stowed $pkg."
-            fi
+    # Try stowing all packages
+    print_info "Stowing packages..."
+    if stow -v -R -t "$USER_HOME" *; then
+        print_success "Successfully stowed configuration files."
+    else
+        print_error "Stow command failed. Trying with --adopt option..."
+        
+        # Try using --adopt which can help with conflicts
+        if stow -v -R --adopt -t "$USER_HOME" *; then
+            print_success "Successfully stowed configurations using --adopt option."
+            print_warning "Existing files were adopted into the stow directory. Review changes if needed."
         else
-            print_warning "Stow package directory not found, skipping: $STOW_DIR/$pkg"
+            print_error "Stow with --adopt also failed. Trying individual packages..."
+            
+            # Try stowing packages one by one to identify problematic ones
+            for pkg in */; do
+                pkg=${pkg%/} # Remove trailing slash
+                print_info "Stowing package: $pkg"
+                
+                if stow -v -R -t "$USER_HOME" "$pkg"; then
+                    print_success "Successfully stowed $pkg."
+                else
+                    print_warning "Failed to stow $pkg. Skipping."
+                fi
+            done
         fi
-    done
+    fi
 
-    popd > /dev/null || print_warning "Could not return from Stow directory."
-else
-    print_error "Stow command not found. Cannot link dotfiles."
-fi
+    # Change back to the original directory
+    cd - > /dev/null || exit
+
+    # Post-stow cleanup - remove any lingering direct symlinks in home directory
+    if [ -L "$USER_HOME/linkding" ]; then
+        print_warning "Removing unwanted linkding symlink in home directory"
+        rm -f "$USER_HOME/linkding"
+    fi
+    
+    if [ -L "$USER_HOME/stirling_pdf" ]; then
+        print_warning "Removing unwanted stirling_pdf symlink in home directory"
+        rm -f "$USER_HOME/stirling_pdf"
+    fi
+ else
+    print_error "Stow directory not found: $STOW_DIR. Cannot stow files."
+ fi
+
 print_info "Stow linking process complete."
+
+# --- Install uv (Python package manager) ---
+print_info "Installing uv (faster pip/venv)..."
+if ! command -v uv &> /dev/null; then
+    if command -v curl &> /dev/null; then
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        if [ $? -ne 0 ]; then
+            print_warning "uv installation via script failed. Check curl output."
+        else
+            # Add ~/.cargo/bin to PATH for the current script session if not already present
+            if [[ ":$PATH:" != *":$HOME/.cargo/bin:"* ]]; then
+                 print_info "Adding $HOME/.cargo/bin to PATH for this session."
+                 export PATH="$HOME/.cargo/bin:$PATH"
+            fi
+            # Check if uv is now in PATH
+            if command -v uv &> /dev/null; then
+                 print_success "uv installed successfully."
+                 print_info "Make sure to add $HOME/.cargo/bin to your PATH permanently."
+            else
+                 print_warning "uv installed but not found in PATH immediately. Check $HOME/.cargo/bin."
+            fi
+        fi
+    else
+        print_error "curl not found. Cannot install uv automatically."
+    fi
+else
+    print_info "uv is already installed."
+fi
 
 # --- Change Default Shell to Zsh ---
 if command -v zsh >/dev/null; then
@@ -800,21 +1087,257 @@ fi
 # --- Service Management ---
 
 # Enable and start Docker service
-if command -v systemctl >/dev/null && dnf list installed docker-ce &>/dev/null; then
-    print_info "Configuring Docker service..."
+print_info "Enabling and starting Docker service..."
+if command -v systemctl >/dev/null && command -v docker >/dev/null; then
     sudo systemctl enable docker
     sudo systemctl start docker
-    # Add user to docker group (requires logout/login or newgrp docker)
+    # Add user to docker group (changes require logout/login)
     if getent group docker > /dev/null; then
         print_info "Adding user $USERNAME to the 'docker' group..."
         sudo usermod -aG docker "$USERNAME"
-        print_warning "User $USERNAME added to the docker group. You need to log out and back in, or run 'newgrp docker' in your terminal for this change to take effect."
+        if [ $? -ne 0 ]; then
+            print_warning "Failed to add user $USERNAME to docker group. Docker commands might require sudo."
+        else
+            print_success "User $USERNAME added to docker group. Please log out and log back in for this change to take effect."
+            print_warning "Until you log out and back in, you'll need to use 'sudo' with Docker commands."
+        fi
     else
-        print_warning "Docker group not found. Skipping adding user to group."
+        print_warning "'docker' group not found. Skipping adding user."
     fi
+    
+    # Create tools directory in home if it doesn't exist yet (will be linked by stow later)
+    if [ ! -d "$USER_HOME/tools" ]; then
+        print_info "Creating tools directory in your home folder..."
+        mkdir -p "$USER_HOME/tools"
+    fi
+    
+    # Setup Docker services helper script
+    print_info "Creating Docker services helper script..."
+    mkdir -p "$STOW_DIR/scripts/.local/bin"
+    cat << 'EOF' > "$STOW_DIR/scripts/.local/bin/docker-services"
+#!/usr/bin/env bash
+
+# Docker Services Helper Script
+# Manages docker-compose services in the ~/tools directory
+
+# Color definitions
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# Display usage information
+usage() {
+    echo -e "${BLUE}Docker Services Helper${NC}"
+    echo "Manages Docker Compose services in the ~/tools directory"
+    echo
+    echo "Usage: $(basename "$0") [command] [service]"
+    echo
+    echo "Commands:"
+    echo "  list          - List all available services"
+    echo "  start [svc]   - Start a specific service or all services"
+    echo "  stop [svc]    - Stop a specific service or all services"
+    echo "  restart [svc] - Restart a specific service or all services"
+    echo "  status        - Show status of all services"
+    echo "  logs [svc]    - Show logs for a specific service"
+    echo
+    echo "Services:"
+    for dir in ~/tools/*/; do
+        if [ -f "${dir}docker-compose.yml" ]; then
+            svc=$(basename "$dir")
+            echo "  $svc"
+        fi
+    done
+}
+
+# Check if Docker is running
+check_docker() {
+    if ! docker info &>/dev/null; then
+        echo -e "${RED}Error: Docker is not running or you don't have permission.${NC}"
+        echo "Try starting Docker with: sudo systemctl start docker"
+        echo "Or add yourself to the docker group and log out/in."
+        return 1
+    fi
+    return 0
+}
+
+# List available services
+list_services() {
+    echo -e "${BLUE}Available services:${NC}"
+    local found=false
+    for dir in ~/tools/*/; do
+        if [ -f "${dir}docker-compose.yml" ]; then
+            svc=$(basename "$dir")
+            echo -e "- ${GREEN}$svc${NC}"
+            found=true
+        fi
+    done
+    if [ "$found" = false ]; then
+        echo -e "${YELLOW}No Docker Compose services found in ~/tools/${NC}"
+    fi
+}
+
+# Start services
+start_service() {
+    check_docker || return 1
+    
+    if [ -z "$1" ]; then
+        echo -e "${YELLOW}Starting all services...${NC}"
+        for dir in ~/tools/*/; do
+            if [ -f "${dir}docker-compose.yml" ]; then
+                svc=$(basename "$dir")
+                echo -e "${BLUE}Starting $svc...${NC}"
+                (cd "$dir" && docker-compose up -d)
+            fi
+        done
+    else
+        if [ -d ~/tools/"$1" ] && [ -f ~/tools/"$1"/docker-compose.yml ]; then
+            echo -e "${BLUE}Starting $1...${NC}"
+            (cd ~/tools/"$1" && docker-compose up -d)
+        else
+            echo -e "${RED}Service $1 not found or missing docker-compose.yml${NC}"
+            return 1
+        fi
+    fi
+}
+
+# Stop services
+stop_service() {
+    check_docker || return 1
+    
+    if [ -z "$1" ]; then
+        echo -e "${YELLOW}Stopping all services...${NC}"
+        for dir in ~/tools/*/; do
+            if [ -f "${dir}docker-compose.yml" ]; then
+                svc=$(basename "$dir")
+                echo -e "${BLUE}Stopping $svc...${NC}"
+                (cd "$dir" && docker-compose down)
+            fi
+        done
+    else
+        if [ -d ~/tools/"$1" ] && [ -f ~/tools/"$1"/docker-compose.yml ]; then
+            echo -e "${BLUE}Stopping $1...${NC}"
+            (cd ~/tools/"$1" && docker-compose down)
+        else
+            echo -e "${RED}Service $1 not found or missing docker-compose.yml${NC}"
+            return 1
+        fi
+    fi
+}
+
+# Show service status
+show_status() {
+    check_docker || return 1
+    
+    local found=false
+    echo -e "${BLUE}Services status:${NC}"
+    for dir in ~/tools/*/; do
+        if [ -f "${dir}docker-compose.yml" ]; then
+            svc=$(basename "$dir")
+            echo -e "${GREEN}$svc:${NC}"
+            
+            # Get container IDs for this service
+            local containers
+            containers=$(cd "$dir" && docker-compose ps -q 2>/dev/null)
+            
+            if [ -z "$containers" ]; then
+                echo -e "  ${YELLOW}Not running${NC}"
+            else
+                docker ps --format "  {{.Status}}\t{{.Ports}}" --filter "id=${containers}"
+                found=true
+            fi
+            echo
+        fi
+    done
+    
+    if [ "$found" = false ]; then
+        echo -e "${YELLOW}No active services found${NC}"
+    fi
+}
+
+# Show logs for a service
+show_logs() {
+    check_docker || return 1
+    
+    if [ -z "$1" ]; then
+        echo -e "${RED}Error: Please specify a service to show logs for${NC}"
+        return 1
+    fi
+    
+    if [ -d ~/tools/"$1" ] && [ -f ~/tools/"$1"/docker-compose.yml ]; then
+        echo -e "${BLUE}Showing logs for $1...${NC}"
+        (cd ~/tools/"$1" && docker-compose logs --tail=100 -f)
+    else
+        echo -e "${RED}Service $1 not found or missing docker-compose.yml${NC}"
+        return 1
+    fi
+}
+
+# Restart a service
+restart_service() {
+    check_docker || return 1
+    
+    if [ -z "$1" ]; then
+        echo -e "${YELLOW}Restarting all services...${NC}"
+        for dir in ~/tools/*/; do
+            if [ -f "${dir}docker-compose.yml" ]; then
+                svc=$(basename "$dir")
+                echo -e "${BLUE}Restarting $svc...${NC}"
+                (cd "$dir" && docker-compose restart)
+            fi
+        done
+    else
+        if [ -d ~/tools/"$1" ] && [ -f ~/tools/"$1"/docker-compose.yml ]; then
+            echo -e "${BLUE}Restarting $1...${NC}"
+            (cd ~/tools/"$1" && docker-compose restart)
+        else
+            echo -e "${RED}Service $1 not found or missing docker-compose.yml${NC}"
+            return 1
+        fi
+    fi
+}
+
+# Main execution
+if [ $# -eq 0 ]; then
+    usage
+    exit 0
+fi
+
+case "$1" in
+    list)
+        list_services
+        ;;
+    start)
+        start_service "$2"
+        ;;
+    stop)
+        stop_service "$2"
+        ;;
+    status)
+        show_status
+        ;;
+    logs)
+        show_logs "$2"
+        ;;
+    restart)
+        restart_service "$2"
+        ;;
+    *)
+        usage
+        exit 1
+        ;;
+esac
+EOF
+
+    # Make the script executable
+    chmod +x "$STOW_DIR/scripts/.local/bin/docker-services"
+    print_success "Docker services helper script created at '$STOW_DIR/scripts/.local/bin/docker-services'"
+    print_info "After installation, you can use 'docker-services' to manage your Docker services."
+    
     print_success "Docker service enabled and started."
 else
-    print_info "Docker not installed or systemctl not found. Skipping Docker service configuration."
+    print_warning "Docker or systemctl not found. Skipping Docker service configuration."
 fi
 
 # Enable and start Libvirt service (if virtualization packages were installed)
@@ -826,7 +1349,7 @@ if command -v systemctl >/dev/null && dnf list installed libvirt-daemon &>/dev/n
      if getent group libvirt > /dev/null; then
         print_info "Adding user $USERNAME to the 'libvirt' group..."
         sudo usermod -aG libvirt "$USERNAME"
-        print_warning "User $USERNAME added to the libvirt group. You need to log out and back in for this change to take effect."
+        print_success "User $USERNAME added to the libvirt group. You need to log out and back in for this change to take effect."
     else
         print_warning "libvirt group not found. Skipping adding user to group."
     fi
@@ -845,12 +1368,11 @@ print_info "- Core packages, development tools, GUI apps, and Flatpaks installed
 print_info "- Nerd Fonts installed."
 print_info "- Stow directory populated with configurations."
 print_info "- .gitconfig and .zshrc generated."
-print_info "- Oh My Zsh and Powerlevel10k installed."
 print_info "- Configurations linked using Stow."
 print_info "- Default shell likely changed to Zsh (logout/login required)."
-print_info "- Docker & Libvirt services configured (if installed, logout/login may be needed for group changes)."
+print_info "- Docker & Libvirt services configured (if installed, logout/login may be needed for group changes).\n"
 
-print_warning "\nImportant Next Steps:"
+print_warning "Important Next Steps:"
 print_warning "1. Review script output for any warnings or errors."
 print_warning "2. Manually copy your SSH keys (~/.ssh/id_*) to $USER_HOME/.ssh/ and set permissions (chmod 600 private, 644 public)."
 print_warning "3. Log out and log back in for all changes (shell, groups) to take full effect."
@@ -858,4 +1380,16 @@ print_warning "4. Launch Zsh. Powerlevel10k configuration wizard might run if ne
 print_warning "5. Verify your applications and configurations are working as expected."
 print_warning "6. Consider rebooting to ensure all services and drivers are loaded correctly."
 
+print_info "Docker Services Management:"
+print_info "- The script has added a 'docker-services' function to your Zsh configuration."
+print_info "- This allows you to easily manage the Docker Compose services in your ~/tools directory."
+print_info "- Usage examples:"
+print_info "  • docker-services list    - List available services"
+print_info "  • docker-services start linkding - Start the linkding service"
+print_info "  • docker-services stop    - Stop all services"
+print_info "  • docker-services status  - Show status of all services"
+print_info "  • docker-services logs stirling_pdf - Show logs for stirling_pdf"
+print_info "- These tools will be available after logging out and back in or sourcing your ~/.zshrc"
+
+print_success "Fedora setup script truly completed!"
 exit 0
