@@ -131,6 +131,7 @@
     libraries = with pkgs; [
       glib         # provides libglib-2.0.so.0
       nss
+      nspr
       # gtk3         # if Windsurf needs GTK UI
       # gdk_pixbuf   # if Windsurf uses images/icons
       # pango        # if Windsurf renders text
