@@ -317,7 +317,6 @@
     pnpm
     rustdesk
     xorg.xhost
-    windsurf
 ];
 
   # Enable zsh
