@@ -199,7 +199,7 @@
 
     # Launch Windsurf (Dockerized) against a local project
     windsurf() {
-        local project="${1:-$PWD}"
+        local project="''${1:-$PWD}"
 
         if [[ ! -d "$project" ]]; then
             echo "✔️  Error: '$project' is not a directory."
