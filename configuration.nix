@@ -133,6 +133,7 @@
       nss
       nspr
       dbus
+      atk
       # gtk3         # if Windsurf needs GTK UI
       # gdk_pixbuf   # if Windsurf uses images/icons
       # pango        # if Windsurf renders text
