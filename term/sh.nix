@@ -192,10 +192,34 @@
 		fi
 	}
 
-       ssh_mode() { ~/.dotfiles/scripts/ssh_mode.sh $1 }
-        csv() {
-        	column -s, -t < $1 | less -#2 -N -S
+    ssh_mode() { ~/.dotfiles/scripts/ssh_mode.sh $1 }
+    csv() {
+        column -s, -t < $1 | less -#2 -N -S
 	}
+
+    # Launch Windsurf (Dockerized) against a local project
+    windsurf() {
+        local project="${1:-$PWD}"
+
+        if [[ ! -d "$project" ]]; then
+            echo "✔️  Error: '$project' is not a directory."
+            return 1
+        fi
+
+        # allow GUI via XWayland
+        export DISPLAY="${DISPLAY}"
+        export XAUTHORITY="${HOME}/.Xauthority"
+
+        docker run --rm -it \
+            -e DISPLAY="$DISPLAY" \
+            -e XAUTHORITY="$XAUTHORITY" \
+            -v /tmp/.X11-unix:/tmp/.X11-unix \
+            -v "${HOME}/.Xauthority":/home/developer/.Xauthority:ro \
+            -v "$project":/home/developer/project \
+            --user "$(id -u):$(id -g)" \
+            windsurf \
+            /home/developer/project
+    }
 
 	# Zoxide
 	eval "$(zoxide init zsh)"
@@ -204,9 +228,6 @@
 
 	# Fzf
 	eval "$(fzf --zsh)"
-	
-	# Give docker access to hyprland displays
-	xhost +local:docker 2>/dev/null
 	
 	# -- Use fd instead of fzf --
 
