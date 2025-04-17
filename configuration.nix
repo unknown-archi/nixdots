@@ -133,7 +133,7 @@
       nss 
       nspr
       dbus
-      alsaLib
+      alsa-lib
       cups
       libdrm
       at-spi2-atk
