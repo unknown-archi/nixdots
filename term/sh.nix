@@ -214,7 +214,7 @@
             -e DISPLAY="$DISPLAY" \
             -e XAUTHORITY="$XAUTHORITY" \
             -v /tmp/.X11-unix:/tmp/.X11-unix \
-            -v "${HOME}/.Xauthority":/home/developer/.Xauthority:ro \
+            -v "''${HOME}/.Xauthority":/home/developer/.Xauthority:ro \
             -v "$project":/home/developer/project \
             --user "$(id -u):$(id -g)" \
             windsurf \
