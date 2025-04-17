@@ -205,6 +205,9 @@
 	# Fzf
 	eval "$(fzf --zsh)"
 	
+	# Give docker access to hyprland displays
+	xhost +local:docker 2>/dev/null
+	
 	# -- Use fd instead of fzf --
 
 	export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix"
