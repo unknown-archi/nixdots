@@ -208,7 +208,7 @@
 
         # allow GUI via XWayland
         export DISPLAY="''${DISPLAY}"
-        export XAUTHORITY="${HOME}/.Xauthority"
+        export XAUTHORITY="''${HOME}/.Xauthority"
 
         docker run --rm -it \
             -e DISPLAY="$DISPLAY" \
