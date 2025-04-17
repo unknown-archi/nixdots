@@ -218,6 +218,7 @@
             -v "$project":/home/developer/project \
             --user "$(id -u):$(id -g)" \
             windsurf \
+            --no-sandbox \
             /home/developer/project
     }
 
