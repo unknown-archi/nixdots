@@ -129,21 +129,15 @@
 
     # add glib (and any other missing deps) here:
     libraries = with pkgs; [
-      glib         # provides libglib-2.0.so.0
-      nss
+      gtk3
+      nss 
       nspr
       dbus
-      atk
+      alsaLib
       cups
       libdrm
-      # gtk3         # if Windsurf needs GTK UI
-      # gdk_pixbuf   # if Windsurf uses images/icons
-      # pango        # if Windsurf renders text
-      # atk          # GTK’s accessibility toolkit
-      # cairo        # 2D graphics library
-      # libx11       # X11 client library
-      # libxkbcommon # keyboard handling
-      # libsecret    # secret-storage support
+      at-spi2-atk
+      at-spi2-core
     ];
   };
 
