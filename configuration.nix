@@ -332,7 +332,6 @@
     usbutils
     sqlmap
     lunatask
-    pnpm
     rustdesk
     xorg.xhost
 ];
