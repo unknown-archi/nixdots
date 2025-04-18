@@ -63,12 +63,11 @@
       open_resume="docker run -p 3000:3000 open-resume";
       spf="superfile";
       exegol="bash ~/.dotfiles/scripts/exegol";
-      pnpm="/home/mathieu/.npm-global/bin/pnpm";
-      pnpx="/home/mathieu/.npm-global/bin/pnpx";
     };
     
     initExtra = ''
 	WAYLAND_DISPLAY=wayland-1
+    export PATH="/home/mathieu/.npm-global/bin:$PATH"
 	# Better autocompletion
 	HISTFILE=$HOME/.zhistory
 	SAVEHIST=1000
