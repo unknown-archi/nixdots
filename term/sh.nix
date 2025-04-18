@@ -64,6 +64,7 @@
       spf="superfile";
       exegol="bash ~/.dotfiles/scripts/exegol";
       pnpm="/home/mathieu./.npm-global/bin/pnpm";
+      pnpx="/home/mathieu./.npm-global/bin/pnpx";
     };
     
     initExtra = ''
