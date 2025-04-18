@@ -63,6 +63,7 @@
       open_resume="docker run -p 3000:3000 open-resume";
       spf="superfile";
       exegol="bash ~/.dotfiles/scripts/exegol";
+      pnpm="/home/mathieu./.npm-global/bin/pnpm";
     };
     
     initExtra = ''
